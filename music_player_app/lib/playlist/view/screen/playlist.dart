@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-import '../../utilities/colors.dart';
+import '../../../utilities/colors.dart';
+import '../../model/playlist_model.dart';
+import '../../view_model/fuctions/playlist_functions.dart';
+import '../subscreen/playlist_home.dart';
 
 class PlayList extends StatefulWidget {
   const PlayList({Key? key}) : super(key: key);

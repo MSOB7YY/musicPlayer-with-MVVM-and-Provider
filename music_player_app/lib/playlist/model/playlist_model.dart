@@ -1,4 +1,5 @@
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
+
 part 'playlist_model.g.dart';
 
 @HiveType(typeId: 1)
