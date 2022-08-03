@@ -8,7 +8,7 @@ class MusicUtils with ChangeNotifier {
   AudioPlayer audioPlayer = AudioPlayer();
   List<SongModel> myMusic = [];
   String currentTitle = '';
-  int currentIndex = -1;
+  int currentIndex = 0;
   Stream<DurationState> get durationStateStream {
     return Rx.combineLatest2<Duration, Duration?, DurationState>(
       audioPlayer.positionStream,
