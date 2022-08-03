@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-
 import '../../playing_music/view/music_play.dart';
 import '../../utilities/bottom_sheet.dart';
 import '../../utilities/create_playlist.dart';
 
-class AlbumHomeScreen extends StatefulWidget {
-  final AlbumModel albumModel;
-  const AlbumHomeScreen({Key? key, required this.albumModel}) : super(key: key);
+class GenreHomeScreen extends StatefulWidget {
+  final GenreModel genreModel;
+
+  static final AudioPlayer audioPlayer = AudioPlayer();
+  const GenreHomeScreen({Key? key, required this.genreModel}) : super(key: key);
 
   @override
-  State<AlbumHomeScreen> createState() => _AlbumHomeScreenState();
+  State<GenreHomeScreen> createState() => _GenreHomeScreenState();
 }
 
-class _AlbumHomeScreenState extends State<AlbumHomeScreen> {
+class _GenreHomeScreenState extends State<GenreHomeScreen> {
   final OnAudioQuery _audioQuery = OnAudioQuery();
-  List<SongModel> albumSong = [];
+  List<SongModel> genreSong = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,20 +32,20 @@ class _AlbumHomeScreenState extends State<AlbumHomeScreen> {
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: true,
-                title: Text(widget.albumModel.album,
+                title: Text(widget.genreModel.genre,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 16.0,
                     )),
                 background: QueryArtworkWidget(
-                  id: widget.albumModel.id,
-                  type: ArtworkType.ALBUM,
+                  id: widget.genreModel.id,
+                  type: ArtworkType.GENRE,
                   artworkBorder: BorderRadius.circular(
                     1.0,
                   ),
                   artworkFit: BoxFit.fill,
                   nullArtworkWidget: Image.asset(
-                    "assets/album.jpg",
+                    "assets/artwrk.jpg",
                   ),
                 ),
               ),
@@ -51,11 +54,8 @@ class _AlbumHomeScreenState extends State<AlbumHomeScreen> {
         },
         body: FutureBuilder<List<SongModel>>(
           future: _audioQuery.queryAudiosFrom(
-            AudiosFromType.ALBUM_ID,
-            widget.albumModel.id,
-            sortType: null,
-            orderType: OrderType.DESC_OR_GREATER,
-            ignoreCase: false,
+            AudiosFromType.GENRE_ID,
+            widget.genreModel.id,
           ),
           builder: (context, item) {
             if (item.data == null) {
@@ -79,35 +79,31 @@ class _AlbumHomeScreenState extends State<AlbumHomeScreen> {
             }
 
             if (item.data!.isEmpty) {
-              return Column(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.centerRight,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          Color.fromARGB(255, 42, 11, 99),
-                          Color.fromARGB(235, 48, 14, 34),
-                        ],
-                      ),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        "Nothing found!",
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
+              return Container(
+                width: double.infinity,
+                height: double.infinity,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.centerRight,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Color.fromARGB(255, 42, 11, 99),
+                      Color.fromARGB(235, 48, 14, 34),
+                    ],
+                  ),
+                ),
+                child: const Center(
+                  child: Text(
+                    "Nothing found!",
+                    style: TextStyle(
+                      color: Colors.white,
                     ),
                   ),
-                ],
+                ),
               );
             }
-            albumSong.clear;
-            albumSong = item.data!;
+            genreSong.clear;
+            genreSong = item.data!;
             return Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
@@ -129,9 +125,11 @@ class _AlbumHomeScreenState extends State<AlbumHomeScreen> {
                           builder: (context) => const MusicScreen(),
                         ),
                       );
-                      MusicScreen.myMusic = albumSong;
+                      MusicScreen.myMusic = genreSong;
                       MusicScreen.audioPlayer.setAudioSource(
-                        createPlaylist(item.data!),
+                        createPlaylist(
+                          item.data!,
+                        ),
                         initialIndex: index,
                       );
                       MusicScreen.audioPlayer.play();
@@ -158,7 +156,7 @@ class _AlbumHomeScreenState extends State<AlbumHomeScreen> {
                       ),
                     ),
                     subtitle: Text(
-                      item.data![index].album.toString(),
+                      item.data![index].artist ?? "No Artist",
                       style: const TextStyle(
                         overflow: TextOverflow.ellipsis,
                         color: Colors.white,
@@ -170,7 +168,10 @@ class _AlbumHomeScreenState extends State<AlbumHomeScreen> {
                         color: Colors.white,
                       ),
                       onPressed: () {
-                        settingModalBottomSheet(context, item.data![index]);
+                        settingModalBottomSheet(
+                          context,
+                          item.data![index],
+                        );
                       },
                     ),
                   );

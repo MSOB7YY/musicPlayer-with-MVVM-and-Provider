@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 import '../../utilities/colors.dart';
+import 'artist_home.dart';
 
 class ArtistScreen extends StatefulWidget {
   const ArtistScreen({Key? key}) : super(key: key);
