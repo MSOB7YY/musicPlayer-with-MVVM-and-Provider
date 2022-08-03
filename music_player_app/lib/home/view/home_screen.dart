@@ -11,7 +11,7 @@ import '../../artist/view/artist.dart';
 import '../../drawer/view/drawer.dart';
 import '../../favorites/view/favorites.dart';
 import '../../genre/view/genre.dart';
-import '../../playlist/view/playlist.dart';
+import '../../playlist/view/screen/playlist.dart';
 import '../../search/view/search_screen.dart';
 import '../../utilities/colors.dart';
 import 'widgets/miniplayer_expand.dart';
