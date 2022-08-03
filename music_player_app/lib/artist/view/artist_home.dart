@@ -132,9 +132,9 @@ class _ArtistHomeScreenState extends State<ArtistHomeScreen> {
                     );
                     context.read<MusicUtils>().myMusic = artistSong;
                     context.read<MusicUtils>().audioPlayer.setAudioSource(
-                          context.read<CreatePlaylist>().createPlaylist(
-                                item.data!,
-                              ),
+                          createPlaylist(
+                            item.data!,
+                          ),
                           initialIndex: index,
                         );
                     context.read<MusicUtils>().audioPlayer.play();

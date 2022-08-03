@@ -162,9 +162,7 @@ class _FavouriteListScreenState extends State<FavouriteListScreen> {
 
                         context.read<MusicUtils>().myMusic = DbFav.favloop;
                         context.read<MusicUtils>().audioPlayer.setAudioSource(
-                              context
-                                  .read<CreatePlaylist>()
-                                  .createPlaylist(DbFav.favloop),
+                              createPlaylist(DbFav.favloop),
                               initialIndex: index,
                             );
                         context.read<MusicUtils>().audioPlayer.play();

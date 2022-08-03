@@ -88,9 +88,7 @@ class _PlayListHomeScreenState extends State<PlayListHomeScreen> {
                       if (context.read<MusicUtils>().currentIndex != index) {
                         context.read<MusicUtils>().myMusic = playloop;
                         context.read<MusicUtils>().audioPlayer.setAudioSource(
-                              context
-                                  .read<CreatePlaylist>()
-                                  .createPlaylist(playloop),
+                              createPlaylist(playloop),
                               initialIndex: index,
                             );
                         context.read<MusicUtils>().audioPlayer.play();

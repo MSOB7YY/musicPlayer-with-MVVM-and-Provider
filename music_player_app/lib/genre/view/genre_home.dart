@@ -112,9 +112,9 @@ class _GenreHomeScreenState extends State<GenreHomeScreen> {
                       );
                       context.read<MusicUtils>().myMusic = genreSong;
                       context.read<MusicUtils>().audioPlayer.setAudioSource(
-                            context.read<CreatePlaylist>().createPlaylist(
-                                  item.data!,
-                                ),
+                            createPlaylist(
+                              item.data!,
+                            ),
                             initialIndex: index,
                           );
                       context.read<MusicUtils>().audioPlayer.play();

@@ -72,8 +72,7 @@ class AllSongs extends StatelessWidget {
 
                         context.read<MusicUtils>().myMusic = value.songs;
                         context.read<MusicUtils>().audioPlayer.setAudioSource(
-                              Provider.of<CreatePlaylist>(context)
-                                  .createPlaylist(item.data!),
+                              createPlaylist(item.data!),
                               initialIndex: index,
                             );
                         context.watch<MusicUtils>().audioPlayer.play();
