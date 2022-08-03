@@ -1,7 +1,7 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, use_build_context_synchronously
 import 'package:flutter/material.dart';
-
-import '../../../all_songs/view/all_songs.dart';
+import 'package:music_player_app/all_songs/view_model/allsongs_provider.dart';
+import 'package:provider/provider.dart';
 import '../../model/playlist_model.dart';
 import '../../view_model/fuctions/playlist_functions.dart';
 
@@ -30,13 +30,14 @@ class _PlaylistButtonState extends State<PlaylistButton> {
         .contains(widget.id);
     final indexCheck =
         playlistNotifier.value[widget.folderindex!].songList.indexWhere(
-      (element) => element == AllSongs.songs[widget.index!].id,
+      (element) =>
+          element == context.read<AllsongsProvider>().songs[widget.index!].id,
     );
     if (checkIndex != true) {
       return IconButton(
           onPressed: () {
             widget.songlist.add(
-              AllSongs.songs[widget.index!].id,
+              context.read<AllsongsProvider>().songs[widget.index!].id,
             );
             PlaylistButton.updatelist = [
               widget.songlist,
@@ -48,7 +49,7 @@ class _PlaylistButtonState extends State<PlaylistButton> {
             );
             updatePlaylist(widget.folderindex!, model);
             getallPlaylists();
-            Playlistsongcheck.showSelectSong(widget.folderindex);
+            Playlistsongcheck.showSelectSong(widget.folderindex, context);
             setState(() {});
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -81,7 +82,7 @@ class _PlaylistButtonState extends State<PlaylistButton> {
           songList: PlaylistButton.dltlist,
         );
         updatePlaylist(widget.folderindex!, model);
-        Playlistsongcheck.showSelectSong(widget.folderindex);
+        Playlistsongcheck.showSelectSong(widget.folderindex, context);
 
         setState(() {});
         ScaffoldMessenger.of(context).showSnackBar(

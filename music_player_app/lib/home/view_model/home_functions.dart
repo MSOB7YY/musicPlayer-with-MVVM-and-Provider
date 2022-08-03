@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:provider/provider.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
-
-import '../../all_songs/view/all_songs.dart';
+import '../../all_songs/view_model/allsongs_provider.dart';
 import '../../utilities/view/colors.dart';
 
 class HomeFunctions with ChangeNotifier {
@@ -16,7 +16,7 @@ class HomeFunctions with ChangeNotifier {
         seconds: 15,
       ),
     );
-    if (AllSongs.songs.isEmpty) {
+    if (context.read<AllsongsProvider>().songs.isEmpty) {
       return showTopSnackBar(
         context,
         CustomSnackBar.error(

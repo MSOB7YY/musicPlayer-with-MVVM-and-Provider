@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:just_audio_background/just_audio_background.dart';
+import 'package:music_player_app/all_songs/view_model/allsongs_provider.dart';
 import 'package:music_player_app/home/view_model/home_functions.dart';
 import 'package:music_player_app/playing_music/view_model/music_functions.dart';
 import 'package:music_player_app/playing_music/view_model/music_utilities.dart';
@@ -52,6 +53,9 @@ class Music extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => PlayMusicProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => AllsongsProvider(),
         ),
       ],
       child: const MaterialApp(

@@ -5,7 +5,6 @@ import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../home/view/home_screen.dart';
 import '../../utilities/view/colors.dart';
-import 'widgets/scan_screen.dart';
 
 class NavDrawer extends StatefulWidget {
   const NavDrawer({Key? key}) : super(key: key);
@@ -68,26 +67,26 @@ class _NavDrawerState extends State<NavDrawer> {
                     )
                   },
                 ),
-                ListTile(
-                  leading: Icon(
-                    Icons.recycling,
-                    color: kWhite,
-                  ),
-                  title: Text(
-                    'Scan Music',
-                    style: TextStyle(
-                      color: kWhite,
-                    ),
-                  ),
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (ctx) => const ScanScreen(),
-                      ),
-                    );
-                  },
-                  // trailing: ,
-                ),
+                // ListTile(
+                //   leading: Icon(
+                //     Icons.recycling,
+                //     color: kWhite,
+                //   ),
+                //   title: Text(
+                //     'Scan Music',
+                //     style: TextStyle(
+                //       color: kWhite,
+                //     ),
+                //   ),
+                //   onTap: () {
+                //     Navigator.of(context).push(
+                //       MaterialPageRoute(
+                //         builder: (ctx) => const ScanScreen(),
+                //       ),
+                //     );
+                //   },
+                //   // trailing: ,
+                // ),
                 ListTile(
                   leading: Icon(
                     Icons.feedback_sharp,

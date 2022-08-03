@@ -7,8 +7,6 @@ import '../../../playing_music/view_model/music_functions.dart';
 import '../../../playing_music/view_model/music_utilities.dart';
 import '../../../utilities/view/body_container.dart';
 import '../../model/duration.dart';
-// ignore: depend_on_referenced_packages
-import 'package:rxdart/rxdart.dart';
 
 import 'sub_widets/null_miniplayer.dart';
 

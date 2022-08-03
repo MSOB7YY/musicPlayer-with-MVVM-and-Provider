@@ -5,8 +5,7 @@ import 'package:music_player_app/utilities/view/colors.dart';
 import 'package:music_player_app/utilities/view/query_art.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
-
-import '../../../all_songs/view/all_songs.dart';
+import '../../../all_songs/view_model/allsongs_provider.dart';
 import '../../../playing_music/view/music_play.dart';
 import '../../../playing_music/view_model/music_utilities.dart';
 import '../../view_model/fuctions/playlist_functions.dart';
@@ -33,7 +32,7 @@ class _PlayListHomeScreenState extends State<PlayListHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Playlistsongcheck.showSelectSong(widget.folderIndex);
+    Playlistsongcheck.showSelectSong(widget.folderIndex, context);
     return Scaffold(
       appBar: AppBar(
         excludeHeaderSemantics: true,
@@ -98,12 +97,14 @@ class _PlayListHomeScreenState extends State<PlayListHomeScreen> {
                       }
                     },
                     leading: QueryArtImage(
-                      songModel: AllSongs
+                      songModel: context
+                          .read<AllsongsProvider>()
                           .songs[Playlistsongcheck.selectPlaySong.value[index]],
                       artworkType: ArtworkType.AUDIO,
                     ),
                     title: Text(
-                      AllSongs
+                      context
+                          .read<AllsongsProvider>()
                           .songs[Playlistsongcheck.selectPlaySong.value[index]]
                           .title,
                       style: TextStyle(
@@ -112,7 +113,8 @@ class _PlayListHomeScreenState extends State<PlayListHomeScreen> {
                       ),
                     ),
                     subtitle: Text(
-                      AllSongs
+                      context
+                          .read<AllsongsProvider>()
                           .songs[Playlistsongcheck.selectPlaySong.value[index]]
                           .artist
                           .toString(),

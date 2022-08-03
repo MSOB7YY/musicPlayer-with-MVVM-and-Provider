@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import '../../../playing_music/view/music_play.dart';
 import '../../../playing_music/view_model/music_utilities.dart';
 import '../../model/duration.dart';
-import 'miniplayer_expand.dart';
 
 class MiniPlayerMini extends StatefulWidget {
   const MiniPlayerMini({Key? key}) : super(key: key);

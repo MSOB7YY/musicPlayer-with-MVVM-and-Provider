@@ -11,7 +11,6 @@ import '../../drawer/view/drawer.dart';
 import '../../favorites/view/favorites.dart';
 import '../../genre/view/genre.dart';
 import '../../playlist/view/screen/playlist.dart';
-import '../../search/view/search_screen.dart';
 import '../../utilities/view/body_container.dart';
 import '../../utilities/view/texts.dart';
 import 'widgets/miniplayer_expand.dart';
@@ -51,11 +50,11 @@ class MusicHome extends StatelessWidget {
               ),
               child: IconButton(
                 onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (ctx) => Search(),
-                    ),
-                  );
+                  // Navigator.of(context).push(
+                  //   MaterialPageRoute(
+                  //     builder: (ctx) => Search(),
+                  //   ),
+                  // );
                 },
                 icon: const Icon(
                   Icons.search,
@@ -155,7 +154,7 @@ class TextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 14,
       ),
     );

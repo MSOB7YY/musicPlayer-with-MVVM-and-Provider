@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:music_player_app/playlist/view/widgets/playlist_button.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-
-import '../../../all_songs/view/all_songs.dart';
+import 'package:provider/provider.dart';
+import '../../../all_songs/view_model/allsongs_provider.dart';
 import '../../view_model/fuctions/playlist_functions.dart';
 
 class AddSongsToPlayList extends StatefulWidget {
@@ -78,8 +78,8 @@ class _AddSongsToPlayListState extends State<AddSongsToPlayList> {
               ),
             );
           }
-          AllSongs.songs.clear;
-          AllSongs.songs = item.data!;
+          context.read<AllsongsProvider>().songs.clear;
+          context.read<AllsongsProvider>().songs = item.data!;
           return Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -106,18 +106,19 @@ class _AddSongsToPlayListState extends State<AddSongsToPlayList> {
                       "assets/null2.png",
                       fit: BoxFit.fitWidth,
                     ),
-                    id: AllSongs.songs[index].id,
+                    id: context.read<AllsongsProvider>().songs[index].id,
                     type: ArtworkType.AUDIO,
                   ),
                   title: Text(
-                    AllSongs.songs[index].title,
+                    context.read<AllsongsProvider>().songs[index].title,
                     style: const TextStyle(
                       overflow: TextOverflow.ellipsis,
                       color: Colors.white,
                     ),
                   ),
                   subtitle: Text(
-                    AllSongs.songs[index].artist ?? "No Artist",
+                    context.read<AllsongsProvider>().songs[index].artist ??
+                        "No Artist",
                     style: const TextStyle(
                       overflow: TextOverflow.ellipsis,
                       color: Colors.white,
@@ -126,7 +127,7 @@ class _AddSongsToPlayListState extends State<AddSongsToPlayList> {
                   trailing: PlaylistButton(
                     index: index,
                     folderindex: widget.folderIndex,
-                    id: AllSongs.songs[index].id,
+                    id: context.read<AllsongsProvider>().songs[index].id,
                   ),
                 );
               },
@@ -135,7 +136,7 @@ class _AddSongsToPlayListState extends State<AddSongsToPlayList> {
                   color: Colors.white,
                 );
               },
-              itemCount: AllSongs.songs.length,
+              itemCount: context.read<AllsongsProvider>().songs.length,
             ),
           );
         },

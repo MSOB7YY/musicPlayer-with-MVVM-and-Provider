@@ -18,6 +18,7 @@ class CreatePlaylist with ChangeNotifier {
         ),
       );
     }
+    notifyListeners();
     return ConcatenatingAudioSource(children: sources);
   }
 }

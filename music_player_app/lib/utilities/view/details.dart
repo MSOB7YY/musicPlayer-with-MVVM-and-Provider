@@ -4,8 +4,6 @@ import 'package:music_player_app/utilities/view/colors.dart';
 import 'package:music_player_app/utilities/view/query_art.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-import 'images.dart';
-
 bool? result;
 
 class Details extends StatelessWidget {

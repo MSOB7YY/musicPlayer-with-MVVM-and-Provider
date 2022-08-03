@@ -3,7 +3,7 @@ import 'package:music_player_app/utilities/view/body_container.dart';
 import 'package:music_player_app/utilities/view/colors.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
-import '../../all_songs/view/all_songs.dart';
+import '../../all_songs/view_model/allsongs_provider.dart';
 import '../../playing_music/view/music_play.dart';
 import '../../playing_music/view_model/music_utilities.dart';
 import '../../utilities/create_playlist.dart';
@@ -22,7 +22,7 @@ class _FavouriteListScreenState extends State<FavouriteListScreen> {
   @override
   void initState() {
     super.initState();
-    DbFav.getAllsongs();
+    DbFav.getAllsongs(context);
   }
 
   @override
@@ -73,18 +73,29 @@ class _FavouriteListScreenState extends State<FavouriteListScreen> {
                           "assets/null2.png",
                           fit: BoxFit.fitWidth,
                         ),
-                        id: AllSongs.songs[value[index]].id,
+                        id: context
+                            .read<AllsongsProvider>()
+                            .songs[value[index]]
+                            .id,
                         type: ArtworkType.AUDIO,
                       ),
                       title: Text(
-                        AllSongs.songs[value[index]].title.toString(),
+                        context
+                            .read<AllsongsProvider>()
+                            .songs[value[index]]
+                            .title
+                            .toString(),
                         style: TextStyle(
                           color: kWhite,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       subtitle: Text(
-                        AllSongs.songs[value[index]].artist.toString(),
+                        context
+                            .read<AllsongsProvider>()
+                            .songs[value[index]]
+                            .artist
+                            .toString(),
                         style: TextStyle(
                           color: kWhite,
                           overflow: TextOverflow.ellipsis,
@@ -113,7 +124,7 @@ class _FavouriteListScreenState extends State<FavouriteListScreen> {
                                   ),
                                   TextButton(
                                     onPressed: () {
-                                      DbFav.deletion(index);
+                                      DbFav.deletion(index, context);
                                       const snackBar = SnackBar(
                                         content: Text('Remove from favourites'),
                                       );

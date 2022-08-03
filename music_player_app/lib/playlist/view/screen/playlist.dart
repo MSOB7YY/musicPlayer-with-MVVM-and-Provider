@@ -239,13 +239,12 @@ class _PlayListState extends State<PlayList> {
                     );
                   }
 
-                  final _name = _nameController.text.trim();
+                  final name = _nameController.text.trim();
 
-                  if (_name.isNotEmpty) {
-                    final _playList =
-                        PlaylistDbModel(name: _name, songList: []);
+                  if (name.isNotEmpty) {
+                    final playList = PlaylistDbModel(name: name, songList: []);
 
-                    addPlaylist(_playList);
+                    addPlaylist(playList);
                     Navigator.of(context).pop();
                   } else {
                     Navigator.of(context).pop();
