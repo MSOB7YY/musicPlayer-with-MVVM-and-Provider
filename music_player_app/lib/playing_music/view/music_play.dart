@@ -6,8 +6,11 @@ import 'package:miniplayer/miniplayer.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../../favorites/view_model/fav_button.dart';
+import '../../home/model/duration.dart';
 import '../../search/view/search_screen.dart';
 import '../../utilities/colors.dart';
+import 'widgets/playlilst_dialog.dart';
 
 MiniplayerController minicntrl = MiniplayerController();
 
