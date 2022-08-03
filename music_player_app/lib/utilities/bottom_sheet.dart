@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
+import '../favorites/view_model/fav_button.dart';
+import '../playing_music/view/widgets/playlilst_dialog.dart';
+import 'details.dart';
+
 settingModalBottomSheet(context, SongModel data) {
   showModalBottomSheet(
     shape: RoundedRectangleBorder(
@@ -68,7 +72,7 @@ settingModalBottomSheet(context, SongModel data) {
             onTap: () => {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (ctx) => EditTag(
+                  builder: (ctx) => Details(
                     songModel: data,
                   ),
                 ),
