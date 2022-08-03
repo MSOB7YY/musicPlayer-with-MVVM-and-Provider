@@ -37,7 +37,7 @@ packages:
     source: hosted
     version: "2.8.2"
   audio_service:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: audio_service
       url: "https://pub.dartlang.org"
@@ -283,7 +283,7 @@ packages:
     source: hosted
     version: "2.1.0"
   hive:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: hive
       url: "https://pub.dartlang.org"
@@ -465,7 +465,7 @@ packages:
     source: hosted
     version: "1.8.1"
   path_provider:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path_provider
       url: "https://pub.dartlang.org"
@@ -721,6 +721,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  toggle_switch:
+    dependency: "direct main"
+    description:
+      name: toggle_switch
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1"
   top_snackbar_flutter:
     dependency: "direct main"
     description:

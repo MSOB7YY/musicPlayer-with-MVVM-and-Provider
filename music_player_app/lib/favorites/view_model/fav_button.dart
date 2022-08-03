@@ -34,6 +34,7 @@ class _ButtonsState extends State<Buttons> {
               'remove from favourites',
             ),
           );
+          // ignore: use_build_context_synchronously
           ScaffoldMessenger.of(context).showSnackBar(snackbar);
         },
         icon: const Icon(
@@ -48,6 +49,7 @@ class _ButtonsState extends State<Buttons> {
 
         setState(() {});
         const snackBar = SnackBar(content: Text('add to favorites '));
+        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       },
       icon: const Icon(Icons.favorite_border_outlined, color: Colors.grey),

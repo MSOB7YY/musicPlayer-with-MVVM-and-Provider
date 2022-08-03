@@ -94,7 +94,6 @@ class _ScanScreenState extends State<ScanScreen>
                 ),
               ),
               ElevatedButton(
-                child: const Text('Scan'),
                 onPressed: () {
                   if (_isplaying) {
                     _animationController.repeat();
@@ -116,6 +115,7 @@ class _ScanScreenState extends State<ScanScreen>
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                child: const Text('Scan'),
               ),
             ],
           ),

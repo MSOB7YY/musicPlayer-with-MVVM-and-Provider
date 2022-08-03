@@ -2,10 +2,11 @@ import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-import 'package:rxdart/rxdart.dart';
 import '../../../playing_music/view/music_play.dart';
 import '../../../utilities/colors.dart';
 import '../../model/duration.dart';
+// ignore: depend_on_referenced_packages
+import 'package:rxdart/rxdart.dart';
 
 class MiniPlayerExpand extends StatefulWidget {
   const MiniPlayerExpand({Key? key}) : super(key: key);
