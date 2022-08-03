@@ -104,25 +104,25 @@ class MusicHome extends StatelessWidget {
         ),
         body: Stack(
           children: [
-            const BodyContainer(
+            BodyContainer(
               child: TabBarView(
                 children: [
-                  Center(
+                  const Center(
                     child: AllSongs(),
                   ),
                   Center(
                     child: PlayList(),
                   ),
-                  Center(
+                  const Center(
                     child: FavouriteListScreen(),
                   ),
-                  Center(
+                  const Center(
                     child: AlbumScreen(),
                   ),
-                  Center(
+                  const Center(
                     child: ArtistScreen(),
                   ),
-                  Center(
+                  const Center(
                     child: GenreScreen(),
                   ),
                 ],

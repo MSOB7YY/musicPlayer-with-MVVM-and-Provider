@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:music_player_app/playing_music/view_model/music_utilities.dart';
 import 'package:music_player_app/utilities/view/colors.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:provider/provider.dart';
 
 import '../favorites/view_model/fav_button.dart';
 import '../playing_music/view/widgets/playlilst_dialog.dart';
@@ -80,7 +82,7 @@ settingModalBottomSheet(context, SongModel data) {
             ),
             onTap: () => {
               Navigator.of(context).pop(),
-              playlistDialog(
+              Provider.of<MusicUtils>(context).playlistDialog(
                 context,
                 data.id,
                 data,

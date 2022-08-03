@@ -75,14 +75,7 @@ class PlayListHomeScreen extends StatelessWidget {
                           builder: (context) => const MusicScreen(),
                         ),
                       );
-                      if (context.read<MusicUtils>().currentIndex != index) {
-                        context.read<MusicUtils>().myMusic = value.playloop;
-                        context.read<MusicUtils>().audioPlayer.setAudioSource(
-                              createPlaylist(value.playloop),
-                              initialIndex: index,
-                            );
-                        context.read<MusicUtils>().audioPlayer.play();
-                      }
+                      context.read<MusicUtils>().playCheck(context, index);
                     },
                     leading: QueryArtImage(
                       songModel: context.read<AllsongsProvider>().songs[context
@@ -124,46 +117,46 @@ class PlayListHomeScreen extends StatelessWidget {
     );
   }
 
-  showdeleteBox(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext ctx) {
-        return AlertDialog(
-          title: const Text(
-            "Details",
-          ),
-          content: const Text(
-            "Clear Playlist",
-            style: TextStyle(
-              color: Color.fromARGB(117, 0, 0, 0),
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          actions: <Widget>[
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: const Color.fromARGB(255, 42, 11, 99),
-                onPrimary: kWhite,
-              ),
-              child: const Text("cancel"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: kAmber,
-                onPrimary: kWhite,
-              ),
-              child: const Text(
-                "Clear",
-              ),
-              onPressed: () {},
-            ),
-          ],
-        );
-      },
-    );
-  }
+  // showdeleteBox(BuildContext context) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext ctx) {
+  //       return AlertDialog(
+  //         title: const Text(
+  //           "Details",
+  //         ),
+  //         content: const Text(
+  //           "Clear Playlist",
+  //           style: TextStyle(
+  //             color: Color.fromARGB(117, 0, 0, 0),
+  //             fontSize: 18,
+  //             fontWeight: FontWeight.bold,
+  //           ),
+  //         ),
+  //         actions: <Widget>[
+  //           ElevatedButton(
+  //             style: ElevatedButton.styleFrom(
+  //               primary: const Color.fromARGB(255, 42, 11, 99),
+  //               onPrimary: kWhite,
+  //             ),
+  //             child: const Text("cancel"),
+  //             onPressed: () {
+  //               Navigator.of(context).pop();
+  //             },
+  //           ),
+  //           ElevatedButton(
+  //             style: ElevatedButton.styleFrom(
+  //               primary: kAmber,
+  //               onPrimary: kWhite,
+  //             ),
+  //             child: const Text(
+  //               "Clear",
+  //             ),
+  //             onPressed: () {},
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
 }
