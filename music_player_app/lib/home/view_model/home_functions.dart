@@ -1,12 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:music_player_app/utilities/colors.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../all_songs/view/all_songs.dart';
+import '../../utilities/view/colors.dart';
 
 class HomeFunctions with ChangeNotifier {
   List<SongModel> allSongs = [];

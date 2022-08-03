@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import '../../../playlist/model/playlist_model.dart';
 import '../../../playlist/view_model/fuctions/playlist_functions.dart';
-import '../../../utilities/colors.dart';
+import '../../../utilities/view/colors.dart';
 
 playlistDialog(context, id, SongModel songListPlay) {
   getallPlaylists();

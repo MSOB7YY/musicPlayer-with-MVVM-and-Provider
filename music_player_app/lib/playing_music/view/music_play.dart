@@ -9,7 +9,7 @@ import 'package:rxdart/rxdart.dart';
 import '../../favorites/view_model/fav_button.dart';
 import '../../home/model/duration.dart';
 import '../../search/view/search_screen.dart';
-import '../../utilities/colors.dart';
+import '../../utilities/view/colors.dart';
 import 'widgets/playlilst_dialog.dart';
 
 MiniplayerController minicntrl = MiniplayerController();

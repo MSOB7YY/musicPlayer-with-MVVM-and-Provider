@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:music_player_app/utilities/view/colors.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 import '../favorites/view_model/fav_button.dart';
 import '../playing_music/view/widgets/playlilst_dialog.dart';
-import 'details.dart';
+import 'view/details.dart';
 
 settingModalBottomSheet(context, SongModel data) {
   showModalBottomSheet(
@@ -17,33 +18,18 @@ settingModalBottomSheet(context, SongModel data) {
           ListTile(
             leading: Text(
               data.title,
-              style: const TextStyle(
+              style: TextStyle(
                 overflow: TextOverflow.ellipsis,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 42, 11, 99),
+                color: background1,
               ),
             ),
           ),
-          const Divider(
+          Divider(
             thickness: 2,
-            color: Color.fromARGB(255, 42, 11, 99),
+            color: background1,
           ),
-          // ListTile(
-          //   leading: Container(
-          //     height: 40,
-          //     width: 40,
-          //     color: const Color.fromARGB(64, 33, 149, 243),
-          //     child: const Icon(
-          //       Icons.sort,
-          //       color: Color.fromARGB(255, 42, 11, 99),
-          //     ),
-          //   ),
-          //   title: const Text(
-          //     'Sort List',
-          //   ),
-          //   onTap: () => {},
-          // ),
           ListTile(
             leading: Container(
               height: 40,
@@ -61,9 +47,9 @@ settingModalBottomSheet(context, SongModel data) {
               height: 40,
               width: 40,
               color: const Color.fromARGB(64, 33, 149, 243),
-              child: const Icon(
+              child: Icon(
                 Icons.info_outline_rounded,
-                color: Color.fromARGB(255, 42, 11, 99),
+                color: background1,
               ),
             ),
             title: const Text(
@@ -84,9 +70,9 @@ settingModalBottomSheet(context, SongModel data) {
               height: 40,
               width: 40,
               color: const Color.fromARGB(64, 33, 149, 243),
-              child: const Icon(
+              child: Icon(
                 Icons.add_circle,
-                color: Color.fromARGB(255, 42, 11, 99),
+                color: background1,
               ),
             ),
             title: const Text(

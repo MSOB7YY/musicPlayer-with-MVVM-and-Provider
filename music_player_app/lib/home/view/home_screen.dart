@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:miniplayer/miniplayer.dart';
 import 'package:music_player_app/home/view_model/home_functions.dart';
+import 'package:music_player_app/utilities/view/colors.dart';
 import 'package:provider/provider.dart';
 import '../../album/view/album.dart';
 import '../../all_songs/view/all_songs.dart';
@@ -11,7 +12,8 @@ import '../../favorites/view/favorites.dart';
 import '../../genre/view/genre.dart';
 import '../../playlist/view/screen/playlist.dart';
 import '../../search/view/search_screen.dart';
-import '../../utilities/body_container.dart';
+import '../../utilities/view/body_container.dart';
+import '../../utilities/view/texts.dart';
 import 'widgets/miniplayer_expand.dart';
 import 'widgets/miniplayer_mini.dart';
 
@@ -34,9 +36,9 @@ class MusicHome extends StatelessWidget {
           centerTitle: true,
           elevation: 0,
           backgroundColor: const Color.fromARGB(255, 42, 11, 99),
-          title: const Text(
-            'MalhaaR Music',
-            style: TextStyle(
+          title: Text(
+            appName,
+            style: const TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
             ),
@@ -62,13 +64,13 @@ class MusicHome extends StatelessWidget {
               ),
             ),
           ],
-          bottom: const TabBar(
-            unselectedLabelColor: Colors.white,
+          bottom: TabBar(
+            unselectedLabelColor: kWhite,
             labelColor: Colors.amber,
             isScrollable: true,
             indicatorColor: Colors.amber,
             tabs: [
-              Tab(
+              const Tab(
                 child: Text(
                   "SONGS",
                   style: TextStyle(
@@ -76,7 +78,7 @@ class MusicHome extends StatelessWidget {
                   ),
                 ),
               ),
-              Tab(
+              const Tab(
                 child: Text(
                   "PLAYLIST",
                   style: TextStyle(
@@ -84,7 +86,7 @@ class MusicHome extends StatelessWidget {
                   ),
                 ),
               ),
-              Tab(
+              const Tab(
                 child: Text(
                   "FAVORITES",
                   style: TextStyle(
@@ -92,7 +94,7 @@ class MusicHome extends StatelessWidget {
                   ),
                 ),
               ),
-              Tab(
+              const Tab(
                 child: Text(
                   "ALBUMS",
                   style: TextStyle(
@@ -100,7 +102,7 @@ class MusicHome extends StatelessWidget {
                   ),
                 ),
               ),
-              Tab(
+              const Tab(
                 child: Text(
                   "ARTIST",
                   style: TextStyle(
@@ -108,7 +110,7 @@ class MusicHome extends StatelessWidget {
                   ),
                 ),
               ),
-              Tab(
+              const Tab(
                 child: Text(
                   "GENRE",
                   style: TextStyle(

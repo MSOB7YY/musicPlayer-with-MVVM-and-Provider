@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:music_player_app/spalsh/view_model/splash_provider.dart';
-import 'package:music_player_app/utilities/colors.dart';
 import 'package:provider/provider.dart';
+import '../../utilities/view/colors.dart';
+import '../../utilities/view/images.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -55,10 +56,10 @@ class _SplashScreenState extends State<SplashScreen>
               child: Container(
                 height: 250,
                 width: 170,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(
-                      'assets/malhaarNew3Logo-modified.png',
+                      logo,
                     ),
                   ),
                 ),

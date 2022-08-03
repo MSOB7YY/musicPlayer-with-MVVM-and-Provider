@@ -1,10 +1,10 @@
 // ignore_for_file: deprecated_member_use
 import 'package:flutter/material.dart';
+import 'package:music_player_app/utilities/view/body_container.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../../home/view/home_screen.dart';
-import '../../utilities/colors.dart';
+import '../../utilities/view/colors.dart';
 import 'widgets/scan_screen.dart';
 
 class NavDrawer extends StatefulWidget {
@@ -22,17 +22,7 @@ class _NavDrawerState extends State<NavDrawer> {
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width / 1.8,
         child: Drawer(
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.centerRight,
-                end: Alignment.bottomRight,
-                colors: [
-                  background1,
-                  background2,
-                ],
-              ),
-            ),
+          child: BodyContainer(
             child: ListView(
               children: <Widget>[
                 DrawerHeader(
@@ -64,10 +54,10 @@ class _NavDrawerState extends State<NavDrawer> {
                     Icons.library_music,
                     color: Colors.white,
                   ),
-                  title: const Text(
+                  title: Text(
                     'Library',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: kWhite,
                     ),
                   ),
                   onTap: () => {
@@ -79,14 +69,14 @@ class _NavDrawerState extends State<NavDrawer> {
                   },
                 ),
                 ListTile(
-                  leading: const Icon(
+                  leading: Icon(
                     Icons.recycling,
-                    color: Colors.white,
+                    color: kWhite,
                   ),
-                  title: const Text(
+                  title: Text(
                     'Scan Music',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: kWhite,
                     ),
                   ),
                   onTap: () {
@@ -99,14 +89,14 @@ class _NavDrawerState extends State<NavDrawer> {
                   // trailing: ,
                 ),
                 ListTile(
-                  leading: const Icon(
+                  leading: Icon(
                     Icons.feedback_sharp,
-                    color: Colors.white,
+                    color: kWhite,
                   ),
-                  title: const Text(
+                  title: Text(
                     'Feedback',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: kWhite,
                     ),
                   ),
                   onTap: () => {
@@ -114,9 +104,9 @@ class _NavDrawerState extends State<NavDrawer> {
                   },
                 ),
                 ListTile(
-                  leading: const Icon(
+                  leading: Icon(
                     Icons.laptop,
-                    color: Colors.white,
+                    color: kWhite,
                   ),
                   title: const Text(
                     'About Developer',

@@ -1,9 +1,9 @@
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:music_player_app/utilities/view/body_container.dart';
+import 'package:music_player_app/utilities/view/colors.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-
 import '../../../playing_music/view/music_play.dart';
-import '../../../utilities/colors.dart';
 import '../../model/duration.dart';
 import 'miniplayer_expand.dart';
 
@@ -30,17 +30,7 @@ class _MiniPlayerMiniState extends State<MiniPlayerMini> {
     if (MusicScreen.audioPlayer.playing ||
         MusicScreen.audioPlayer.currentIndex != null &&
             MusicScreen.currentIndex != -1) {
-      return Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomCenter,
-            colors: [
-              background1,
-              background2,
-            ],
-          ),
-        ),
+      return BodyContainer(
         child: Column(
           children: [
             Container(
@@ -57,7 +47,7 @@ class _MiniPlayerMiniState extends State<MiniPlayerMini> {
                     progress: progress,
                     total: total,
                     barHeight: 3.0,
-                    baseBarColor: Colors.white,
+                    baseBarColor: kWhite,
                     progressBarColor: Colors.amber,
                     thumbColor: Colors.blue[900],
                     thumbRadius: 2,
@@ -86,8 +76,8 @@ class _MiniPlayerMiniState extends State<MiniPlayerMini> {
               title: Text(
                 MusicScreen
                     .myMusic[MusicScreen.audioPlayer.currentIndex!].title,
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: kWhite,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
@@ -95,8 +85,8 @@ class _MiniPlayerMiniState extends State<MiniPlayerMini> {
                 MusicScreen
                     .myMusic[MusicScreen.audioPlayer.currentIndex!].artist
                     .toString(),
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: kWhite,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
@@ -146,17 +136,7 @@ class _MiniPlayerMiniState extends State<MiniPlayerMini> {
         ),
       );
     }
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topRight,
-          end: Alignment.bottomCenter,
-          colors: [
-            background1,
-            background2,
-          ],
-        ),
-      ),
+    return BodyContainer(
       child: Column(
         children: [
           Container(
@@ -173,7 +153,7 @@ class _MiniPlayerMiniState extends State<MiniPlayerMini> {
                   progress: progress,
                   total: total,
                   barHeight: 3.0,
-                  baseBarColor: Colors.white,
+                  baseBarColor: kWhite,
                   progressBarColor: Colors.amber,
                   thumbColor: Colors.blue[900],
                   thumbRadius: 2,
@@ -191,17 +171,17 @@ class _MiniPlayerMiniState extends State<MiniPlayerMini> {
             leading: Image.asset(
               "assets/malhaarNew3Logo.png",
             ),
-            title: const Text(
+            title: Text(
               "Music Player",
               style: TextStyle(
-                color: Colors.white,
+                color: kWhite,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-            subtitle: const Text(
+            subtitle: Text(
               "Artist",
               style: TextStyle(
-                color: Colors.white,
+                color: kWhite,
                 overflow: TextOverflow.ellipsis,
               ),
             ),

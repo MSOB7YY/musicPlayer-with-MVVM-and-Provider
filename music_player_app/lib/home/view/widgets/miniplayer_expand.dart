@@ -1,10 +1,10 @@
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:music_player_app/utilities/view/colors.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import '../../../playing_music/view/music_play.dart';
-import '../../../utilities/body_container.dart';
-import '../../../utilities/colors.dart';
+import '../../../utilities/view/body_container.dart';
 import '../../model/duration.dart';
 // ignore: depend_on_referenced_packages
 import 'package:rxdart/rxdart.dart';
@@ -74,8 +74,8 @@ class _MiniPlayerExpandState extends State<MiniPlayerExpand> {
                             MusicScreen
                                 .myMusic[MusicScreen.audioPlayer.currentIndex!]
                                 .title,
-                            style: const TextStyle(
-                              color: Colors.white,
+                            style: TextStyle(
+                              color: kWhite,
                               overflow: TextOverflow.ellipsis,
                               fontSize: 25,
                             ),
@@ -92,9 +92,9 @@ class _MiniPlayerExpandState extends State<MiniPlayerExpand> {
                                 .myMusic[MusicScreen.audioPlayer.currentIndex!]
                                 .artist
                                 .toString(),
-                            style: const TextStyle(
+                            style: TextStyle(
                               overflow: TextOverflow.ellipsis,
-                              color: Colors.white,
+                              color: kWhite,
                             ),
                           ),
                         ),
@@ -120,7 +120,7 @@ class _MiniPlayerExpandState extends State<MiniPlayerExpand> {
                                     progress: progress,
                                     total: total,
                                     barHeight: 6.0,
-                                    baseBarColor: Colors.white,
+                                    baseBarColor: kWhite,
                                     progressBarColor: Colors.amber,
                                     thumbColor: Colors.blue[900],
                                     timeLabelTextStyle: const TextStyle(
@@ -150,8 +150,8 @@ class _MiniPlayerExpandState extends State<MiniPlayerExpand> {
                                     Flexible(
                                       child: Text(
                                         progress.toString().split(".")[0],
-                                        style: const TextStyle(
-                                          color: Colors.white70,
+                                        style: TextStyle(
+                                          color: kWhite,
                                           fontSize: 15,
                                         ),
                                       ),
@@ -159,8 +159,8 @@ class _MiniPlayerExpandState extends State<MiniPlayerExpand> {
                                     Flexible(
                                       child: Text(
                                         total.toString().split(".")[0],
-                                        style: const TextStyle(
-                                          color: Colors.white70,
+                                        style: TextStyle(
+                                          color: kWhite,
                                           fontSize: 15,
                                         ),
                                       ),
@@ -236,9 +236,9 @@ class _MiniPlayerExpandState extends State<MiniPlayerExpand> {
     return StreamBuilder<PlayerState>(
       builder: (context, snapshot) {
         return IconButton(
-          icon: const Icon(
+          icon: Icon(
             Icons.skip_previous_sharp,
-            color: Colors.white,
+            color: kWhite,
           ),
           iconSize: 45.0,
           onPressed: () {
@@ -255,9 +255,9 @@ class _MiniPlayerExpandState extends State<MiniPlayerExpand> {
     return StreamBuilder<PlayerState>(
       builder: (context, snapshot) {
         return IconButton(
-          icon: const Icon(
+          icon: Icon(
             Icons.skip_next_sharp,
-            color: Colors.white,
+            color: kWhite,
           ),
           iconSize: 45,
           onPressed: () {

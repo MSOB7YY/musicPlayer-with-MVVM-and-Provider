@@ -1,12 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:music_player_app/utilities/view/body_container.dart';
+import 'package:music_player_app/utilities/view/colors.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:provider/provider.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../playing_music/view/music_play.dart';
 import '../../utilities/bottom_sheet.dart';
-import '../../utilities/colors.dart';
 import '../../utilities/create_playlist.dart';
 
 class AllSongs extends StatefulWidget {
@@ -47,41 +49,19 @@ class _AllSongsState extends State<AllSongs> {
         ),
         builder: (context, item) {
           if (item.data == null) {
-            return Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.centerRight,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    background1,
-                    background2,
-                  ],
-                ),
-              ),
-              child: const Center(
+            return const BodyContainer(
+              child: Center(
                 child: CircularProgressIndicator(),
               ),
             );
           }
           if (item.data!.isEmpty) {
-            return Container(
-              width: double.infinity,
-              height: double.infinity,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.centerRight,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    background1,
-                    background2,
-                  ],
-                ),
-              ),
-              child: const Center(
+            return BodyContainer(
+              child: Center(
                 child: Text(
                   "Nothing found!",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: kWhite,
                   ),
                 ),
               ),
@@ -96,17 +76,7 @@ class _AllSongsState extends State<AllSongs> {
             },
             child: Padding(
               padding: const EdgeInsets.only(bottom: 80.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.centerRight,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      background1,
-                      background2,
-                    ],
-                  ),
-                ),
+              child: BodyContainer(
                 child: ListView.separated(
                   itemBuilder: (BuildContext context, index) {
                     return ListTile(
@@ -120,7 +90,9 @@ class _AllSongsState extends State<AllSongs> {
                         if (MusicScreen.currentIndex != index) {
                           MusicScreen.myMusic = AllSongs.songs;
                           MusicScreen.audioPlayer.setAudioSource(
-                            createPlaylist(item.data!),
+                            context
+                                .read<CreatePlaylist>()
+                                .createPlaylist(item.data!),
                             initialIndex: index,
                           );
                           MusicScreen.audioPlayer.play();
@@ -140,24 +112,24 @@ class _AllSongsState extends State<AllSongs> {
                       ),
                       title: Text(
                         item.data![index].title,
-                        style: const TextStyle(
+                        style: TextStyle(
                           overflow: TextOverflow.ellipsis,
-                          color: Colors.white,
+                          color: kWhite,
                         ),
                       ),
                       subtitle: Text(
                         item.data![index].artist == '<unknown>'
                             ? "unknown Artist"
                             : item.data![index].artist ?? "No Artist",
-                        style: const TextStyle(
+                        style: TextStyle(
                           overflow: TextOverflow.ellipsis,
-                          color: Colors.white,
+                          color: kWhite,
                         ),
                       ),
                       trailing: IconButton(
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.more_vert_outlined,
-                          color: Colors.white,
+                          color: kWhite,
                         ),
                         onPressed: () {
                           settingModalBottomSheet(
@@ -169,8 +141,8 @@ class _AllSongsState extends State<AllSongs> {
                     );
                   },
                   separatorBuilder: (ctx, index) {
-                    return const Divider(
-                      color: Colors.white,
+                    return Divider(
+                      color: kWhite,
                     );
                   },
                   itemCount: item.data!.length,

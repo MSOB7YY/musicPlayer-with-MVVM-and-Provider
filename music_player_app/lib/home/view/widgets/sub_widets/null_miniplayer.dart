@@ -1,9 +1,8 @@
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:music_player_app/utilities/body_container.dart';
-
+import 'package:music_player_app/utilities/view/colors.dart';
 import '../../../../playing_music/view/music_play.dart';
-import '../../../../utilities/colors.dart';
+import '../../../../utilities/view/body_container.dart';
 import '../../../model/duration.dart';
 import '../miniplayer_expand.dart';
 
@@ -34,29 +33,29 @@ class NullMiniPlayer extends StatelessWidget {
                 ),
                 ListView(
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.only(top: 28.0),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 28.0),
                       child: Center(
                         child: Text(
                           "Music Player",
                           style: TextStyle(
-                            color: Colors.white,
+                            color: kWhite,
                             overflow: TextOverflow.ellipsis,
                             fontSize: 25,
                           ),
                         ),
                       ),
                     ),
-                    const Center(
+                    Center(
                       child: Padding(
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                           top: 5.0,
                         ),
                         child: Text(
                           "Artist",
                           style: TextStyle(
                             overflow: TextOverflow.ellipsis,
-                            color: Colors.white,
+                            color: kWhite,
                           ),
                         ),
                       ),
@@ -82,7 +81,7 @@ class NullMiniPlayer extends StatelessWidget {
                                   progress: progress,
                                   total: total,
                                   barHeight: 6.0,
-                                  baseBarColor: Colors.white,
+                                  baseBarColor: kWhite,
                                   progressBarColor: Colors.amber,
                                   thumbColor: Colors.blue[900],
                                   timeLabelTextStyle: const TextStyle(
@@ -112,8 +111,8 @@ class NullMiniPlayer extends StatelessWidget {
                                   Flexible(
                                     child: Text(
                                       progress.toString().split(".")[0],
-                                      style: const TextStyle(
-                                        color: Colors.white70,
+                                      style: TextStyle(
+                                        color: kWhite,
                                         fontSize: 15,
                                       ),
                                     ),
@@ -121,8 +120,8 @@ class NullMiniPlayer extends StatelessWidget {
                                   Flexible(
                                     child: Text(
                                       total.toString().split(".")[0],
-                                      style: const TextStyle(
-                                        color: Colors.white70,
+                                      style: TextStyle(
+                                        color: kWhite,
                                         fontSize: 15,
                                       ),
                                     ),

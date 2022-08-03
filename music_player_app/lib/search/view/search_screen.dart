@@ -1,9 +1,13 @@
 // ignore_for_file: invalid_use_of_protected_member, must_be_immutable, invalid_use_of_visible_for_testing_member
 import 'package:flutter/material.dart';
+import 'package:music_player_app/utilities/create_playlist.dart';
+import 'package:music_player_app/utilities/view/body_container.dart';
+import 'package:music_player_app/utilities/view/colors.dart';
+import 'package:music_player_app/utilities/view/query_art.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:provider/provider.dart';
 import '../../all_songs/view/all_songs.dart';
 import '../../playing_music/view/music_play.dart';
-import '../../utilities/create_playlist.dart';
 
 class Search extends StatelessWidget {
   ValueNotifier<List<SongModel>> temp = ValueNotifier([]);
@@ -15,7 +19,7 @@ class Search extends StatelessWidget {
       appBar: AppBar(
         toolbarHeight: 60,
         elevation: 0,
-        backgroundColor: const Color.fromARGB(255, 42, 11, 99),
+        backgroundColor: background1,
         title: SizedBox(
           width: 1200.0,
           height: 40,
@@ -39,15 +43,15 @@ class Search extends StatelessWidget {
                 }
               }
             },
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: kWhite,
             ),
             controller: searchController,
             decoration: InputDecoration(
               suffixIcon: IconButton(
-                icon: const Icon(
+                icon: Icon(
                   Icons.close,
-                  color: Colors.white,
+                  color: kWhite,
                 ),
                 onPressed: () {
                   searchController.clear();
@@ -74,27 +78,17 @@ class Search extends StatelessWidget {
           ),
         ),
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.centerRight,
-            end: Alignment.bottomRight,
-            colors: [
-              Color.fromARGB(255, 42, 11, 99),
-              Color.fromARGB(235, 48, 14, 34),
-            ],
-          ),
-        ),
+      body: BodyContainer(
         child: ValueListenableBuilder(
           valueListenable: temp,
           builder:
               (BuildContext ctx, List<SongModel> searchdata, Widget? child) {
             if (searchdata.isEmpty) {
-              return const Center(
+              return Center(
                 child: Text(
                   "search something",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: kWhite,
                   ),
                 ),
               );
@@ -103,30 +97,20 @@ class Search extends StatelessWidget {
               itemBuilder: (ctx, index) {
                 final data = searchdata[index];
                 return ListTile(
-                  leading: QueryArtworkWidget(
-                    artworkBorder: const BorderRadius.all(
-                      Radius.zero,
-                    ),
-                    artworkHeight: 60,
-                    artworkWidth: 60,
-                    artworkFit: BoxFit.fill,
-                    nullArtworkWidget: Image.asset(
-                      "assets/null2.png",
-                      fit: BoxFit.fitWidth,
-                    ),
-                    id: data.id,
-                    type: ArtworkType.AUDIO,
+                  leading: QueryArtImage(
+                    songModel: data,
+                    artworkType: ArtworkType.AUDIO,
                   ),
                   title: Text(
                     data.title,
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: kWhite,
                     ),
                   ),
                   subtitle: Text(
                     data.artist.toString(),
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: kWhite,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -140,7 +124,7 @@ class Search extends StatelessWidget {
 
                     MusicScreen.myMusic = searchdata;
                     await MusicScreen.audioPlayer.setAudioSource(
-                      createPlaylist(searchdata),
+                      context.read<CreatePlaylist>().createPlaylist(searchdata),
                       initialIndex: index,
                     );
                     await MusicScreen.audioPlayer.play();
