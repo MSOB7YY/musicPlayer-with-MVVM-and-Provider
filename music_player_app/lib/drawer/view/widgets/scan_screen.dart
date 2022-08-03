@@ -2,11 +2,12 @@
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:music_player_app/utilities/view/body_container.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../../all_songs/view/all_songs.dart';
-import '../../../utilities/colors.dart';
+import '../../../utilities/view/colors.dart';
 
 class ScanScreen extends StatefulWidget {
   const ScanScreen({Key? key}) : super(key: key);
@@ -45,23 +46,13 @@ class _ScanScreenState extends State<ScanScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 42, 11, 99),
+        backgroundColor: background1,
         title: const Text(
           "Scan Music",
         ),
         elevation: 0,
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.centerRight,
-            end: Alignment.bottomRight,
-            colors: [
-              Color.fromARGB(255, 42, 11, 99),
-              Color.fromARGB(235, 48, 14, 34),
-            ],
-          ),
-        ),
+      body: BodyContainer(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -84,8 +75,8 @@ class _ScanScreenState extends State<ScanScreen>
                   animatedTexts: [
                     WavyAnimatedText(
                       'Scanning.....',
-                      textStyle: const TextStyle(
-                        color: Colors.white,
+                      textStyle: TextStyle(
+                        color: kWhite,
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
                       ),
@@ -135,7 +126,7 @@ class _ScanScreenState extends State<ScanScreen>
             gradient: SweepGradient(
               colors: [
                 const Color.fromARGB(255, 66, 64, 64).withOpacity(0.2),
-                Colors.white.withOpacity(0.6),
+                kWhite.withOpacity(0.6),
               ],
             ),
           ),

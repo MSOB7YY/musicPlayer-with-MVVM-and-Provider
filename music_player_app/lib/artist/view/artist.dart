@@ -1,8 +1,8 @@
 // ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
+import 'package:music_player_app/utilities/view/body_container.dart';
+import 'package:music_player_app/utilities/view/colors.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-
-import '../../utilities/colors.dart';
 import 'artist_home.dart';
 
 class ArtistScreen extends StatefulWidget {
@@ -25,19 +25,9 @@ class _ArtistScreenState extends State<ArtistScreen> {
         ),
         builder: (context, item) {
           if (item.data == null) {
-            return Center(
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.centerRight,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      background1,
-                      background2,
-                    ],
-                  ),
-                ),
-                child: const Center(
+            return const Center(
+              child: BodyContainer(
+                child: Center(
                   child: CircularProgressIndicator(),
                 ),
               ),
@@ -45,24 +35,12 @@ class _ArtistScreenState extends State<ArtistScreen> {
           }
 
           if (item.data!.isEmpty) {
-            return Container(
-              width: double.infinity,
-              height: double.infinity,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.centerRight,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    background1,
-                    background2,
-                  ],
-                ),
-              ),
-              child: const Center(
+            return BodyContainer(
+              child: Center(
                 child: Text(
                   "Nothing found!",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: kWhite,
                   ),
                 ),
               ),
@@ -70,17 +48,7 @@ class _ArtistScreenState extends State<ArtistScreen> {
           }
           return Padding(
             padding: const EdgeInsets.only(bottom: 15.0),
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.centerRight,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    background1,
-                    background2,
-                  ],
-                ),
-              ),
+            child: BodyContainer(
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 70.0),
                 child: ListView.separated(
@@ -103,9 +71,9 @@ class _ArtistScreenState extends State<ArtistScreen> {
                       ),
                       title: Text(
                         item.data![index].artist,
-                        style: const TextStyle(
+                        style: TextStyle(
                           overflow: TextOverflow.ellipsis,
-                          color: Colors.white,
+                          color: kWhite,
                         ),
                       ),
                       subtitle: Text(
@@ -125,8 +93,8 @@ class _ArtistScreenState extends State<ArtistScreen> {
                     );
                   },
                   separatorBuilder: (ctx, index) {
-                    return const Divider(
-                      color: Colors.white,
+                    return Divider(
+                      color: kWhite,
                     );
                   },
                   itemCount: item.data!.length,

@@ -1,8 +1,7 @@
 // ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-
-import '../../utilities/colors.dart';
+import '../../utilities/view/colors.dart';
 import 'album_home_screen.dart';
 
 class AlbumScreen extends StatefulWidget {

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:music_player_app/utilities/view/body_container.dart';
+import 'package:music_player_app/utilities/view/colors.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 import 'genre_home.dart';
@@ -25,19 +27,9 @@ class _GenreScreenState extends State<GenreScreen> {
           ),
           builder: (context, item) {
             if (item.data == null) {
-              return Center(
-                child: Container(
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.centerRight,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Color.fromARGB(255, 42, 11, 99),
-                        Color.fromARGB(235, 48, 14, 34),
-                      ],
-                    ),
-                  ),
-                  child: const Center(
+              return const Center(
+                child: BodyContainer(
+                  child: Center(
                     child: CircularProgressIndicator(),
                   ),
                 ),
@@ -58,27 +50,17 @@ class _GenreScreenState extends State<GenreScreen> {
                     ],
                   ),
                 ),
-                child: const Center(
+                child: Center(
                   child: Text(
                     "Nothing found!",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: kWhite,
                     ),
                   ),
                 ),
               );
             }
-            return Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.centerRight,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color.fromARGB(255, 42, 11, 99),
-                    Color.fromARGB(235, 48, 14, 34),
-                  ],
-                ),
-              ),
+            return BodyContainer(
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 70.0),
                 child: ListView.separated(
@@ -102,9 +84,9 @@ class _GenreScreenState extends State<GenreScreen> {
                       ),
                       title: Text(
                         item.data![index].genre,
-                        style: const TextStyle(
+                        style: TextStyle(
                           overflow: TextOverflow.ellipsis,
-                          color: Colors.white,
+                          color: kWhite,
                         ),
                       ),
                       subtitle: Text(
@@ -125,8 +107,8 @@ class _GenreScreenState extends State<GenreScreen> {
                     );
                   },
                   separatorBuilder: (ctx, index) {
-                    return const Divider(
-                      color: Colors.white,
+                    return Divider(
+                      color: kWhite,
                     );
                   },
                   itemCount: item.data!.length,

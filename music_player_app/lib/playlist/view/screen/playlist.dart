@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:music_player_app/utilities/view/body_container.dart';
+import 'package:music_player_app/utilities/view/colors.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-import '../../../utilities/colors.dart';
 import '../../model/playlist_model.dart';
 import '../../view_model/fuctions/playlist_functions.dart';
 import '../subscreen/playlist_home.dart';
@@ -56,36 +57,18 @@ class _PlayListState extends State<PlayList> {
           builder: (BuildContext ctx, List<PlaylistDbModel> playList,
               Widget? child) {
             if (playList.isEmpty) {
-              return Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.centerRight,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      background1,
-                      background2,
-                    ],
-                  ),
-                ),
-                child: const Center(
+              return BodyContainer(
+                child: Center(
                   child: Text(
                     "Empty Playlist",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                      color: kWhite,
+                    ),
                   ),
                 ),
               );
             }
-            return Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.centerRight,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    background1,
-                    background2,
-                  ],
-                ),
-              ),
+            return BodyContainer(
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 70.0),
                 child: ListView.separated(
@@ -95,15 +78,15 @@ class _PlayListState extends State<PlayList> {
                     return ListTile(
                       title: Text(
                         data.name,
-                        style: const TextStyle(
-                          color: Colors.white,
+                        style: TextStyle(
+                          color: kWhite,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       subtitle: Text(
                         'Songs: ${data.songList.length}',
-                        style: const TextStyle(
-                          color: Colors.white,
+                        style: TextStyle(
+                          color: kWhite,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
@@ -113,7 +96,7 @@ class _PlayListState extends State<PlayList> {
                         size: 40,
                       ),
                       trailing: IconButton(
-                        color: Colors.white,
+                        color: kWhite,
                         onPressed: () {
                           playlistBottomSheet(context, index);
                         },
@@ -133,8 +116,8 @@ class _PlayListState extends State<PlayList> {
                     );
                   },
                   separatorBuilder: (ctx, index) {
-                    return const Divider(
-                      color: Colors.white,
+                    return Divider(
+                      color: kWhite,
                       thickness: 1,
                     );
                   },
@@ -166,7 +149,7 @@ class _PlayListState extends State<PlayList> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: const Color.fromARGB(255, 42, 11, 99),
-                  onPrimary: Colors.white,
+                  onPrimary: kWhite,
                 ),
                 child: const Text(
                   "cancel",
@@ -178,7 +161,7 @@ class _PlayListState extends State<PlayList> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: Colors.amber,
-                  onPrimary: Colors.white,
+                  onPrimary: kWhite,
                 ),
                 child: const Text(
                   "Rename",
@@ -226,7 +209,7 @@ class _PlayListState extends State<PlayList> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: const Color.fromARGB(255, 42, 11, 99),
-                  onPrimary: Colors.white,
+                  onPrimary: kWhite,
                 ),
                 child: const Text("cancel"),
                 onPressed: () {
@@ -236,7 +219,7 @@ class _PlayListState extends State<PlayList> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: Colors.amber,
-                  onPrimary: Colors.white,
+                  onPrimary: kWhite,
                 ),
                 child: const Text(
                   "Create",

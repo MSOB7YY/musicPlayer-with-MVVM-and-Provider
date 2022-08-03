@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../home/view/home_screen.dart';
+import 'package:music_player_app/spalsh/view_model/splash_provider.dart';
+import 'package:provider/provider.dart';
+import '../../utilities/view/colors.dart';
+import '../../utilities/view/images.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -18,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen>
   );
   @override
   void initState() {
-    goHome();
+    context.read<SplashProvider>().goHome(context);
     super.initState();
     _animatonController.forward();
   }
@@ -34,13 +37,13 @@ class _SplashScreenState extends State<SplashScreen>
     return Stack(
       children: <Widget>[
         Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.centerRight,
               end: Alignment.bottomRight,
               colors: [
-                Color.fromARGB(255, 42, 11, 99),
-                Color.fromARGB(235, 49, 15, 42),
+                background1,
+                background2,
               ],
             ),
           ),
@@ -53,10 +56,10 @@ class _SplashScreenState extends State<SplashScreen>
               child: Container(
                 height: 250,
                 width: 170,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(
-                      'assets/malhaarNew3Logo-modified.png',
+                      logo,
                     ),
                   ),
                 ),
@@ -73,8 +76,8 @@ class _SplashScreenState extends State<SplashScreen>
         SizedBox(
           height: MediaQuery.of(context).size.height / 2,
         ),
-        const Align(
-          alignment: AlignmentDirectional(
+        Align(
+          alignment: const AlignmentDirectional(
             0.1,
             0.3,
           ),
@@ -82,27 +85,12 @@ class _SplashScreenState extends State<SplashScreen>
             "MalhaaR Music",
             style: TextStyle(
               fontSize: 25,
-              color: Colors.white,
+              color: kWhite,
               decoration: TextDecoration.none,
             ),
           ),
         ),
       ],
-    );
-  }
-
-  Future<void> goHome() async {
-    await Future.delayed(
-      const Duration(
-        seconds: 5,
-      ),
-    );
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (ctx) {
-          return const MusicHome();
-        },
-      ),
     );
   }
 }

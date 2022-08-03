@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:provider/provider.dart';
 
 import '../../playing_music/view/music_play.dart';
 import '../../utilities/bottom_sheet.dart';
@@ -131,7 +132,9 @@ class _AlbumHomeScreenState extends State<AlbumHomeScreen> {
                       );
                       MusicScreen.myMusic = albumSong;
                       MusicScreen.audioPlayer.setAudioSource(
-                        createPlaylist(item.data!),
+                        context
+                            .read<CreatePlaylist>()
+                            .createPlaylist(item.data!),
                         initialIndex: index,
                       );
                       MusicScreen.audioPlayer.play();

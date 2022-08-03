@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:music_player_app/utilities/view/body_container.dart';
+import 'package:music_player_app/utilities/view/colors.dart';
+import 'package:music_player_app/utilities/view/query_art.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:provider/provider.dart';
 import '../../playing_music/view/music_play.dart';
 import '../../utilities/bottom_sheet.dart';
 import '../../utilities/create_playlist.dart';
@@ -33,8 +37,8 @@ class _GenreHomeScreenState extends State<GenreHomeScreen> {
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: true,
                 title: Text(widget.genreModel.genre,
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: kWhite,
                       fontSize: 16.0,
                     )),
                 background: QueryArtworkWidget(
@@ -59,19 +63,9 @@ class _GenreHomeScreenState extends State<GenreHomeScreen> {
           ),
           builder: (context, item) {
             if (item.data == null) {
-              return Center(
-                child: Container(
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.centerRight,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Color.fromARGB(255, 42, 11, 99),
-                        Color.fromARGB(235, 48, 14, 34),
-                      ],
-                    ),
-                  ),
-                  child: const Center(
+              return const Center(
+                child: BodyContainer(
+                  child: Center(
                     child: CircularProgressIndicator(),
                   ),
                 ),
@@ -92,11 +86,11 @@ class _GenreHomeScreenState extends State<GenreHomeScreen> {
                     ],
                   ),
                 ),
-                child: const Center(
+                child: Center(
                   child: Text(
                     "Nothing found!",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: kWhite,
                     ),
                   ),
                 ),
@@ -104,17 +98,7 @@ class _GenreHomeScreenState extends State<GenreHomeScreen> {
             }
             genreSong.clear;
             genreSong = item.data!;
-            return Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.centerRight,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color.fromARGB(255, 42, 11, 99),
-                    Color.fromARGB(235, 48, 14, 34),
-                  ],
-                ),
-              ),
+            return BodyContainer(
               child: ListView.separated(
                 itemBuilder: (BuildContext context, index) {
                   return ListTile(
@@ -127,45 +111,35 @@ class _GenreHomeScreenState extends State<GenreHomeScreen> {
                       );
                       MusicScreen.myMusic = genreSong;
                       MusicScreen.audioPlayer.setAudioSource(
-                        createPlaylist(
-                          item.data!,
-                        ),
+                        context.read<CreatePlaylist>().createPlaylist(
+                              item.data!,
+                            ),
                         initialIndex: index,
                       );
                       MusicScreen.audioPlayer.play();
                     },
-                    leading: QueryArtworkWidget(
-                      artworkBorder: const BorderRadius.all(
-                        Radius.zero,
-                      ),
-                      artworkHeight: 60,
-                      artworkWidth: 60,
-                      artworkFit: BoxFit.fill,
-                      nullArtworkWidget: Image.asset(
-                        "assets/null2.png",
-                        fit: BoxFit.fitWidth,
-                      ),
-                      id: item.data![index].id,
-                      type: ArtworkType.AUDIO,
+                    leading: QueryArtImage(
+                      songModel: item.data![index],
+                      artworkType: ArtworkType.GENRE,
                     ),
                     title: Text(
                       item.data![index].title,
-                      style: const TextStyle(
+                      style: TextStyle(
                         overflow: TextOverflow.ellipsis,
-                        color: Colors.white,
+                        color: kWhite,
                       ),
                     ),
                     subtitle: Text(
                       item.data![index].artist ?? "No Artist",
-                      style: const TextStyle(
+                      style: TextStyle(
                         overflow: TextOverflow.ellipsis,
-                        color: Colors.white,
+                        color: kWhite,
                       ),
                     ),
                     trailing: IconButton(
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.more_vert_outlined,
-                        color: Colors.white,
+                        color: kWhite,
                       ),
                       onPressed: () {
                         settingModalBottomSheet(
@@ -177,8 +151,8 @@ class _GenreHomeScreenState extends State<GenreHomeScreen> {
                   );
                 },
                 separatorBuilder: (ctx, index) {
-                  return const Divider(
-                    color: Colors.white,
+                  return Divider(
+                    color: kWhite,
                   );
                 },
                 itemCount: item.data!.length,

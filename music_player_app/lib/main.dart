@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:just_audio_background/just_audio_background.dart';
+import 'package:music_player_app/home/view_model/home_functions.dart';
 import 'package:music_player_app/playlist/model/playlist_model.dart';
+import 'package:music_player_app/spalsh/view_model/splash_provider.dart';
+import 'package:provider/provider.dart';
 import 'favorites/model/favourite_model.dart';
 import 'spalsh/view/splash_screen.dart';
 
@@ -34,9 +37,19 @@ class Music extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => HomeFunctions(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => SplashProvider(),
+        ),
+      ],
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: SplashScreen(),
+      ),
     );
   }
 }

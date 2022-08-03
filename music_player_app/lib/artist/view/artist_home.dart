@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:music_player_app/utilities/view/colors.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:provider/provider.dart';
 import '../../playing_music/view/music_play.dart';
 import '../../utilities/bottom_sheet.dart';
 import '../../utilities/create_playlist.dart';
@@ -34,9 +36,9 @@ class _ArtistHomeScreenState extends State<ArtistHomeScreen> {
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
               title: Text(widget.artistModel.artist,
-                  style: const TextStyle(
+                  style: TextStyle(
                     overflow: TextOverflow.ellipsis,
-                    color: Colors.white,
+                    color: kWhite,
                     fontSize: 16.0,
                   )),
               background: QueryArtworkWidget(
@@ -94,11 +96,11 @@ class _ArtistHomeScreenState extends State<ArtistHomeScreen> {
                   ],
                 ),
               ),
-              child: const Center(
+              child: Center(
                 child: Text(
                   "Nothing found!",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: kWhite,
                   ),
                 ),
               ),
@@ -129,9 +131,9 @@ class _ArtistHomeScreenState extends State<ArtistHomeScreen> {
                     );
                     MusicScreen.myMusic = artistSong;
                     MusicScreen.audioPlayer.setAudioSource(
-                      createPlaylist(
-                        item.data!,
-                      ),
+                      context.read<CreatePlaylist>().createPlaylist(
+                            item.data!,
+                          ),
                       initialIndex: index,
                     );
                     MusicScreen.audioPlayer.play();
@@ -152,22 +154,22 @@ class _ArtistHomeScreenState extends State<ArtistHomeScreen> {
                   ),
                   title: Text(
                     item.data![index].title,
-                    style: const TextStyle(
+                    style: TextStyle(
                       overflow: TextOverflow.ellipsis,
-                      color: Colors.white,
+                      color: kWhite,
                     ),
                   ),
                   subtitle: Text(
                     item.data![index].artist ?? "No Artist",
-                    style: const TextStyle(
+                    style: TextStyle(
                       overflow: TextOverflow.ellipsis,
-                      color: Colors.white,
+                      color: kWhite,
                     ),
                   ),
                   trailing: IconButton(
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.more_vert_outlined,
-                      color: Colors.white,
+                      color: kWhite,
                     ),
                     onPressed: () {
                       settingModalBottomSheet(
@@ -179,8 +181,8 @@ class _ArtistHomeScreenState extends State<ArtistHomeScreen> {
                 );
               },
               separatorBuilder: (ctx, index) {
-                return const Divider(
-                  color: Colors.white,
+                return Divider(
+                  color: kWhite,
                 );
               },
               itemCount: item.data!.length,

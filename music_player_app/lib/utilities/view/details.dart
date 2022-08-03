@@ -1,41 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:music_player_app/utilities/view/body_container.dart';
+import 'package:music_player_app/utilities/view/colors.dart';
+import 'package:music_player_app/utilities/view/query_art.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-import 'colors.dart';
+import 'images.dart';
 
 bool? result;
 
-class Details extends StatefulWidget {
+class Details extends StatelessWidget {
   final SongModel songModel;
   const Details({Key? key, required this.songModel}) : super(key: key);
 
-  @override
-  State<Details> createState() => _EditTagState();
-}
-
-class _EditTagState extends State<Details> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 42, 11, 99),
+        backgroundColor: background1,
         title: const Text(
           "Details",
         ),
         centerTitle: true,
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.centerRight,
-            end: Alignment.bottomRight,
-            colors: [
-              background1,
-              background2,
-            ],
-          ),
-        ),
+      body: BodyContainer(
         child: Padding(
           padding: const EdgeInsets.all(18.0),
           child: ListView(
@@ -49,28 +37,20 @@ class _EditTagState extends State<Details> {
                       child: Container(
                         height: MediaQuery.of(context).size.height / 5,
                         width: MediaQuery.of(context).size.width / 2,
-                        child: QueryArtworkWidget(
-                          artworkBorder: const BorderRadius.all(
-                            Radius.zero,
-                          ),
-                          artworkHeight: 60,
-                          artworkWidth: 60,
-                          artworkFit: BoxFit.fill,
-                          nullArtworkWidget: Image.asset(
-                            "assets/null2.png",
-                            fit: BoxFit.fitWidth,
-                          ),
-                          id: widget.songModel.id,
-                          type: ArtworkType.AUDIO,
+                        child: QueryArtImage(
+                          songModel: songModel,
+                          artworkType: ArtworkType.AUDIO,
                         ),
                       ),
                     ),
-                    SizedBox(height: MediaQuery.of(context).size.height / 15),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 15,
+                    ),
                     Center(
                       child: Text(
-                        "Title:   ${widget.songModel.title}",
-                        style: const TextStyle(
-                          color: Colors.white,
+                        "Title:   songModel.title}",
+                        style: TextStyle(
+                          color: kWhite,
                         ),
                       ),
                     ),
@@ -78,38 +58,38 @@ class _EditTagState extends State<Details> {
                     Padding(
                       padding: const EdgeInsets.only(left: 16.0),
                       child: Text(
-                        "Artist:   ${widget.songModel.artist}",
-                        style: const TextStyle(
-                          color: Colors.white,
+                        "Artist:   ${songModel.artist}",
+                        style: TextStyle(
+                          color: kWhite,
                         ),
                       ),
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height / 15),
                     Text(
-                      "Album: ${widget.songModel.album}",
-                      style: const TextStyle(
-                        color: Colors.white,
+                      "Album: ${songModel.album}",
+                      style: TextStyle(
+                        color: kWhite,
                       ),
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height / 15),
                     Text(
-                      "Genre:   ${widget.songModel.genre}",
-                      style: const TextStyle(
-                        color: Colors.white,
+                      "Genre:   ${songModel.genre}",
+                      style: TextStyle(
+                        color: kWhite,
                       ),
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height / 15),
                     Text(
-                      "Size:   ${widget.songModel.size}",
-                      style: const TextStyle(
-                        color: Colors.white,
+                      "Size:   ${songModel.size}",
+                      style: TextStyle(
+                        color: kWhite,
                       ),
                     ),
                     SizedBox(height: MediaQuery.of(context).size.height / 15),
                     Text(
-                      "File Extension:   ${widget.songModel.fileExtension}",
-                      style: const TextStyle(
-                        color: Colors.white,
+                      "File Extension:   ${songModel.fileExtension}",
+                      style: TextStyle(
+                        color: kWhite,
                       ),
                     ),
                   ],

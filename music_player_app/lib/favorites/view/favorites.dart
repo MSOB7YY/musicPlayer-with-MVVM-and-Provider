@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:music_player_app/utilities/view/body_container.dart';
+import 'package:music_player_app/utilities/view/colors.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:provider/provider.dart';
 import '../../all_songs/view/all_songs.dart';
 import '../../playing_music/view/music_play.dart';
 import '../../utilities/create_playlist.dart';
@@ -28,17 +31,7 @@ class _FavouriteListScreenState extends State<FavouriteListScreen> {
           valueListenable: DbFav.favourites,
           builder: (BuildContext context, List<dynamic> value, Widget? child) {
             if (value.isEmpty) {
-              return Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.centerRight,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Color.fromARGB(255, 42, 11, 99),
-                      Color.fromARGB(235, 48, 14, 34),
-                    ],
-                  ),
-                ),
+              return BodyContainer(
                 child: Center(
                   child: Column(
                     children: [
@@ -51,26 +44,18 @@ class _FavouriteListScreenState extends State<FavouriteListScreen> {
                           ),
                         ),
                       ),
-                      const Text(
+                      Text(
                         "Add your Favorites",
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(
+                          color: kWhite,
+                        ),
                       )
                     ],
                   ),
                 ),
               );
             }
-            return Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.centerRight,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color.fromARGB(255, 42, 11, 99),
-                    Color.fromARGB(235, 48, 14, 34),
-                  ],
-                ),
-              ),
+            return BodyContainer(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ListView.separated(
@@ -92,15 +77,15 @@ class _FavouriteListScreenState extends State<FavouriteListScreen> {
                       ),
                       title: Text(
                         AllSongs.songs[value[index]].title.toString(),
-                        style: const TextStyle(
-                          color: Colors.white,
+                        style: TextStyle(
+                          color: kWhite,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       subtitle: Text(
                         AllSongs.songs[value[index]].artist.toString(),
-                        style: const TextStyle(
-                          color: Colors.white,
+                        style: TextStyle(
+                          color: kWhite,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
@@ -110,7 +95,7 @@ class _FavouriteListScreenState extends State<FavouriteListScreen> {
                             context: context,
                             builder: (BuildContext ctx) {
                               return AlertDialog(
-                                backgroundColor: Colors.white,
+                                backgroundColor: kWhite,
                                 content: const Text(
                                   'Do you want to remove song from favorites?',
                                   style: TextStyle(
@@ -165,7 +150,9 @@ class _FavouriteListScreenState extends State<FavouriteListScreen> {
 
                         MusicScreen.myMusic = DbFav.favloop;
                         MusicScreen.audioPlayer.setAudioSource(
-                          createPlaylist(DbFav.favloop),
+                          context
+                              .read<CreatePlaylist>()
+                              .createPlaylist(DbFav.favloop),
                           initialIndex: index,
                         );
                         MusicScreen.audioPlayer.play();
@@ -173,8 +160,8 @@ class _FavouriteListScreenState extends State<FavouriteListScreen> {
                     );
                   },
                   separatorBuilder: (ctx, index) {
-                    return const Divider(
-                      color: Colors.white,
+                    return Divider(
+                      color: kWhite,
                       thickness: 0.5,
                     );
                   },

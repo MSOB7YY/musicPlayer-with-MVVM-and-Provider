@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:music_player_app/utilities/create_playlist.dart';
+import 'package:music_player_app/utilities/view/body_container.dart';
+import 'package:music_player_app/utilities/view/colors.dart';
+import 'package:music_player_app/utilities/view/query_art.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:provider/provider.dart';
 
 import '../../../all_songs/view/all_songs.dart';
 import '../../../playing_music/view/music_play.dart';
-import '../../../utilities/colors.dart';
-import '../../../utilities/create_playlist.dart';
 import '../../view_model/fuctions/playlist_functions.dart';
 import '../widgets/add_playlist.dart';
 
@@ -69,17 +72,7 @@ class _PlayListHomeScreenState extends State<PlayListHomeScreen> {
         valueListenable: playlistNotifier,
         builder:
             (BuildContext ctx, List<dynamic> selectedsongs, Widget? child) {
-          return Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.centerRight,
-                end: Alignment.bottomRight,
-                colors: [
-                  background1,
-                  background2,
-                ],
-              ),
-            ),
+          return BodyContainer(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: ListView.separated(
@@ -95,35 +88,26 @@ class _PlayListHomeScreenState extends State<PlayListHomeScreen> {
                       if (MusicScreen.currentIndex != index) {
                         MusicScreen.myMusic = playloop;
                         MusicScreen.audioPlayer.setAudioSource(
-                          createPlaylist(playloop),
+                          context
+                              .read<CreatePlaylist>()
+                              .createPlaylist(playloop),
                           initialIndex: index,
                         );
                         MusicScreen.audioPlayer.play();
                       }
                     },
-                    leading: QueryArtworkWidget(
-                      artworkBorder: const BorderRadius.all(
-                        Radius.zero,
-                      ),
-                      artworkHeight: 60,
-                      artworkWidth: 60,
-                      artworkFit: BoxFit.fill,
-                      nullArtworkWidget: Image.asset(
-                        "assets/null2.png",
-                        fit: BoxFit.fitWidth,
-                      ),
-                      id: AllSongs
-                          .songs[Playlistsongcheck.selectPlaySong.value[index]]
-                          .id,
-                      type: ArtworkType.AUDIO,
+                    leading: QueryArtImage(
+                      songModel: AllSongs
+                          .songs[Playlistsongcheck.selectPlaySong.value[index]],
+                      artworkType: ArtworkType.AUDIO,
                     ),
                     title: Text(
                       AllSongs
                           .songs[Playlistsongcheck.selectPlaySong.value[index]]
                           .title,
-                      style: const TextStyle(
+                      style: TextStyle(
                         overflow: TextOverflow.ellipsis,
-                        color: Colors.white,
+                        color: kWhite,
                       ),
                     ),
                     subtitle: Text(
@@ -131,16 +115,16 @@ class _PlayListHomeScreenState extends State<PlayListHomeScreen> {
                           .songs[Playlistsongcheck.selectPlaySong.value[index]]
                           .artist
                           .toString(),
-                      style: const TextStyle(
+                      style: TextStyle(
                         overflow: TextOverflow.ellipsis,
-                        color: Colors.white,
+                        color: kWhite,
                       ),
                     ),
                   );
                 },
                 separatorBuilder: (ctx, index) {
-                  return const Divider(
-                    color: Colors.white,
+                  return Divider(
+                    color: kWhite,
                   );
                 },
                 itemCount: Playlistsongcheck.selectPlaySong.value.length,
@@ -172,7 +156,7 @@ class _PlayListHomeScreenState extends State<PlayListHomeScreen> {
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 primary: const Color.fromARGB(255, 42, 11, 99),
-                onPrimary: Colors.white,
+                onPrimary: kWhite,
               ),
               child: const Text("cancel"),
               onPressed: () {
@@ -182,7 +166,7 @@ class _PlayListHomeScreenState extends State<PlayListHomeScreen> {
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 primary: Colors.amber,
-                onPrimary: Colors.white,
+                onPrimary: kWhite,
               ),
               child: const Text(
                 "Clear",
