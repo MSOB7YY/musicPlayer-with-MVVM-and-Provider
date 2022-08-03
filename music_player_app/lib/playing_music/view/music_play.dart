@@ -2,6 +2,7 @@
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:music_player_app/playing_music/view/widgets/playlist_dialog_widget.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
 import '../../favorites/view_model/fav_button.dart';
@@ -141,11 +142,11 @@ class MusicScreen extends StatelessWidget {
                       width: 40,
                       child: IconButton(
                         onPressed: () {
-                          playlistDialog(
-                            context,
-                            value.myMusic[value.currentIndex].id,
-                            value.myMusic[value.currentIndex],
-                          );
+                          context.read<MusicUtils>().playlistDialog(
+                                context,
+                                value.myMusic[value.currentIndex].id,
+                                value.myMusic[value.currentIndex],
+                              );
                         },
                         icon: const Icon(
                           Icons.playlist_add,
