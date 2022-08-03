@@ -3,6 +3,7 @@ import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
 
 import '../../playing_music/view/music_play.dart';
+import '../../playing_music/view_model/music_utilities.dart';
 import '../../utilities/bottom_sheet.dart';
 import '../../utilities/create_playlist.dart';
 
@@ -130,14 +131,14 @@ class _AlbumHomeScreenState extends State<AlbumHomeScreen> {
                           builder: (context) => const MusicScreen(),
                         ),
                       );
-                      MusicScreen.myMusic = albumSong;
-                      MusicScreen.audioPlayer.setAudioSource(
-                        context
-                            .read<CreatePlaylist>()
-                            .createPlaylist(item.data!),
-                        initialIndex: index,
-                      );
-                      MusicScreen.audioPlayer.play();
+                      context.read<MusicUtils>().myMusic = albumSong;
+                      context.read<MusicUtils>().audioPlayer.setAudioSource(
+                            context
+                                .read<CreatePlaylist>()
+                                .createPlaylist(item.data!),
+                            initialIndex: index,
+                          );
+                      context.read<MusicUtils>().audioPlayer.play();
                     },
                     leading: QueryArtworkWidget(
                       artworkBorder: const BorderRadius.all(

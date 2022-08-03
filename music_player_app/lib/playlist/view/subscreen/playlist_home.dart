@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 
 import '../../../all_songs/view/all_songs.dart';
 import '../../../playing_music/view/music_play.dart';
+import '../../../playing_music/view_model/music_utilities.dart';
 import '../../view_model/fuctions/playlist_functions.dart';
 import '../widgets/add_playlist.dart';
 
@@ -85,15 +86,15 @@ class _PlayListHomeScreenState extends State<PlayListHomeScreen> {
                           builder: (context) => const MusicScreen(),
                         ),
                       );
-                      if (MusicScreen.currentIndex != index) {
-                        MusicScreen.myMusic = playloop;
-                        MusicScreen.audioPlayer.setAudioSource(
-                          context
-                              .read<CreatePlaylist>()
-                              .createPlaylist(playloop),
-                          initialIndex: index,
-                        );
-                        MusicScreen.audioPlayer.play();
+                      if (context.read<MusicUtils>().currentIndex != index) {
+                        context.read<MusicUtils>().myMusic = playloop;
+                        context.read<MusicUtils>().audioPlayer.setAudioSource(
+                              context
+                                  .read<CreatePlaylist>()
+                                  .createPlaylist(playloop),
+                              initialIndex: index,
+                            );
+                        context.read<MusicUtils>().audioPlayer.play();
                       }
                     },
                     leading: QueryArtImage(

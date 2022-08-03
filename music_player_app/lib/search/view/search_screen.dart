@@ -8,6 +8,7 @@ import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
 import '../../all_songs/view/all_songs.dart';
 import '../../playing_music/view/music_play.dart';
+import '../../playing_music/view_model/music_utilities.dart';
 
 class Search extends StatelessWidget {
   ValueNotifier<List<SongModel>> temp = ValueNotifier([]);
@@ -122,12 +123,14 @@ class Search extends StatelessWidget {
                       ),
                     );
 
-                    MusicScreen.myMusic = searchdata;
-                    await MusicScreen.audioPlayer.setAudioSource(
-                      context.read<CreatePlaylist>().createPlaylist(searchdata),
-                      initialIndex: index,
-                    );
-                    await MusicScreen.audioPlayer.play();
+                    context.read<MusicUtils>().myMusic = searchdata;
+                    await context.read<MusicUtils>().audioPlayer.setAudioSource(
+                          context
+                              .read<CreatePlaylist>()
+                              .createPlaylist(searchdata),
+                          initialIndex: index,
+                        );
+                    await context.read<MusicUtils>().audioPlayer.play();
                   },
                 );
               },

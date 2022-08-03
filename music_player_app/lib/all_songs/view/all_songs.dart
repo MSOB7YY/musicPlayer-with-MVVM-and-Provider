@@ -8,6 +8,7 @@ import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../playing_music/view/music_play.dart';
+import '../../playing_music/view_model/music_utilities.dart';
 import '../../utilities/bottom_sheet.dart';
 import '../../utilities/create_playlist.dart';
 
@@ -81,22 +82,20 @@ class _AllSongsState extends State<AllSongs> {
                   itemBuilder: (BuildContext context, index) {
                     return ListTile(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const MusicScreen(),
-                          ),
-                        );
-                        if (MusicScreen.currentIndex != index) {
-                          MusicScreen.myMusic = AllSongs.songs;
-                          MusicScreen.audioPlayer.setAudioSource(
-                            context
-                                .read<CreatePlaylist>()
-                                .createPlaylist(item.data!),
-                            initialIndex: index,
-                          );
-                          MusicScreen.audioPlayer.play();
-                        }
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => const MusicScreen(),
+                        //   ),
+                        // );
+
+                        // context.read<MusicUtils>().myMusic = AllSongs.songs;
+                        // context.read<MusicUtils>().audioPlayer.setAudioSource(
+                        //       Provider.of<CreatePlaylist>(context)
+                        //           .createPlaylist(item.data!),
+                        //       initialIndex: index,
+                        //     );
+                        Provider.of<MusicUtils>(context).audioPlayer.play();
                       },
                       leading: QueryArtworkWidget(
                         artworkBorder: BorderRadius.circular(14),

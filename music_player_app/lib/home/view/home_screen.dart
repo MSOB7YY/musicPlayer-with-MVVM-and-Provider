@@ -66,58 +66,40 @@ class MusicHome extends StatelessWidget {
           ],
           bottom: TabBar(
             unselectedLabelColor: kWhite,
-            labelColor: Colors.amber,
+            labelColor: kAmber,
             isScrollable: true,
-            indicatorColor: Colors.amber,
+            indicatorColor: kAmber,
             tabs: [
               const Tab(
-                child: Text(
-                  "SONGS",
-                  style: TextStyle(
-                    fontSize: 14,
-                  ),
+                child: TextWidget(
+                  title: "SONGS",
                 ),
               ),
               const Tab(
-                child: Text(
-                  "PLAYLIST",
-                  style: TextStyle(
-                    fontSize: 14,
-                  ),
+                child: TextWidget(
+                  title: "PLAYLIST",
                 ),
               ),
               const Tab(
-                child: Text(
-                  "FAVORITES",
-                  style: TextStyle(
-                    fontSize: 14,
-                  ),
+                child: TextWidget(
+                  title: "FAVORITES",
                 ),
               ),
               const Tab(
-                child: Text(
-                  "ALBUMS",
-                  style: TextStyle(
-                    fontSize: 14,
-                  ),
+                child: TextWidget(
+                  title: "ALBUMS",
                 ),
               ),
               const Tab(
-                child: Text(
-                  "ARTIST",
-                  style: TextStyle(
-                    fontSize: 14,
-                  ),
+                child: TextWidget(
+                  title: "ARTIST",
                 ),
               ),
               const Tab(
-                child: Text(
-                  "GENRE",
-                  style: TextStyle(
-                    fontSize: 14,
-                  ),
+                child: TextWidget(
+                  title: "GENRE",
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -160,6 +142,21 @@ class MusicHome extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class TextWidget extends StatelessWidget {
+  final String title;
+  const TextWidget({Key? key, required this.title}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      title,
+      style: TextStyle(
+        fontSize: 14,
       ),
     );
   }

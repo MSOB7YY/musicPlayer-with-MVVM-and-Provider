@@ -2,24 +2,19 @@
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:miniplayer/miniplayer.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../favorites/view_model/fav_button.dart';
 import '../../home/model/duration.dart';
 import '../../search/view/search_screen.dart';
 import '../../utilities/view/colors.dart';
+import '../view_model/music_functions.dart';
+import '../view_model/music_utilities.dart';
 import 'widgets/playlilst_dialog.dart';
 
-MiniplayerController minicntrl = MiniplayerController();
-
 class MusicScreen extends StatefulWidget {
-  static AudioPlayer audioPlayer = AudioPlayer();
-
-  static String currentTitle = '';
-  static List<SongModel> myMusic = [];
-  static int currentIndex = -1;
   const MusicScreen({
     Key? key,
   }) : super(key: key);
@@ -35,7 +30,7 @@ class MusicScreenState extends State<MusicScreen> {
   @override
   void initState() {
     super.initState();
-    MusicScreen.audioPlayer.currentIndexStream.listen((index) {
+    context.read<MusicUtils>().audioPlayer.currentIndexStream.listen((index) {
       if (index != null) {
         _updateCurrentPlayingSongDetails(index);
       }
@@ -45,8 +40,8 @@ class MusicScreenState extends State<MusicScreen> {
 
   Stream<DurationState> get _durationStateStream =>
       Rx.combineLatest2<Duration, Duration?, DurationState>(
-        MusicScreen.audioPlayer.positionStream,
-        MusicScreen.audioPlayer.durationStream,
+        context.read<MusicUtils>().audioPlayer.positionStream,
+        context.read<MusicUtils>().audioPlayer.durationStream,
         (position, duration) =>
             DurationState(position: position, total: duration ?? Duration.zero),
       );
@@ -100,7 +95,10 @@ class MusicScreenState extends State<MusicScreen> {
                   width: MediaQuery.of(context).size.width * 0.8,
                   height: MediaQuery.of(context).size.height * 0.3,
                   child: QueryArtworkWidget(
-                    id: MusicScreen.myMusic[MusicScreen.currentIndex].id,
+                    id: context
+                        .read<MusicUtils>()
+                        .myMusic[context.read<MusicUtils>().currentIndex]
+                        .id,
                     type: ArtworkType.AUDIO,
                     artworkBorder: BorderRadius.circular(
                       14.0,
@@ -118,7 +116,10 @@ class MusicScreenState extends State<MusicScreen> {
                   top: 20.0,
                 ),
                 child: Text(
-                  MusicScreen.myMusic[MusicScreen.currentIndex].title,
+                  context
+                      .read<MusicUtils>()
+                      .myMusic[context.read<MusicUtils>().currentIndex]
+                      .title,
                   style: const TextStyle(
                     color: Colors.white,
                     overflow: TextOverflow.ellipsis,
@@ -133,11 +134,17 @@ class MusicScreenState extends State<MusicScreen> {
                   top: 5.0,
                 ),
                 child: Text(
-                  MusicScreen.myMusic[MusicScreen.currentIndex].artist
+                  context
+                              .read<MusicUtils>()
+                              .myMusic[context.read<MusicUtils>().currentIndex]
+                              .artist
                               .toString() ==
                           '<unknown>'
                       ? "unknown Artist"
-                      : MusicScreen.myMusic[MusicScreen.currentIndex].artist
+                      : context
+                          .read<MusicUtils>()
+                          .myMusic[context.read<MusicUtils>().currentIndex]
+                          .artist
                           .toString(),
                   style: const TextStyle(
                     overflow: TextOverflow.ellipsis,
@@ -156,7 +163,10 @@ class MusicScreenState extends State<MusicScreen> {
                     height: 40,
                     width: 40,
                     child: Buttons(
-                      id: MusicScreen.myMusic[MusicScreen.currentIndex].id,
+                      id: context
+                          .read<MusicUtils>()
+                          .myMusic[context.read<MusicUtils>().currentIndex]
+                          .id,
                     ),
                   ),
                   Container(
@@ -167,8 +177,13 @@ class MusicScreenState extends State<MusicScreen> {
                       onPressed: () {
                         playlistDialog(
                           context,
-                          MusicScreen.myMusic[MusicScreen.currentIndex].id,
-                          MusicScreen.myMusic[MusicScreen.currentIndex],
+                          context
+                              .read<MusicUtils>()
+                              .myMusic[context.read<MusicUtils>().currentIndex]
+                              .id,
+                          context
+                              .read<MusicUtils>()
+                              .myMusic[context.read<MusicUtils>().currentIndex],
                         );
                       },
                       icon: const Icon(
@@ -184,12 +199,22 @@ class MusicScreenState extends State<MusicScreen> {
                     width: 40,
                     child: InkWell(
                       onTap: () {
-                        MusicScreen.audioPlayer.loopMode == LoopMode.one
-                            ? MusicScreen.audioPlayer.setLoopMode(LoopMode.off)
-                            : MusicScreen.audioPlayer.setLoopMode(LoopMode.one);
+                        context.read<MusicUtils>().audioPlayer.loopMode ==
+                                LoopMode.one
+                            ? context
+                                .read<MusicUtils>()
+                                .audioPlayer
+                                .setLoopMode(LoopMode.off)
+                            : context
+                                .read<MusicUtils>()
+                                .audioPlayer
+                                .setLoopMode(LoopMode.one);
                       },
                       child: StreamBuilder<LoopMode>(
-                        stream: MusicScreen.audioPlayer.loopModeStream,
+                        stream: context
+                            .read<MusicUtils>()
+                            .audioPlayer
+                            .loopModeStream,
                         builder: (context, snapshot) {
                           final loopMode = snapshot.data;
                           if (LoopMode.one == loopMode) {
@@ -236,7 +261,10 @@ class MusicScreenState extends State<MusicScreen> {
                             fontSize: 0,
                           ),
                           onSeek: (duration) {
-                            MusicScreen.audioPlayer.seek(duration);
+                            context
+                                .read<MusicUtils>()
+                                .audioPlayer
+                                .seek(duration);
                           },
                         );
                       },
@@ -285,9 +313,9 @@ class MusicScreenState extends State<MusicScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _previousButton(),
-                  _playButton(),
-                  _nextButton(),
+                  context.read<PlayMusicProvider>().previousButton(),
+                  context.read<PlayMusicProvider>().playButton(),
+                  context.read<PlayMusicProvider>().nextButton(),
                 ],
               ),
             ),
@@ -299,89 +327,90 @@ class MusicScreenState extends State<MusicScreen> {
 
   void changeToSeconds(int seconds) {
     Duration duration = Duration(seconds: seconds);
-    MusicScreen.audioPlayer.seek(duration);
+    context.read<MusicUtils>().audioPlayer.seek(duration);
   }
 
-  StreamBuilder<PlayerState> _playButton() {
-    return StreamBuilder<PlayerState>(
-      builder: (context, snapshot) {
-        return IconButton(
-          onPressed: () {
-            setState(() {
-              if (MusicScreen.audioPlayer.playing) {
-                MusicScreen.audioPlayer.pause();
-              } else {
-                MusicScreen.audioPlayer.play();
-              }
-            });
-          },
-          icon: StreamBuilder<bool>(
-            stream: MusicScreen.audioPlayer.playingStream,
-            builder: (context, snapshot) {
-              bool? playingState = snapshot.data;
-              if (playingState != null && playingState) {
-                return const Icon(
-                  Icons.pause_circle_outline,
-                  size: 45,
-                  color: Colors.amber,
-                );
-              }
-              return const Icon(
-                Icons.play_circle_outline,
-                size: 45,
-                color: Colors.amber,
-              );
-            },
-          ),
-        );
-      },
-    );
-  }
+  // StreamBuilder<PlayerState> _playButton() {
+  //   return StreamBuilder<PlayerState>(
+  //     builder: (context, snapshot) {
+  //       return IconButton(
+  //         onPressed: () {
+  //           setState(() {
+  //             if (context.read<MusicUtils>().audioPlayer.playing) {
+  //               context.read<MusicUtils>().audioPlayer.pause();
+  //             } else {
+  //               context.read<MusicUtils>().audioPlayer.play();
+  //             }
+  //           });
+  //         },
+  //         icon: StreamBuilder<bool>(
+  //           stream: context.read<MusicUtils>().audioPlayer.playingStream,
+  //           builder: (context, snapshot) {
+  //             bool? playingState = snapshot.data;
+  //             if (playingState != null && playingState) {
+  //               return const Icon(
+  //                 Icons.pause_circle_outline,
+  //                 size: 45,
+  //                 color: Colors.amber,
+  //               );
+  //             }
+  //             return const Icon(
+  //               Icons.play_circle_outline,
+  //               size: 45,
+  //               color: Colors.amber,
+  //             );
+  //           },
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
-  StreamBuilder<PlayerState> _previousButton() {
-    return StreamBuilder<PlayerState>(
-      builder: (context, snapshot) {
-        return IconButton(
-          icon: const Icon(
-            Icons.skip_previous_sharp,
-            color: Colors.white,
-          ),
-          iconSize: 45.0,
-          onPressed: () {
-            if (MusicScreen.audioPlayer.hasPrevious) {
-              MusicScreen.audioPlayer.seekToPrevious();
-            }
-          },
-        );
-      },
-    );
-  }
+  // StreamBuilder<PlayerState> _previousButton() {
+  //   return StreamBuilder<PlayerState>(
+  //     builder: (context, snapshot) {
+  //       return IconButton(
+  //         icon: const Icon(
+  //           Icons.skip_previous_sharp,
+  //           color: Colors.white,
+  //         ),
+  //         iconSize: 45.0,
+  //         onPressed: () {
+  //           if (context.read<MusicUtils>().audioPlayer.hasPrevious) {
+  //             context.read<MusicUtils>().audioPlayer.seekToPrevious();
+  //           }
+  //         },
+  //       );
+  //     },
+  //   );
+  // }
 
-  StreamBuilder<PlayerState> _nextButton() {
-    return StreamBuilder<PlayerState>(
-      builder: (context, snapshot) {
-        return IconButton(
-          icon: const Icon(
-            Icons.skip_next_sharp,
-            color: Colors.white,
-          ),
-          iconSize: 45,
-          onPressed: () {
-            if (MusicScreen.audioPlayer.hasNext) {
-              MusicScreen.audioPlayer.seekToNext();
-            }
-          },
-        );
-      },
-    );
-  }
+  // StreamBuilder<PlayerState> _nextButton() {
+  //   return StreamBuilder<PlayerState>(
+  //     builder: (context, snapshot) {
+  //       return IconButton(
+  //         icon: const Icon(
+  //           Icons.skip_next_sharp,
+  //           color: Colors.white,
+  //         ),
+  //         iconSize: 45,
+  //         onPressed: () {
+  //           if (context.read<MusicUtils>().audioPlayer.hasNext) {
+  //             context.read<MusicUtils>().audioPlayer.seekToNext();
+  //           }
+  //         },
+  //       );
+  //     },
+  //   );
+  // }
 
   void _updateCurrentPlayingSongDetails(int index) {
     setState(
       () {
-        if (MusicScreen.myMusic.isNotEmpty) {
-          MusicScreen.currentTitle = MusicScreen.myMusic[index].title;
-          MusicScreen.currentIndex = index;
+        if (context.read<MusicUtils>().myMusic.isNotEmpty) {
+          context.read<MusicUtils>().currentTitle =
+              context.read<MusicUtils>().myMusic[index].title;
+          context.read<MusicUtils>().currentIndex = index;
         }
       },
     );

@@ -10,7 +10,6 @@ import '../../utilities/view/colors.dart';
 
 class HomeFunctions with ChangeNotifier {
   List<SongModel> allSongs = [];
-
   Future<void> scan(BuildContext context) async {
     await Future.delayed(
       const Duration(
@@ -35,15 +34,15 @@ class HomeFunctions with ChangeNotifier {
     }
     return showTopSnackBar(
       context,
-      const CustomSnackBar.success(
+      CustomSnackBar.success(
         iconPositionLeft: 0,
         iconPositionTop: 0,
         iconRotationAngle: 0,
         icon: Icon(
           Icons.abc,
-          color: Colors.amber,
+          color: kAmber,
         ),
-        backgroundColor: Colors.amber,
+        backgroundColor: kAmber,
         message: "Songs Scanned",
       ),
     );

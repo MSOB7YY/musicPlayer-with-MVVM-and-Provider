@@ -5,6 +5,7 @@ import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
 import '../../all_songs/view/all_songs.dart';
 import '../../playing_music/view/music_play.dart';
+import '../../playing_music/view_model/music_utilities.dart';
 import '../../utilities/create_playlist.dart';
 import '../view_model/favorites_function.dart';
 
@@ -148,14 +149,14 @@ class _FavouriteListScreenState extends State<FavouriteListScreen> {
                           ),
                         );
 
-                        MusicScreen.myMusic = DbFav.favloop;
-                        MusicScreen.audioPlayer.setAudioSource(
-                          context
-                              .read<CreatePlaylist>()
-                              .createPlaylist(DbFav.favloop),
-                          initialIndex: index,
-                        );
-                        MusicScreen.audioPlayer.play();
+                        context.read<MusicUtils>().myMusic = DbFav.favloop;
+                        context.read<MusicUtils>().audioPlayer.setAudioSource(
+                              context
+                                  .read<CreatePlaylist>()
+                                  .createPlaylist(DbFav.favloop),
+                              initialIndex: index,
+                            );
+                        context.read<MusicUtils>().audioPlayer.play();
                       },
                     );
                   },
