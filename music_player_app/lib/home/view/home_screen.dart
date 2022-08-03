@@ -11,7 +11,6 @@ import '../../drawer/view/drawer.dart';
 import '../../favorites/view/favorites.dart';
 import '../../genre/view/genre.dart';
 import '../../playlist/view/screen/playlist.dart';
-import '../../search/view/search_screen.dart';
 import '../../utilities/view/body_container.dart';
 import '../../utilities/view/texts.dart';
 import 'widgets/miniplayer_expand.dart';
@@ -51,11 +50,11 @@ class MusicHome extends StatelessWidget {
               ),
               child: IconButton(
                 onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (ctx) => Search(),
-                    ),
-                  );
+                  // Navigator.of(context).push(
+                  //   MaterialPageRoute(
+                  //     builder: (ctx) => Search(),
+                  //   ),
+                  // );
                 },
                 icon: const Icon(
                   Icons.search,
@@ -66,58 +65,40 @@ class MusicHome extends StatelessWidget {
           ],
           bottom: TabBar(
             unselectedLabelColor: kWhite,
-            labelColor: Colors.amber,
+            labelColor: kAmber,
             isScrollable: true,
-            indicatorColor: Colors.amber,
+            indicatorColor: kAmber,
             tabs: [
               const Tab(
-                child: Text(
-                  "SONGS",
-                  style: TextStyle(
-                    fontSize: 14,
-                  ),
+                child: TextWidget(
+                  title: "SONGS",
                 ),
               ),
               const Tab(
-                child: Text(
-                  "PLAYLIST",
-                  style: TextStyle(
-                    fontSize: 14,
-                  ),
+                child: TextWidget(
+                  title: "PLAYLIST",
                 ),
               ),
               const Tab(
-                child: Text(
-                  "FAVORITES",
-                  style: TextStyle(
-                    fontSize: 14,
-                  ),
+                child: TextWidget(
+                  title: "FAVORITES",
                 ),
               ),
               const Tab(
-                child: Text(
-                  "ALBUMS",
-                  style: TextStyle(
-                    fontSize: 14,
-                  ),
+                child: TextWidget(
+                  title: "ALBUMS",
                 ),
               ),
               const Tab(
-                child: Text(
-                  "ARTIST",
-                  style: TextStyle(
-                    fontSize: 14,
-                  ),
+                child: TextWidget(
+                  title: "ARTIST",
                 ),
               ),
               const Tab(
-                child: Text(
-                  "GENRE",
-                  style: TextStyle(
-                    fontSize: 14,
-                  ),
+                child: TextWidget(
+                  title: "GENRE",
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -160,6 +141,21 @@ class MusicHome extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class TextWidget extends StatelessWidget {
+  final String title;
+  const TextWidget({Key? key, required this.title}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      title,
+      style: const TextStyle(
+        fontSize: 14,
       ),
     );
   }

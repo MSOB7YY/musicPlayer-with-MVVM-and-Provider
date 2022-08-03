@@ -4,6 +4,7 @@ import 'package:music_player_app/utilities/view/colors.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
 import '../../playing_music/view/music_play.dart';
+import '../../playing_music/view_model/music_utilities.dart';
 import '../../utilities/bottom_sheet.dart';
 import '../../utilities/create_playlist.dart';
 
@@ -129,14 +130,14 @@ class _ArtistHomeScreenState extends State<ArtistHomeScreen> {
                         builder: (context) => const MusicScreen(),
                       ),
                     );
-                    MusicScreen.myMusic = artistSong;
-                    MusicScreen.audioPlayer.setAudioSource(
-                      context.read<CreatePlaylist>().createPlaylist(
+                    context.read<MusicUtils>().myMusic = artistSong;
+                    context.read<MusicUtils>().audioPlayer.setAudioSource(
+                          createPlaylist(
                             item.data!,
                           ),
-                      initialIndex: index,
-                    );
-                    MusicScreen.audioPlayer.play();
+                          initialIndex: index,
+                        );
+                    context.read<MusicUtils>().audioPlayer.play();
                   },
                   leading: QueryArtworkWidget(
                     artworkBorder: const BorderRadius.all(

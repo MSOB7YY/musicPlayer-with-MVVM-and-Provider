@@ -1,7 +1,8 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, use_build_context_synchronously
 import 'package:flutter/material.dart';
-
-import '../../../all_songs/view/all_songs.dart';
+import 'package:music_player_app/all_songs/view_model/allsongs_provider.dart';
+import 'package:music_player_app/playlist/view_model/Playlist_provider.dart/playlist_provider.dart';
+import 'package:provider/provider.dart';
 import '../../model/playlist_model.dart';
 import '../../view_model/fuctions/playlist_functions.dart';
 
@@ -26,34 +27,52 @@ class PlaylistButton extends StatefulWidget {
 class _PlaylistButtonState extends State<PlaylistButton> {
   @override
   Widget build(BuildContext context) {
-    final checkIndex = playlistNotifier.value[widget.folderindex!].songList
+    final checkIndex = context
+        .read<PlaylistProviderFuctions>()
+        .playlistNotifier[widget.folderindex!]
+        .songList
         .contains(widget.id);
-    final indexCheck =
-        playlistNotifier.value[widget.folderindex!].songList.indexWhere(
-      (element) => element == AllSongs.songs[widget.index!].id,
-    );
+    final indexCheck = context
+        .read<PlaylistProviderFuctions>()
+        .playlistNotifier[widget.folderindex!]
+        .songList
+        .indexWhere(
+          (element) =>
+              element ==
+              context.read<AllsongsProvider>().songs[widget.index!].id,
+        );
     if (checkIndex != true) {
       return IconButton(
           onPressed: () {
             widget.songlist.add(
-              AllSongs.songs[widget.index!].id,
+              context.read<AllsongsProvider>().songs[widget.index!].id,
             );
             PlaylistButton.updatelist = [
               widget.songlist,
-              playlistNotifier.value[widget.folderindex!].songList
+              context
+                  .read<PlaylistProviderFuctions>()
+                  .playlistNotifier[widget.folderindex!]
+                  .songList
             ].expand((element) => element).toList();
             final model = PlaylistDbModel(
-              name: playlistNotifier.value[widget.folderindex!].name,
+              name: context
+                  .read<PlaylistProviderFuctions>()
+                  .playlistNotifier[widget.folderindex!]
+                  .name,
               songList: PlaylistButton.updatelist,
             );
-            updatePlaylist(widget.folderindex!, model);
-            getallPlaylists();
-            Playlistsongcheck.showSelectSong(widget.folderindex);
+            context
+                .read<PlaylistProviderFuctions>()
+                .updatePlaylist(widget.folderindex!, model);
+            context.read<PlaylistProviderFuctions>().getallPlaylists();
+            context
+                .read<Playlistsongcheck>()
+                .showSelectSong(widget.folderindex, context);
             setState(() {});
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(
-                  'added song to the playlist ${playlistNotifier.value[widget.folderindex!].name},',
+                  'added song to the playlist ${context.read<PlaylistProviderFuctions>().playlistNotifier[widget.folderindex!].name},',
                   style: const TextStyle(
                     color: Colors.white,
                   ),
@@ -70,24 +89,37 @@ class _PlaylistButtonState extends State<PlaylistButton> {
     }
     return IconButton(
       onPressed: () async {
-        await playlistNotifier.value[widget.folderindex!].songList
+        await context
+            .read<PlaylistProviderFuctions>()
+            .playlistNotifier[widget.folderindex!]
+            .songList
             .removeAt(indexCheck);
         PlaylistButton.dltlist = [
           widget.songlist,
-          playlistNotifier.value[widget.folderindex!].songList
+          context
+              .read<PlaylistProviderFuctions>()
+              .playlistNotifier[widget.folderindex!]
+              .songList
         ].expand((element) => element).toList();
         final model = PlaylistDbModel(
-          name: playlistNotifier.value[widget.folderindex!].name,
+          name: context
+              .read<PlaylistProviderFuctions>()
+              .playlistNotifier[widget.folderindex!]
+              .name,
           songList: PlaylistButton.dltlist,
         );
-        updatePlaylist(widget.folderindex!, model);
-        Playlistsongcheck.showSelectSong(widget.folderindex);
+        context
+            .read<PlaylistProviderFuctions>()
+            .updatePlaylist(widget.folderindex!, model);
+        context
+            .read<Playlistsongcheck>()
+            .showSelectSong(widget.folderindex, context);
 
         setState(() {});
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              'song deleted from the playlist  ${playlistNotifier.value[widget.folderindex!].name},',
+              'song deleted from the playlist  ${context.read<PlaylistProviderFuctions>().playlistNotifier[widget.folderindex!].name},',
               style: const TextStyle(color: Colors.white),
             ),
             backgroundColor: Colors.amber,

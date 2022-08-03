@@ -1,10 +1,11 @@
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:music_player_app/utilities/view/colors.dart';
-import '../../../../playing_music/view/music_play.dart';
+import 'package:provider/provider.dart';
+import '../../../../playing_music/view_model/music_utilities.dart';
 import '../../../../utilities/view/body_container.dart';
 import '../../../model/duration.dart';
-import '../miniplayer_expand.dart';
+import '../icon_buttons.dart';
 
 class NullMiniPlayer extends StatelessWidget {
   const NullMiniPlayer({
@@ -68,7 +69,9 @@ class NullMiniPlayer extends StatelessWidget {
                             padding: EdgeInsets.zero,
                             margin: const EdgeInsets.only(bottom: 4.0),
                             child: StreamBuilder<DurationState>(
-                              stream: durationStateStream,
+                              stream: context
+                                  .read<MusicUtils>()
+                                  .durationStateStream,
                               builder: (context, snapshot) {
                                 final durationState = snapshot.data;
                                 final progress =
@@ -82,20 +85,24 @@ class NullMiniPlayer extends StatelessWidget {
                                   total: total,
                                   barHeight: 6.0,
                                   baseBarColor: kWhite,
-                                  progressBarColor: Colors.amber,
+                                  progressBarColor: kAmber,
                                   thumbColor: Colors.blue[900],
                                   timeLabelTextStyle: const TextStyle(
                                     fontSize: 0,
                                   ),
                                   onSeek: (duration) {
-                                    MusicScreen.audioPlayer.seek(duration);
+                                    context
+                                        .read<MusicUtils>()
+                                        .audioPlayer
+                                        .seek(duration);
                                   },
                                 );
                               },
                             ),
                           ),
                           StreamBuilder<DurationState>(
-                            stream: durationStateStream,
+                            stream:
+                                context.read<MusicUtils>().durationStateStream,
                             builder: (context, snapshot) {
                               final durationState = snapshot.data;
                               final progress =
@@ -139,30 +146,18 @@ class NullMiniPlayer extends StatelessWidget {
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.skip_previous,
-                              size: 27,
-                              color: Colors.amber,
-                            ),
+                        children: const [
+                          IconButtons(
+                            icon: Icons.skip_previous,
+                            size: 27,
                           ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.play_arrow,
-                              size: 27,
-                              color: Colors.amber,
-                            ),
+                          IconButtons(
+                            icon: Icons.play_arrow,
+                            size: 27,
                           ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.skip_next,
-                              size: 27,
-                              color: Colors.amber,
-                            ),
+                          IconButtons(
+                            icon: Icons.skip_next,
+                            size: 27,
                           ),
                         ],
                       ),

@@ -27,7 +27,7 @@ class _ButtonsState extends State<Buttons> {
     if (checkIndex == true) {
       return IconButton(
         onPressed: () async {
-          await DbFav.deletion(lastIndex);
+          await DbFav.deletion(lastIndex, context);
           setState(() {});
           const snackbar = SnackBar(
             content: Text(
@@ -45,7 +45,7 @@ class _ButtonsState extends State<Buttons> {
     }
     return IconButton(
       onPressed: () async {
-        await DbFav.addSongs(widget.id);
+        await DbFav.addSongs(widget.id, context);
 
         setState(() {});
         const snackBar = SnackBar(content: Text('add to favorites '));

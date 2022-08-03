@@ -1,141 +1,81 @@
 import 'package:flutter/material.dart';
 import 'package:music_player_app/playlist/view/widgets/playlist_button.dart';
+import 'package:music_player_app/utilities/view/body_container.dart';
+import 'package:music_player_app/utilities/view/colors.dart';
+import 'package:music_player_app/utilities/view/main_text_widget.dart';
+import 'package:music_player_app/utilities/view/query_art.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-
-import '../../../all_songs/view/all_songs.dart';
+import 'package:provider/provider.dart';
+import '../../../all_songs/view_model/allsongs_provider.dart';
+import '../../../utilities/view/main_empty_widget.dart';
 import '../../view_model/fuctions/playlist_functions.dart';
 
-class AddSongsToPlayList extends StatefulWidget {
+class AddSongsToPlayList extends StatelessWidget {
   final int folderIndex;
-  const AddSongsToPlayList({Key? key, required this.folderIndex})
-      : super(key: key);
+  AddSongsToPlayList({Key? key, required this.folderIndex}) : super(key: key);
 
-  @override
-  State<AddSongsToPlayList> createState() => _AddSongsToPlayListState();
-}
-
-class _AddSongsToPlayListState extends State<AddSongsToPlayList> {
   final OnAudioQuery audioQuery = OnAudioQuery();
-  bool isAdded = false;
+  final bool isAdded = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.amber,
+        backgroundColor: kAmber,
         title: Text(
-            "Songs are adding to ${playlistNotifier.value[widget.folderIndex].name} "),
+            "Songs are adding to ${context.read<PlaylistProviderFuctions>().playlistNotifier[folderIndex].name} "),
       ),
       body: FutureBuilder<List<SongModel>>(
         future: audioQuery.querySongs(
-          sortType: SongSortType.DURATION,
-          orderType: OrderType.DESC_OR_GREATER,
-          uriType: UriType.EXTERNAL,
-          ignoreCase: true,
-        ),
+            sortType: SongSortType.DURATION,
+            orderType: OrderType.DESC_OR_GREATER,
+            uriType: UriType.EXTERNAL,
+            ignoreCase: true),
         builder: (context, item) {
           if (item.data == null) {
             return Column(
-              children: [
-                Container(
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.centerRight,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Color.fromARGB(255, 42, 11, 99),
-                        Color.fromARGB(235, 48, 14, 34),
-                      ],
-                    ),
-                  ),
-                  child: const Center(
+              children: const [
+                BodyContainer(
+                  child: Center(
                     child: CircularProgressIndicator(),
                   ),
                 ),
               ],
             );
           }
-          if (item.data!.isEmpty) {
-            return Container(
-              width: double.infinity,
-              height: double.infinity,
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.centerRight,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color.fromARGB(255, 42, 11, 99),
-                    Color.fromARGB(235, 48, 14, 34),
-                  ],
-                ),
-              ),
-              child: const Center(
-                child: Text(
-                  "Nothing found!",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            );
-          }
-          AllSongs.songs.clear;
-          AllSongs.songs = item.data!;
-          return Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.centerRight,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color.fromARGB(255, 42, 11, 99),
-                  Color.fromARGB(235, 48, 14, 34),
-                ],
-              ),
-            ),
+          item.data!.isEmpty
+              ? const MainItemEmpty()
+              : context.read<AllsongsProvider>().songs.clear;
+          context.read<AllsongsProvider>().songs = item.data!;
+          return BodyContainer(
             child: ListView.separated(
               itemBuilder: (BuildContext context, index) {
                 return ListTile(
                   onTap: () async {},
-                  leading: QueryArtworkWidget(
-                    artworkBorder: const BorderRadius.all(
-                      Radius.zero,
-                    ),
-                    artworkHeight: 60,
-                    artworkWidth: 60,
-                    artworkFit: BoxFit.fill,
-                    nullArtworkWidget: Image.asset(
-                      "assets/null2.png",
-                      fit: BoxFit.fitWidth,
-                    ),
-                    id: AllSongs.songs[index].id,
-                    type: ArtworkType.AUDIO,
+                  leading: QueryArtImage(
+                    songModel: context.read<AllsongsProvider>().songs[index],
+                    artworkType: ArtworkType.AUDIO,
                   ),
-                  title: Text(
-                    AllSongs.songs[index].title,
-                    style: const TextStyle(
-                      overflow: TextOverflow.ellipsis,
-                      color: Colors.white,
-                    ),
+                  title: MainTextWidget(
+                    title: context.read<AllsongsProvider>().songs[index].title,
                   ),
-                  subtitle: Text(
-                    AllSongs.songs[index].artist ?? "No Artist",
-                    style: const TextStyle(
-                      overflow: TextOverflow.ellipsis,
-                      color: Colors.white,
-                    ),
+                  subtitle: MainTextWidget(
+                    title:
+                        context.read<AllsongsProvider>().songs[index].artist ??
+                            "No Artist",
                   ),
                   trailing: PlaylistButton(
                     index: index,
-                    folderindex: widget.folderIndex,
-                    id: AllSongs.songs[index].id,
+                    folderindex: folderIndex,
+                    id: context.read<AllsongsProvider>().songs[index].id,
                   ),
                 );
               },
               separatorBuilder: (ctx, index) {
-                return const Divider(
-                  color: Colors.white,
+                return Divider(
+                  color: kWhite,
                 );
               },
-              itemCount: AllSongs.songs.length,
+              itemCount: context.read<AllsongsProvider>().songs.length,
             ),
           );
         },
