@@ -34,6 +34,8 @@ class AllSongs extends StatelessWidget {
                       ignoreCase: true,
                     ),
             builder: (context, item) {
+              value.songs.clear();
+              value.songs = item.data!;
               return item.data == null
                   ? const BodyContainer(
                       child: Center(

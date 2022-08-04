@@ -6,11 +6,7 @@ import 'package:music_player_app/utilities/view/query_art.dart';
 import 'package:music_player_app/utilities/view_model/utility_provider.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
-
-import '../../playing_music/view/music_play.dart';
-import '../../playing_music/view_model/music_utilities.dart';
 import '../../utilities/bottom_sheet.dart';
-import '../../utilities/create_playlist.dart';
 import '../../utilities/view/body_container.dart';
 import '../../utilities/view/main_empty_widget.dart';
 

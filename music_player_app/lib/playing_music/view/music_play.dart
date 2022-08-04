@@ -1,14 +1,14 @@
-import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:just_audio/just_audio.dart';
+import 'package:music_player_app/playing_music/view/widgets/music_icons.dart';
+import 'package:music_player_app/playing_music/view_model/music_functions.dart';
+import 'package:music_player_app/playing_music/view_model/music_utilities.dart';
+import 'package:music_player_app/utilities/view/colors.dart';
+import 'package:music_player_app/utilities/view/images.dart';
 import 'package:music_player_app/utilities/view/main_text_widget.dart';
-import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
-import '../../favorites/view/fav_button.dart';
-import '../../home/model/duration.dart';
-import '../../utilities/view/colors.dart';
-import '../view_model/music_functions.dart';
-import '../view_model/music_utilities.dart';
+import 'widgets/duration_state_widget.dart';
+import 'widgets/duration_text.dart';
+import 'widgets/music_artwork.dart';
 
 class MusicScreen extends StatelessWidget {
   const MusicScreen({
@@ -56,10 +56,10 @@ class MusicScreen extends StatelessWidget {
       ),
       body: Consumer<MusicUtils>(builder: (context, value, child) {
         return Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage(
-                "assets/bg.webp",
+                musicPlayBackground,
               ),
               fit: BoxFit.cover,
             ),
@@ -70,21 +70,13 @@ class MusicScreen extends StatelessWidget {
               Center(
                 child: Padding(
                   padding: const EdgeInsets.only(
-                    top: 50.0,
+                    top: 0.0,
                   ),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    height: MediaQuery.of(context).size.height * 0.3,
-                    child: QueryArtworkWidget(
-                      id: value.myMusic[value.currentIndex].id,
-                      type: ArtworkType.AUDIO,
-                      artworkBorder: BorderRadius.circular(
-                        14.0,
-                      ),
-                      nullArtworkWidget: Image.asset(
-                        "assets/malhaarNew3Logo.png",
-                      ),
-                    ),
+                  child: MusicPlayArtwork(
+                    id: context
+                        .read<MusicUtils>()
+                        .myMusic[context.read<MusicUtils>().currentIndex]
+                        .id,
                   ),
                 ),
               ),
@@ -112,69 +104,10 @@ class MusicScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Container(
-                      color: const Color.fromARGB(64, 225, 224, 231),
-                      height: 40,
-                      width: 40,
-                      child: FavoriteButtons(
-                        id: value.myMusic[value.currentIndex].id,
-                      ),
-                    ),
-                    Container(
-                      color: const Color.fromARGB(64, 225, 224, 231),
-                      height: 40,
-                      width: 40,
-                      child: IconButton(
-                        onPressed: () {
-                          context.read<MusicUtils>().playlistDialog(
-                                context,
-                                value.myMusic[value.currentIndex].id,
-                                value.myMusic[value.currentIndex],
-                              );
-                        },
-                        icon: const Icon(
-                          Icons.playlist_add,
-                          color: Colors.white,
-                          size: 28,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      color: const Color.fromARGB(64, 225, 224, 231),
-                      height: 40,
-                      width: 40,
-                      child: InkWell(
-                        onTap: () {
-                          value.audioPlayer.loopMode == LoopMode.one
-                              ? value.audioPlayer.setLoopMode(LoopMode.off)
-                              : value.audioPlayer.setLoopMode(LoopMode.one);
-                        },
-                        child: StreamBuilder<LoopMode>(
-                          stream: value.audioPlayer.loopModeStream,
-                          builder: (context, snapshot) {
-                            final loopMode = snapshot.data;
-                            if (LoopMode.one == loopMode) {
-                              return const Icon(
-                                Icons.repeat_one,
-                                color: Colors.white70,
-                              );
-                            }
-                            return const Icon(
-                              Icons.repeat,
-                              color: Colors.white70,
-                            );
-                          },
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
+              MusicIconsWidget(
+                  myMusic: context
+                      .read<MusicUtils>()
+                      .myMusic[context.read<MusicUtils>().currentIndex]),
               Padding(
                 padding: const EdgeInsets.fromLTRB(18, 58, 18, 0),
                 child: Column(
@@ -182,69 +115,9 @@ class MusicScreen extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.zero,
                       margin: const EdgeInsets.only(bottom: 4.0),
-                      child: StreamBuilder<DurationState>(
-                        stream: value.durationStateStream,
-                        builder: (context, snapshot) {
-                          final durationState = snapshot.data;
-                          final progress =
-                              durationState?.position ?? Duration.zero;
-                          final total = durationState?.total ?? Duration.zero;
-
-                          return ProgressBar(
-                            timeLabelLocation: TimeLabelLocation.sides,
-                            progress: progress,
-                            total: total,
-                            barHeight: 6.0,
-                            baseBarColor: Colors.white,
-                            progressBarColor: Colors.amber,
-                            thumbColor: Colors.blue[900],
-                            timeLabelTextStyle: const TextStyle(
-                              fontSize: 0,
-                            ),
-                            onSeek: (duration) {
-                              context
-                                  .read<MusicUtils>()
-                                  .audioPlayer
-                                  .seek(duration);
-                            },
-                          );
-                        },
-                      ),
+                      child: const DurationStateWidget(),
                     ),
-                    StreamBuilder<DurationState>(
-                      stream: value.durationStateStream,
-                      builder: (context, snapshot) {
-                        final durationState = snapshot.data;
-                        final progress =
-                            durationState?.position ?? Duration.zero;
-                        final total = durationState?.total ?? Duration.zero;
-
-                        return Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Flexible(
-                              child: Text(
-                                progress.toString().split(".")[0],
-                                style: const TextStyle(
-                                  color: Colors.white70,
-                                  fontSize: 15,
-                                ),
-                              ),
-                            ),
-                            Flexible(
-                              child: Text(
-                                total.toString().split(".")[0],
-                                style: const TextStyle(
-                                  color: Colors.white70,
-                                  fontSize: 15,
-                                ),
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    ),
+                    const MusicDurationTextWidget(),
                   ],
                 ),
               ),

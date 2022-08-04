@@ -15,11 +15,11 @@ import 'package:music_player_app/playlist/view_model/Playlist_provider.dart/play
 import 'package:music_player_app/playlist/view_model/Playlist_provider.dart/widget_provider.dart';
 import 'package:music_player_app/playlist/view_model/fuctions/playlist_button_fn.dart';
 import 'package:music_player_app/playlist/view_model/fuctions/playlist_functions.dart';
-import 'package:music_player_app/spalsh/view_model/splash_provider.dart';
+import 'package:music_player_app/splash/view/splash_screen.dart';
+import 'package:music_player_app/splash/view_model/splash_provider.dart';
 import 'package:music_player_app/utilities/view_model/utility_provider.dart';
 import 'package:provider/provider.dart';
 import 'favorites/model/favourite_model.dart';
-import 'spalsh/view/splash_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
