@@ -9,7 +9,6 @@ import '../../view/widgets/playlist_bottom.dart';
 class PlaylistProviderFuctions with ChangeNotifier {
   List<PlaylistDbModel> playlistNotifier = [];
   List<SongModel> playloop = [];
-
   void addPlaylist(PlaylistDbModel value) async {
     final playlistDb = await Hive.openBox<PlaylistDbModel>('playlist_Db');
     int id = await playlistDb.add(value);
