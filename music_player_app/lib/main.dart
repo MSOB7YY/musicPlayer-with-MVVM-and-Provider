@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:just_audio_background/just_audio_background.dart';
+import 'package:music_player_app/album/view_model/album_provider.dart';
 import 'package:music_player_app/all_songs/view_model/allsongs_provider.dart';
 import 'package:music_player_app/favorites/view_model/favorite_button_provider.dart';
 import 'package:music_player_app/favorites/view_model/favorites_function.dart';
@@ -15,6 +16,7 @@ import 'package:music_player_app/playlist/view_model/Playlist_provider.dart/widg
 import 'package:music_player_app/playlist/view_model/fuctions/playlist_button_fn.dart';
 import 'package:music_player_app/playlist/view_model/fuctions/playlist_functions.dart';
 import 'package:music_player_app/spalsh/view_model/splash_provider.dart';
+import 'package:music_player_app/utilities/view_model/utility_provider.dart';
 import 'package:provider/provider.dart';
 import 'favorites/model/favourite_model.dart';
 import 'spalsh/view/splash_screen.dart';
@@ -84,6 +86,12 @@ class Music extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => FavouriteButtonProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => AlbumProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => UtilityProvider(),
         ),
       ],
       child: const MaterialApp(
