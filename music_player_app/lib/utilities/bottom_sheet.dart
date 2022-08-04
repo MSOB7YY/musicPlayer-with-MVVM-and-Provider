@@ -3,9 +3,7 @@ import 'package:music_player_app/playing_music/view_model/music_utilities.dart';
 import 'package:music_player_app/utilities/view/colors.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
-
-import '../favorites/view_model/fav_button.dart';
-import '../playing_music/view/widgets/playlilst_dialog.dart';
+import '../favorites/view/fav_button.dart';
 import 'view/details.dart';
 
 settingModalBottomSheet(context, SongModel data) {
@@ -37,7 +35,7 @@ settingModalBottomSheet(context, SongModel data) {
               height: 40,
               width: 40,
               color: const Color.fromARGB(64, 33, 149, 243),
-              child: Buttons(id: data.id),
+              child: FavoriteButtons(id: data.id),
             ),
             title: const Text(
               'Add to Favourites',

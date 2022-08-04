@@ -6,44 +6,46 @@ import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
 import '../../all_songs/view_model/allsongs_provider.dart';
 
-class DbFav {
-  static ValueNotifier<List<dynamic>> favourites = ValueNotifier([]);
-  static List<dynamic> favsong = [];
-  static List<SongModel> favloop = [];
+class FavoriteFunctions with ChangeNotifier {
+  List<dynamic> favourites = [];
+  List<dynamic> favsong = [];
+  List<SongModel> favloop = [];
 
-  static addSongs(item, BuildContext context) async {
+  addSongs(item, BuildContext context) async {
     final boxdb = await Hive.openBox('favourites');
     await boxdb.add(item);
-
-    getAllsongs(context);
+    notifyListeners();
+    getAllFavorites(context);
   }
 
-  static getAllsongs(BuildContext context) async {
+  getAllFavorites(BuildContext context) async {
     final boxdb = await Hive.openBox('favourites');
     favsong = boxdb.values.toList();
 
     displaySongs(context);
-    favourites.notifyListeners();
+    notifyListeners();
   }
 
-  static displaySongs(BuildContext context) async {
+  displaySongs(BuildContext context) async {
     final boxdb = await Hive.openBox('favourites');
     final List<dynamic> music = boxdb.values.toList();
-    favourites.value.clear();
+    favourites.clear();
     favloop.clear();
     for (int i = 0; i < music.length; i++) {
       for (int j = 0; j < context.read<AllsongsProvider>().songs.length; j++) {
         if (music[i] == context.read<AllsongsProvider>().songs[j].id) {
-          favourites.value.add(j);
+          favourites.add(j);
           favloop.add(context.read<AllsongsProvider>().songs[j]);
         }
       }
     }
+    notifyListeners();
   }
 
-  static deletion(index, BuildContext context) async {
+  deletion(index, BuildContext context) async {
     final boxdb = await Hive.openBox('favourites');
     await boxdb.deleteAt(index);
-    getAllsongs(context);
+    getAllFavorites(context);
+    notifyListeners();
   }
 }

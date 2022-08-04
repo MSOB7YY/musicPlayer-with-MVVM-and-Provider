@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:music_player_app/playlist/view_model/fuctions/playlist_button_fn.dart';
 import 'package:provider/provider.dart';
 
+import '../../view_model/fuctions/playlist_functions.dart';
+
 class PlaylistButton extends StatelessWidget {
   const PlaylistButton(
       {Key? key,
@@ -10,19 +12,24 @@ class PlaylistButton extends StatelessWidget {
       required this.id})
       : super(key: key);
 
-  final int? index;
-  final int? folderindex;
-  final int? id;
+  final int index;
+  final int folderindex;
+  final int id;
 
   @override
   @override
   Widget build(BuildContext context) {
-    return checkIndex != true
+    return context
+                .read<PlaylistProviderFuctions>()
+                .playlistNotifier[folderindex]
+                .songList
+                .contains(id) !=
+            true
         ? IconButton(
             onPressed: () {
               context
                   .read<PlaylistButtonFunctions>()
-                  .addPlaylistButton(context, index!, folderindex!);
+                  .addPlaylistButton(context, index, folderindex);
             },
             icon: const Icon(
               Icons.add,
@@ -33,7 +40,7 @@ class PlaylistButton extends StatelessWidget {
             onPressed: () async {
               await context
                   .read<PlaylistButtonFunctions>()
-                  .deleteFromPlaylist(folderindex!, context, id!, index!);
+                  .deleteFromPlaylist(folderindex, context, id, index);
             },
             icon: const Icon(
               Icons.minimize_rounded,
