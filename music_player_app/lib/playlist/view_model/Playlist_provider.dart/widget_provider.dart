@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:music_player_app/utilities/view/colors.dart';
 
 class WidgetProvider with ChangeNotifier {
   scaffoldMessenge(BuildContext context, String message) {
@@ -6,8 +7,8 @@ class WidgetProvider with ChangeNotifier {
       SnackBar(
         content: Text(
           message,
-          style: const TextStyle(
-            color: Colors.white,
+          style: TextStyle(
+            color: kWhite,
           ),
         ),
         backgroundColor: Colors.amber,

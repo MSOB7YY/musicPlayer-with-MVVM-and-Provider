@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:music_player_app/all_songs/view_model/allsongs_provider.dart';
+import 'package:music_player_app/utilities/bottom_sheet.dart';
 import 'package:music_player_app/utilities/view/body_container.dart';
 import 'package:music_player_app/utilities/view/colors.dart';
+import 'package:music_player_app/utilities/view/main_text_widget.dart';
 import 'package:music_player_app/utilities/view/query_art.dart';
 import 'package:music_player_app/utilities/view_model/utility_provider.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
-import '../../utilities/bottom_sheet.dart';
-import '../../utilities/view/main_text_widget.dart';
 
 class AllSongs extends StatelessWidget {
   const AllSongs({Key? key}) : super(key: key);
