@@ -14,7 +14,6 @@ class AllSongs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("klgkjfh");
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) {
         Provider.of<AllsongsProvider>(context, listen: false)
@@ -24,7 +23,6 @@ class AllSongs extends StatelessWidget {
     return Scaffold(
       body: Consumer<AllsongsProvider>(
         builder: (context, value, child) {
-          print("object");
           return FutureBuilder<List<SongModel>>(
             future:
                 Provider.of<AllsongsProvider>(context).audioQuery.querySongs(

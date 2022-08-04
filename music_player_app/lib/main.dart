@@ -4,6 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:music_player_app/album/view_model/album_provider.dart';
 import 'package:music_player_app/all_songs/view_model/allsongs_provider.dart';
+import 'package:music_player_app/artist/view_model/artist_provider.dart';
 import 'package:music_player_app/favorites/view_model/favorite_button_provider.dart';
 import 'package:music_player_app/favorites/view_model/favorites_function.dart';
 import 'package:music_player_app/favorites/view_model/widgets_favourites.dart';
@@ -92,6 +93,9 @@ class Music extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => UtilityProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ArtistProvider(),
         ),
       ],
       child: const MaterialApp(

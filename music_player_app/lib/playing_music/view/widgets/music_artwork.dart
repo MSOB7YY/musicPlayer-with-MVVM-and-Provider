@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:on_audio_query/on_audio_query.dart';
-import 'package:provider/provider.dart';
+// ignore_for_file: sized_box_for_whitespace, must_be_immutable
 
-import '../../../utilities/view/images.dart';
+import 'package:flutter/material.dart';
+import 'package:music_player_app/utilities/view/images.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 
 class MusicPlayArtwork extends StatelessWidget {
   MusicPlayArtwork({Key? key, required this.id}) : super(key: key);
