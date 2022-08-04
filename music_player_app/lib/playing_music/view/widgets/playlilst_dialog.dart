@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:music_player_app/playlist/model/playlist_model.dart';
 import 'package:music_player_app/playlist/view_model/fuctions/playlist_functions.dart';
+import 'package:music_player_app/utilities/view/colors.dart';
 import 'package:provider/provider.dart';
-import '../../../playlist/model/playlist_model.dart';
 
 class AddPlaylistDialog extends StatelessWidget {
   AddPlaylistDialog({
@@ -13,7 +14,7 @@ class AddPlaylistDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Colors.amber,
+      backgroundColor: kAmber,
       title: const Text(
         "New Playlist",
       ),
@@ -21,16 +22,15 @@ class AddPlaylistDialog extends StatelessWidget {
         key: formkey,
         child: TextFormField(
           validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Please enter some text';
-            }
-            return null;
+            return value == null || value.isEmpty
+                ? 'Please enter some text'
+                : null;
           },
           controller: nameController,
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(
-                color: Colors.white,
+                color: kWhite,
               ),
             ),
           ),
@@ -40,7 +40,7 @@ class AddPlaylistDialog extends StatelessWidget {
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             primary: const Color.fromARGB(255, 42, 11, 99),
-            onPrimary: Colors.white,
+            onPrimary: kWhite,
           ),
           child: const Text("cancel"),
           onPressed: () {
@@ -49,8 +49,8 @@ class AddPlaylistDialog extends StatelessWidget {
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: Colors.white,
-            onPrimary: Colors.amber,
+            primary: kWhite,
+            onPrimary: kAmber,
           ),
           child: const Text(
             "Create",
@@ -58,9 +58,9 @@ class AddPlaylistDialog extends StatelessWidget {
           onPressed: () {
             if (formkey.currentState!.validate()) {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  backgroundColor: Colors.amber,
-                  content: Text(
+                SnackBar(
+                  backgroundColor: kAmber,
+                  content: const Text(
                     'Playlist Added Successfully....',
                     style: TextStyle(
                       fontSize: 15,

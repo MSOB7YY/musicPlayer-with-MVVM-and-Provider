@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:music_player_app/spalsh/view_model/splash_provider.dart';
+import 'package:music_player_app/splash/view_model/splash_provider.dart';
+import 'package:music_player_app/utilities/view/colors.dart';
+import 'package:music_player_app/utilities/view/images.dart';
 import 'package:provider/provider.dart';
-import '../../utilities/view/colors.dart';
-import '../../utilities/view/images.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

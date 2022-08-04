@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:music_player_app/playing_music/view_model/music_utilities.dart';
+import 'package:music_player_app/playlist/view_model/Playlist_provider.dart/widget_provider.dart';
 import 'package:music_player_app/utilities/view/body_container.dart';
 import 'package:music_player_app/utilities/view/main_text_widget.dart';
 import 'package:on_audio_query/on_audio_query.dart';
@@ -52,13 +53,13 @@ class PlaylistDialogWidget extends StatelessWidget {
             : BodyContainer(
                 child: ListView.separated(
                   itemBuilder: (ctx, index) {
-                    final data = value.playlistNotifier[index];
                     return ListTile(
                       title: MainTextWidget(
-                        title: data.name,
+                        title: value.playlistNotifier[index].name,
                       ),
                       subtitle: MainTextWidget(
-                        title: '${data.songList.length}',
+                        title:
+                            '${value.playlistNotifier[index].songList.length}',
                       ),
                       leading: Icon(
                         Icons.playlist_play_rounded,
@@ -72,38 +73,19 @@ class PlaylistDialogWidget extends StatelessWidget {
                           color: Color.fromARGB(94, 255, 255, 255),
                         ),
                         onPressed: () {
-                          if (value.playlistNotifier[index].songList
-                              .contains(id)) {
-                            Navigator.of(context).pop();
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  ' ${songListPlay.title} allready exixt in ${value.playlistNotifier[index].name}',
-                                  style: TextStyle(
-                                    color: kWhite,
-                                  ),
-                                ),
-                                backgroundColor: kAmber,
-                                behavior: SnackBarBehavior.floating,
-                              ),
-                            );
-                          } else {
-                            Navigator.of(context).pop();
-                            value.playlistNotifier[index].songList.add(id);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  ' ${songListPlay.title},Added To Playlist ${value.playlistNotifier[index].name}',
-                                  style: TextStyle(
-                                    overflow: TextOverflow.ellipsis,
-                                    color: kWhite,
-                                  ),
-                                ),
-                                backgroundColor: Colors.blue[900],
-                                behavior: SnackBarBehavior.floating,
-                              ),
-                            );
-                          }
+                          value.playlistNotifier[index].songList.contains(id)
+                              ?
+                              // Navigator.of(context).pop(),
+                              context.read<WidgetProvider>().scaffoldMessenge(
+                                    context,
+                                    ' ${songListPlay.title} allready exixt in ${value.playlistNotifier[index].name}',
+                                  )
+                              : Navigator.of(context).pop();
+                          value.playlistNotifier[index].songList.add(id);
+                          context.read<WidgetProvider>().scaffoldMessenge(
+                                context,
+                                ' ${songListPlay.title},Added To Playlist ${value.playlistNotifier[index].name}',
+                              );
                         },
                       ),
                       onTap: () {},
