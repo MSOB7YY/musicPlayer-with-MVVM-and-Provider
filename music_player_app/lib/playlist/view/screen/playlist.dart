@@ -4,15 +4,12 @@ import 'package:music_player_app/utilities/view/body_container.dart';
 import 'package:music_player_app/utilities/view/colors.dart';
 import 'package:music_player_app/utilities/view/main_text_widget.dart';
 import 'package:provider/provider.dart';
-import '../../model/playlist_model.dart';
 import '../../view_model/fuctions/playlist_functions.dart';
 import '../subscreen/playlist_home.dart';
 
 class PlayList extends StatelessWidget {
   PlayList({Key? key}) : super(key: key);
 
-  final _formkey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
   final nameRenmaeController = TextEditingController();
 
   @override
