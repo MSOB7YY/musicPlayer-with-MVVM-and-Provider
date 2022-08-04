@@ -11,11 +11,6 @@ class PlaylistButtonFunctions with ChangeNotifier {
   List<dynamic> dltlist = [];
   List<dynamic> songlist = [];
   deleteFromPlaylist(int folderIndex, BuildContext context, int id, int index) {
-    final checkIndex = context
-        .read<PlaylistProviderFuctions>()
-        .playlistNotifier[folderIndex]
-        .songList
-        .contains(id);
     final indexCheck = context
         .read<PlaylistProviderFuctions>()
         .playlistNotifier[folderIndex]

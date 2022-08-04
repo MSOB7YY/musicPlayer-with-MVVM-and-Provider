@@ -10,6 +10,7 @@ import '../view/widgets/playlilst_dialog.dart';
 import '../view/widgets/playlist_dialog_widget.dart';
 
 class MusicUtils with ChangeNotifier {
+  final Duration duration = const Duration();
   AudioPlayer audioPlayer = AudioPlayer();
   List<SongModel> myMusic = [];
   String currentTitle = '';

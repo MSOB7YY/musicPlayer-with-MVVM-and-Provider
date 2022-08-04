@@ -1,23 +1,20 @@
-// ignore_for_file: sized_box_for_whitespace, import_of_legacy_library_into_null_safe
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:music_player_app/playing_music/view/widgets/playlist_dialog_widget.dart';
+import 'package:music_player_app/utilities/view/main_text_widget.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
-import '../../favorites/view_model/fav_button.dart';
+import '../../favorites/view/fav_button.dart';
 import '../../home/model/duration.dart';
 import '../../utilities/view/colors.dart';
 import '../view_model/music_functions.dart';
 import '../view_model/music_utilities.dart';
-import 'widgets/playlilst_dialog.dart';
 
 class MusicScreen extends StatelessWidget {
   const MusicScreen({
     Key? key,
   }) : super(key: key);
 
-  final Duration duration = const Duration();
   @override
   Widget build(BuildContext context) {
     MediaQuery.of(context).size.height;
@@ -32,7 +29,7 @@ class MusicScreen extends StatelessWidget {
               .updateCurrentPlayingSongDetails(index);
         }
       });
-      duration;
+      context.read<MusicUtils>().duration;
     });
     return Scaffold(
       backgroundColor: background1,
@@ -96,13 +93,8 @@ class MusicScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(
                     top: 20.0,
                   ),
-                  child: Text(
-                    value.myMusic[value.currentIndex].title,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      overflow: TextOverflow.ellipsis,
-                      fontSize: 25,
-                    ),
+                  child: MainTextWidget(
+                    title: value.myMusic[value.currentIndex].title,
                   ),
                 ),
               ),
@@ -111,15 +103,12 @@ class MusicScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(
                     top: 5.0,
                   ),
-                  child: Text(
-                    value.myMusic[value.currentIndex].artist.toString() ==
+                  child: MainTextWidget(
+                    title: value.myMusic[value.currentIndex].artist
+                                .toString() ==
                             '<unknown>'
                         ? "unknown Artist"
                         : value.myMusic[value.currentIndex].artist.toString(),
-                    style: const TextStyle(
-                      overflow: TextOverflow.ellipsis,
-                      color: Colors.white,
-                    ),
                   ),
                 ),
               ),
@@ -132,7 +121,7 @@ class MusicScreen extends StatelessWidget {
                       color: const Color.fromARGB(64, 225, 224, 231),
                       height: 40,
                       width: 40,
-                      child: Buttons(
+                      child: FavoriteButtons(
                         id: value.myMusic[value.currentIndex].id,
                       ),
                     ),

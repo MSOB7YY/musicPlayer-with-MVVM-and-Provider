@@ -3,14 +3,18 @@ import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:music_player_app/all_songs/view_model/allsongs_provider.dart';
+import 'package:music_player_app/favorites/view_model/favorite_button_provider.dart';
+import 'package:music_player_app/favorites/view_model/favorites_function.dart';
+import 'package:music_player_app/favorites/view_model/widgets_favourites.dart';
 import 'package:music_player_app/home/view_model/home_functions.dart';
 import 'package:music_player_app/playing_music/view_model/music_functions.dart';
 import 'package:music_player_app/playing_music/view_model/music_utilities.dart';
 import 'package:music_player_app/playlist/model/playlist_model.dart';
 import 'package:music_player_app/playlist/view_model/Playlist_provider.dart/playlist_provider.dart';
+import 'package:music_player_app/playlist/view_model/Playlist_provider.dart/widget_provider.dart';
+import 'package:music_player_app/playlist/view_model/fuctions/playlist_button_fn.dart';
 import 'package:music_player_app/playlist/view_model/fuctions/playlist_functions.dart';
 import 'package:music_player_app/spalsh/view_model/splash_provider.dart';
-import 'package:music_player_app/utilities/create_playlist.dart';
 import 'package:provider/provider.dart';
 import 'favorites/model/favourite_model.dart';
 import 'spalsh/view/splash_screen.dart';
@@ -65,6 +69,21 @@ class Music extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => Playlistsongcheck(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => PlaylistButtonFunctions(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => WidgetProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => FavoriteFunctions(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => FavoritesWidget(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => FavouriteButtonProvider(),
         ),
       ],
       child: const MaterialApp(
