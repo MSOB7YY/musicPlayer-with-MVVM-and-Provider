@@ -1,27 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:just_audio/just_audio.dart';
+import 'package:music_player_app/album/view/siver_artist_appbar.dart';
+import 'package:music_player_app/all_songs/view_model/allsongs_provider.dart';
+import 'package:music_player_app/artist/view_model/artist_provider.dart';
+import 'package:music_player_app/playing_music/view/music_play.dart';
+import 'package:music_player_app/playing_music/view_model/music_utilities.dart';
+import 'package:music_player_app/utilities/bottom_sheet.dart';
+import 'package:music_player_app/utilities/create_playlist.dart';
+import 'package:music_player_app/utilities/view/body_container.dart';
 import 'package:music_player_app/utilities/view/colors.dart';
+import 'package:music_player_app/utilities/view/main_empty_widget.dart';
+import 'package:music_player_app/utilities/view/main_text_widget.dart';
+import 'package:music_player_app/utilities/view/query_art.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
-import '../../playing_music/view/music_play.dart';
-import '../../playing_music/view_model/music_utilities.dart';
-import '../../utilities/bottom_sheet.dart';
-import '../../utilities/create_playlist.dart';
 
-class ArtistHomeScreen extends StatefulWidget {
+class ArtistHomeScreen extends StatelessWidget {
   final ArtistModel artistModel;
 
-  static final AudioPlayer audioPlayer = AudioPlayer();
   const ArtistHomeScreen({Key? key, required this.artistModel})
       : super(key: key);
-
-  @override
-  State<ArtistHomeScreen> createState() => _ArtistHomeScreenState();
-}
-
-class _ArtistHomeScreenState extends State<ArtistHomeScreen> {
-  final OnAudioQuery _audioQuery = OnAudioQuery();
-  List<SongModel> artistSong = [];
 
   @override
   Widget build(BuildContext context) {
@@ -29,54 +26,19 @@ class _ArtistHomeScreenState extends State<ArtistHomeScreen> {
         body: NestedScrollView(
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
         return <Widget>[
-          SliverAppBar(
-            backgroundColor: Colors.amber,
-            expandedHeight: 200.0,
-            floating: false,
-            pinned: true,
-            flexibleSpace: FlexibleSpaceBar(
-              centerTitle: true,
-              title: Text(widget.artistModel.artist,
-                  style: TextStyle(
-                    overflow: TextOverflow.ellipsis,
-                    color: kWhite,
-                    fontSize: 16.0,
-                  )),
-              background: QueryArtworkWidget(
-                id: widget.artistModel.id,
-                type: ArtworkType.ARTIST,
-                artworkBorder: BorderRadius.circular(
-                  1.0,
-                ),
-                artworkFit: BoxFit.fitWidth,
-                nullArtworkWidget: Image.asset(
-                  "assets/artist4.jpg",
-                ),
-              ),
-            ),
-          ),
+          SilverArtistAppbar(artistModel: artistModel),
         ];
       },
       body: FutureBuilder<List<SongModel>>(
-        future: _audioQuery.queryAudiosFrom(
-          AudiosFromType.ARTIST_ID,
-          widget.artistModel.id,
-        ),
+        future: context.read<AllsongsProvider>().audioQuery.queryAudiosFrom(
+              AudiosFromType.ARTIST_ID,
+              artistModel.id,
+            ),
         builder: (context, item) {
           if (item.data == null) {
-            return Center(
-              child: Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.centerRight,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Color.fromARGB(255, 42, 11, 99),
-                      Color.fromARGB(235, 48, 14, 34),
-                    ],
-                  ),
-                ),
-                child: const Center(
+            return const Center(
+              child: BodyContainer(
+                child: Center(
                   child: CircularProgressIndicator(),
                 ),
               ),
@@ -84,42 +46,11 @@ class _ArtistHomeScreenState extends State<ArtistHomeScreen> {
           }
 
           if (item.data!.isEmpty) {
-            return Container(
-              width: double.infinity,
-              height: double.infinity,
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.centerRight,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color.fromARGB(255, 42, 11, 99),
-                    Color.fromARGB(235, 48, 14, 34),
-                  ],
-                ),
-              ),
-              child: Center(
-                child: Text(
-                  "Nothing found!",
-                  style: TextStyle(
-                    color: kWhite,
-                  ),
-                ),
-              ),
-            );
+            return const MainItemEmpty();
           }
-          artistSong.clear;
-          artistSong = item.data!;
-          return Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.centerRight,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color.fromARGB(255, 42, 11, 99),
-                  Color.fromARGB(235, 48, 14, 34),
-                ],
-              ),
-            ),
+          context.read<ArtistProvider>().artistSong.clear;
+          context.read<ArtistProvider>().artistSong = item.data!;
+          return BodyContainer(
             child: ListView.separated(
               itemBuilder: (BuildContext context, index) {
                 return ListTile(
@@ -130,7 +61,8 @@ class _ArtistHomeScreenState extends State<ArtistHomeScreen> {
                         builder: (context) => const MusicScreen(),
                       ),
                     );
-                    context.read<MusicUtils>().myMusic = artistSong;
+                    context.read<MusicUtils>().myMusic =
+                        context.read<ArtistProvider>().artistSong;
                     context.read<MusicUtils>().audioPlayer.setAudioSource(
                           createPlaylist(
                             item.data!,
@@ -139,33 +71,15 @@ class _ArtistHomeScreenState extends State<ArtistHomeScreen> {
                         );
                     context.read<MusicUtils>().audioPlayer.play();
                   },
-                  leading: QueryArtworkWidget(
-                    artworkBorder: const BorderRadius.all(
-                      Radius.zero,
-                    ),
-                    artworkHeight: 60,
-                    artworkWidth: 60,
-                    artworkFit: BoxFit.fill,
-                    nullArtworkWidget: Image.asset(
-                      "assets/null2.png",
-                      fit: BoxFit.fitWidth,
-                    ),
-                    id: item.data![index].id,
-                    type: ArtworkType.AUDIO,
+                  leading: QueryArtImage(
+                    songModel: item.data![index],
+                    artworkType: ArtworkType.AUDIO,
                   ),
-                  title: Text(
-                    item.data![index].title,
-                    style: TextStyle(
-                      overflow: TextOverflow.ellipsis,
-                      color: kWhite,
-                    ),
+                  title: MainTextWidget(
+                    title: item.data![index].title,
                   ),
-                  subtitle: Text(
-                    item.data![index].artist ?? "No Artist",
-                    style: TextStyle(
-                      overflow: TextOverflow.ellipsis,
-                      color: kWhite,
-                    ),
+                  subtitle: MainTextWidget(
+                    title: item.data![index].artist ?? "No Artist",
                   ),
                   trailing: IconButton(
                     icon: Icon(
