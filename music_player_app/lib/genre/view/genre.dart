@@ -1,30 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:music_player_app/all_songs/view_model/allsongs_provider.dart';
 import 'package:music_player_app/utilities/view/body_container.dart';
 import 'package:music_player_app/utilities/view/colors.dart';
+import 'package:music_player_app/utilities/view/main_text_widget.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-
+import 'package:provider/provider.dart';
 import 'genre_home.dart';
 
-class GenreScreen extends StatefulWidget {
+class GenreScreen extends StatelessWidget {
   const GenreScreen({Key? key}) : super(key: key);
 
-  @override
-  State<GenreScreen> createState() => _GenreScreenState();
-}
-
-class _GenreScreenState extends State<GenreScreen> {
-  final OnAudioQuery _audioQuery = OnAudioQuery();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(bottom: 20.0),
         child: FutureBuilder<List<GenreModel>>(
-          future: _audioQuery.queryGenres(
-            sortType: null,
-            orderType: OrderType.ASC_OR_SMALLER,
-            ignoreCase: true,
-          ),
+          future: context.read<AllsongsProvider>().audioQuery.queryGenres(
+                sortType: null,
+                orderType: OrderType.ASC_OR_SMALLER,
+                ignoreCase: true,
+              ),
           builder: (context, item) {
             if (item.data == null) {
               return const Center(
@@ -37,19 +33,7 @@ class _GenreScreenState extends State<GenreScreen> {
             }
 
             if (item.data!.isEmpty) {
-              return Container(
-                width: double.infinity,
-                height: double.infinity,
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.centerRight,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Color.fromARGB(255, 42, 11, 99),
-                      Color.fromARGB(235, 48, 14, 34),
-                    ],
-                  ),
-                ),
+              return BodyContainer(
                 child: Center(
                   child: Text(
                     "Nothing found!",
@@ -82,18 +66,13 @@ class _GenreScreenState extends State<GenreScreen> {
                         id: item.data![index].id,
                         type: ArtworkType.GENRE,
                       ),
-                      title: Text(
-                        item.data![index].genre,
-                        style: TextStyle(
-                          overflow: TextOverflow.ellipsis,
-                          color: kWhite,
-                        ),
+                      title: MainTextWidget(
+                        title: item.data![index].genre,
                       ),
-                      subtitle: Text(
-                        "Songs: ${item.data![index].numOfSongs}".toString(),
-                        style: const TextStyle(
-                          color: Color.fromARGB(151, 255, 255, 255),
-                        ),
+                      subtitle: MainTextWidget(
+                        title:
+                            "Songs: ${item.data![index].numOfSongs}".toString(),
+                        color: const Color.fromARGB(151, 255, 255, 255),
                       ),
                       onTap: () => {
                         Navigator.of(context).push(

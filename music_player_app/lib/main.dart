@@ -8,6 +8,7 @@ import 'package:music_player_app/artist/view_model/artist_provider.dart';
 import 'package:music_player_app/favorites/view_model/favorite_button_provider.dart';
 import 'package:music_player_app/favorites/view_model/favorites_function.dart';
 import 'package:music_player_app/favorites/view_model/widgets_favourites.dart';
+import 'package:music_player_app/genre/view_model/genre_provider.dart';
 import 'package:music_player_app/home/view_model/home_functions.dart';
 import 'package:music_player_app/playing_music/view_model/music_functions.dart';
 import 'package:music_player_app/playing_music/view_model/music_utilities.dart';
@@ -96,6 +97,9 @@ class Music extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => ArtistProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => GenreProvider(),
         ),
       ],
       child: const MaterialApp(
