@@ -32,77 +32,68 @@ class GenreHomeScreen extends StatelessWidget {
                 genreModel.id,
               ),
           builder: (context, item) {
-            if (item.data == null) {
-              return const Center(
-                child: BodyContainer(
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                ),
-              );
-            }
-
-            if (item.data!.isEmpty) {
-              return BodyContainer(
-                child: Center(
-                  child: Text(
-                    "Nothing found!",
-                    style: TextStyle(
-                      color: kWhite,
-                    ),
-                  ),
-                ),
-              );
-            }
-            context.read<GenreProvider>().genreSong.clear;
-            context.read<GenreProvider>().genreSong = item.data!;
-            return BodyContainer(
-              child: ListView.separated(
-                itemBuilder: (BuildContext context, index) {
-                  return ListTile(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const MusicScreen(),
+            return item.data!.isEmpty
+                ? BodyContainer(
+                    child: Center(
+                      child: Text(
+                        "Nothing found!",
+                        style: TextStyle(
+                          color: kWhite,
                         ),
-                      );
-                      context
-                          .read<UtilityProvider>()
-                          .playTheMusic(context, item.data!, index);
-                    },
-                    leading: QueryArtImage(
-                      songModel: item.data![index],
-                      artworkType: ArtworkType.GENRE,
-                    ),
-                    title: MainTextWidget(
-                      title: item.data![index].title,
-                    ),
-                    subtitle: MainTextWidget(
-                      title: item.data![index].artist ?? "No Artist",
-                    ),
-                    trailing: IconButton(
-                      icon: Icon(
-                        Icons.more_vert_outlined,
-                        color: kWhite,
                       ),
-                      onPressed: () {
-                        settingModalBottomSheet(
-                          context,
-                          item.data![index],
+                    ),
+                  )
+                :
+
+                // context.read<GenreProvider>().genreSong.clear;
+                // context.read<GenreProvider>().genreSong = item.data!;
+                BodyContainer(
+                    child: ListView.separated(
+                      itemBuilder: (BuildContext context, index) {
+                        return ListTile(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const MusicScreen(),
+                              ),
+                            );
+                            context
+                                .read<UtilityProvider>()
+                                .playTheMusic(context, item.data!, index);
+                          },
+                          leading: QueryArtImage(
+                            songModel: item.data![index],
+                            artworkType: ArtworkType.GENRE,
+                          ),
+                          title: MainTextWidget(
+                            title: item.data![index].title,
+                          ),
+                          subtitle: MainTextWidget(
+                            title: item.data![index].artist ?? "No Artist",
+                          ),
+                          trailing: IconButton(
+                            icon: Icon(
+                              Icons.more_vert_outlined,
+                              color: kWhite,
+                            ),
+                            onPressed: () {
+                              settingModalBottomSheet(
+                                context,
+                                item.data![index],
+                              );
+                            },
+                          ),
                         );
                       },
+                      separatorBuilder: (ctx, index) {
+                        return Divider(
+                          color: kWhite,
+                        );
+                      },
+                      itemCount: item.data!.length,
                     ),
                   );
-                },
-                separatorBuilder: (ctx, index) {
-                  return Divider(
-                    color: kWhite,
-                  );
-                },
-                itemCount: item.data!.length,
-              ),
-            );
           },
         ),
       ),
