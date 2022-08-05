@@ -2,7 +2,7 @@ import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:music_player_app/home/view/widgets/icon_buttons.dart';
 import 'package:music_player_app/utilities/view/body_container.dart';
-import 'package:music_player_app/utilities/view/colors.dart';
+import 'package:music_player_app/utilities/view/core.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
 import '../../../playing_music/view/music_play.dart';

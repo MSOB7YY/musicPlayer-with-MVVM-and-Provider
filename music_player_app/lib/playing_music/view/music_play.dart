@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:music_player_app/playing_music/view/widgets/music_icons.dart';
 import 'package:music_player_app/playing_music/view_model/music_functions.dart';
 import 'package:music_player_app/playing_music/view_model/music_utilities.dart';
-import 'package:music_player_app/utilities/view/colors.dart';
-import 'package:music_player_app/utilities/view/images.dart';
+import 'package:music_player_app/utilities/view/core.dart';
 import 'package:music_player_app/utilities/view/main_text_widget.dart';
 import 'package:provider/provider.dart';
 import 'widgets/duration_state_widget.dart';
@@ -32,10 +31,10 @@ class MusicScreen extends StatelessWidget {
       context.read<MusicUtils>().duration;
     });
     return Scaffold(
-      backgroundColor: background1,
+      backgroundColor: primary0,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: background1,
+        backgroundColor: primary0,
         title: const Text(
           "Now Playing",
         ),
@@ -105,9 +104,10 @@ class MusicScreen extends StatelessWidget {
                 ),
               ),
               MusicIconsWidget(
-                  myMusic: context
-                      .read<MusicUtils>()
-                      .myMusic[context.read<MusicUtils>().currentIndex]),
+                myMusic: context
+                    .read<MusicUtils>()
+                    .myMusic[context.read<MusicUtils>().currentIndex],
+              ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(18, 58, 18, 0),
                 child: Column(

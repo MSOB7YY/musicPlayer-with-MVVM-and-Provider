@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:music_player_app/playing_music/view_model/music_utilities.dart';
 import 'package:music_player_app/playlist/view_model/Playlist_provider.dart/widget_provider.dart';
+import 'package:music_player_app/playlist/view_model/fuctions/playlist_functions.dart';
 import 'package:music_player_app/utilities/view/body_container.dart';
+import 'package:music_player_app/utilities/view/core.dart';
 import 'package:music_player_app/utilities/view/main_text_widget.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
-
-import '../../../playlist/view_model/fuctions/playlist_functions.dart';
-import '../../../utilities/view/colors.dart';
 
 class PlaylistDialogWidget extends StatelessWidget {
   final SongModel songListPlay;
@@ -28,8 +27,8 @@ class PlaylistDialogWidget extends StatelessWidget {
                     begin: Alignment.centerRight,
                     end: Alignment.bottomRight,
                     colors: [
-                      background1,
-                      background2,
+                      primary0,
+                      primary1,
                     ],
                   ),
                 ),

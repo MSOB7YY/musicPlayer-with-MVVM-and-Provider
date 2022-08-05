@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:miniplayer/miniplayer.dart';
 import 'package:music_player_app/home/view_model/home_functions.dart';
-import 'package:music_player_app/utilities/view/colors.dart';
+import 'package:music_player_app/utilities/view/core.dart';
 import 'package:provider/provider.dart';
 import '../../album/view/album.dart';
 import '../../all_songs/view/all_songs.dart';

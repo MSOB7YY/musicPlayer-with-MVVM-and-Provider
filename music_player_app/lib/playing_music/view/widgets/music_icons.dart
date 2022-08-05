@@ -4,7 +4,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:music_player_app/favorites/view/fav_button.dart';
 import 'package:music_player_app/playing_music/view/widgets/icon_sub_container.dart';
 import 'package:music_player_app/playing_music/view_model/music_utilities.dart';
-import 'package:music_player_app/utilities/view/colors.dart';
+import 'package:music_player_app/utilities/view/core.dart';
 import 'package:on_audio_query_platform_interface/details/on_audio_query_helper.dart';
 import 'package:provider/provider.dart';
 

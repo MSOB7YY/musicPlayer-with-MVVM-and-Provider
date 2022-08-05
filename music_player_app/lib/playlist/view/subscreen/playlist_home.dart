@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:music_player_app/playlist/view_model/Playlist_provider.dart/playlist_provider.dart';
 import 'package:music_player_app/utilities/view/body_container.dart';
-import 'package:music_player_app/utilities/view/colors.dart';
+import 'package:music_player_app/utilities/view/core.dart';
 import 'package:music_player_app/utilities/view/main_text_widget.dart';
 import 'package:music_player_app/utilities/view/query_art.dart';
 import 'package:on_audio_query/on_audio_query.dart';

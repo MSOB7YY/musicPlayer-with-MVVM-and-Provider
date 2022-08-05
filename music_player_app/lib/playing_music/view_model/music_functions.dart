@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:music_player_app/playing_music/view_model/music_utilities.dart';
+import 'package:music_player_app/utilities/view/core.dart';
 import 'package:provider/provider.dart';
-import '../../utilities/view/colors.dart';
 
 class PlayMusicProvider with ChangeNotifier {
   StreamBuilder<PlayerState> playButton() {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:music_player_app/playing_music/view_model/music_utilities.dart';
 import 'package:music_player_app/utilities/view/body_container.dart';
-import 'package:music_player_app/utilities/view/colors.dart';
+import 'package:music_player_app/utilities/view/core.dart';
 import 'package:music_player_app/utilities/view/main_text_widget.dart';
 import 'package:provider/provider.dart';
 import '../../view_model/fuctions/playlist_functions.dart';
@@ -23,7 +23,7 @@ class PlayList extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        backgroundColor: background1,
+        backgroundColor: primary0,
         elevation: 0,
         automaticallyImplyLeading: false,
         title: const Text("PlayList"),

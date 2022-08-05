@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'colors.dart';
+import 'package:music_player_app/utilities/view/core.dart';
 
 class BodyContainer extends StatelessWidget {
   final Widget child;
@@ -13,8 +13,8 @@ class BodyContainer extends StatelessWidget {
             begin: Alignment.topRight,
             end: Alignment.bottomCenter,
             colors: [
-              background1,
-              background2,
+              primary0,
+              primary1,
             ],
           ),
         ),

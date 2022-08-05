@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../utilities/view/colors.dart';
+import 'package:music_player_app/utilities/view/core.dart';
 
 class IconButtons extends StatelessWidget {
   final IconData icon;
