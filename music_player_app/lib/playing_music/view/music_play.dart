@@ -10,10 +10,8 @@ import 'widgets/duration_text.dart';
 import 'widgets/music_artwork.dart';
 
 class MusicScreen extends StatelessWidget {
-  const MusicScreen({
-    Key? key,
-  }) : super(key: key);
-
+  const MusicScreen({Key? key}) : super(key: key);
+  // final List<SongModel> musicList;
   @override
   Widget build(BuildContext context) {
     MediaQuery.of(context).size.height;

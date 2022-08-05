@@ -15,7 +15,6 @@ class AddSongsToPlayList extends StatelessWidget {
   const AddSongsToPlayList({Key? key, required this.folderIndex})
       : super(key: key);
 
-  final bool isAdded = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,10 +41,12 @@ class AddSongsToPlayList extends StatelessWidget {
               ],
             );
           }
-          item.data!.isEmpty
-              ? const MainItemEmpty()
-              : context.read<AllsongsProvider>().songs.clear;
+          if (item.data!.isEmpty) {
+            return const MainItemEmpty();
+          }
+          context.read<AllsongsProvider>().songs.clear();
           context.read<AllsongsProvider>().songs = item.data!;
+
           return BodyContainer(
             child: ListView.separated(
               itemBuilder: (BuildContext context, index) {

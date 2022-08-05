@@ -7,7 +7,7 @@ import '../../model/playlist_model.dart';
 import '../../view/widgets/playlist_bottom.dart';
 
 class PlaylistProviderFuctions with ChangeNotifier {
-  List<PlaylistDbModel> playlistNotifier = [];
+  final List<PlaylistDbModel> playlistNotifier = [];
   List<SongModel> playloop = [];
   void addPlaylist(PlaylistDbModel value) async {
     final playlistDb = await Hive.openBox<PlaylistDbModel>('playlist_Db');
@@ -32,9 +32,11 @@ class PlaylistProviderFuctions with ChangeNotifier {
   }
 
   updatePlaylist(index, value) async {
+    print('updatePlaylist');
     final playlistDb = await Hive.openBox<PlaylistDbModel>('playlist_Db');
     await playlistDb.putAt(index, value);
     getallPlaylists();
+    notifyListeners();
   }
 
   playlistBottomSheet(context, index) {

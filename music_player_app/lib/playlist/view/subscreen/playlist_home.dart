@@ -14,9 +14,8 @@ import '../widgets/add_playlist.dart';
 
 class PlayListHomeScreen extends StatelessWidget {
   final int folderIndex;
-  PlayListHomeScreen({Key? key, required this.folderIndex}) : super(key: key);
-  final List<SongModel> playlistSongs = [];
-  final int tempIndex = 0;
+  const PlayListHomeScreen({Key? key, required this.folderIndex})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,18 +23,18 @@ class PlayListHomeScreen extends StatelessWidget {
       (timeStamp) {
         Provider.of<PlaylistProviderFuctions>(context, listen: false)
             .getallPlaylists();
+        Provider.of<Playlistsongcheck>(context, listen: false)
+            .showSelectSong(context, folderIndex);
       },
     );
-    context.read<Playlistsongcheck>().showSelectSong(folderIndex, context);
+
     return Scaffold(
       appBar: AppBar(
         excludeHeaderSemantics: true,
-        title: Text(
-          context
-              .read<PlaylistProviderFuctions>()
-              .playlistNotifier[folderIndex]
-              .name,
-        ),
+        title: Text(context
+            .read<PlaylistProviderFuctions>()
+            .playlistNotifier[folderIndex]
+            .name),
         backgroundColor: kAmber,
         actions: [
           Padding(
@@ -57,7 +56,7 @@ class PlayListHomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Consumer<PlaylistProviderFuctions>(
+      body: Consumer<Playlistsongcheck>(
         builder: (context, value, child) {
           return BodyContainer(
             child: Padding(
