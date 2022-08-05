@@ -1,12 +1,12 @@
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:music_player_app/utilities/view/colors.dart';
+import 'package:music_player_app/home/model/duration.dart';
+import 'package:music_player_app/playing_music/view_model/music_functions.dart';
+import 'package:music_player_app/playing_music/view_model/music_utilities.dart';
+import 'package:music_player_app/utilities/view/body_container.dart';
+import 'package:music_player_app/utilities/view/core.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
-import '../../../playing_music/view_model/music_functions.dart';
-import '../../../playing_music/view_model/music_utilities.dart';
-import '../../../utilities/view/body_container.dart';
-import '../../model/duration.dart';
 
 import 'sub_widets/null_miniplayer.dart';
 

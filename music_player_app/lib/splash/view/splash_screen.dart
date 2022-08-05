@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:music_player_app/splash/view_model/splash_provider.dart';
-import 'package:music_player_app/utilities/view/colors.dart';
-import 'package:music_player_app/utilities/view/images.dart';
+import 'package:music_player_app/utilities/view/core.dart';
 import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -42,8 +41,8 @@ class _SplashScreenState extends State<SplashScreen>
               begin: Alignment.centerRight,
               end: Alignment.bottomRight,
               colors: [
-                background1,
-                background2,
+                primary0,
+                primary1,
               ],
             ),
           ),

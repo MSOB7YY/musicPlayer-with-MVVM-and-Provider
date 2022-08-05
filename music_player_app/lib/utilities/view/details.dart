@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:music_player_app/utilities/view/body_container.dart';
-import 'package:music_player_app/utilities/view/colors.dart';
+import 'package:music_player_app/utilities/view/core.dart';
 import 'package:music_player_app/utilities/view/query_art.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
@@ -15,7 +15,7 @@ class Details extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: background1,
+        backgroundColor: primary0,
         title: const Text(
           "Details",
         ),

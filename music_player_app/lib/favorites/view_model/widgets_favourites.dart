@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:music_player_app/favorites/view_model/favorites_function.dart';
+import 'package:music_player_app/utilities/view/core.dart';
 import 'package:provider/provider.dart';
-
-import '../../utilities/view/colors.dart';
 
 class FavoritesWidget with ChangeNotifier {
   showFavoriteDeletionBox(BuildContext context, int index) {

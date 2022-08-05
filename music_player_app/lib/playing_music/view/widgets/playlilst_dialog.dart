@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:music_player_app/playlist/model/playlist_model.dart';
 import 'package:music_player_app/playlist/view_model/fuctions/playlist_functions.dart';
-import 'package:music_player_app/utilities/view/colors.dart';
+import 'package:music_player_app/utilities/view/core.dart';
 import 'package:provider/provider.dart';
 
 class AddPlaylistDialog extends StatelessWidget {

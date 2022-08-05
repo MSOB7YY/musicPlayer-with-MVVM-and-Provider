@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:music_player_app/utilities/view/colors.dart';
+import 'package:music_player_app/utilities/view/core.dart';
 
 class WidgetProvider with ChangeNotifier {
   scaffoldMessenge(BuildContext context, String message) {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:music_player_app/favorites/view/fav_button.dart';
 import 'package:music_player_app/playing_music/view_model/music_utilities.dart';
-import 'package:music_player_app/utilities/view/colors.dart';
+import 'package:music_player_app/utilities/view/core.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
-import '../favorites/view/fav_button.dart';
 import 'view/details.dart';
 
 settingModalBottomSheet(context, SongModel data) {
@@ -22,13 +22,13 @@ settingModalBottomSheet(context, SongModel data) {
                 overflow: TextOverflow.ellipsis,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: background1,
+                color: primary0,
               ),
             ),
           ),
           Divider(
             thickness: 2,
-            color: background1,
+            color: primary0,
           ),
           ListTile(
             leading: Container(
@@ -49,7 +49,7 @@ settingModalBottomSheet(context, SongModel data) {
               color: const Color.fromARGB(64, 33, 149, 243),
               child: Icon(
                 Icons.info_outline_rounded,
-                color: background1,
+                color: primary0,
               ),
             ),
             title: const Text(
@@ -72,7 +72,7 @@ settingModalBottomSheet(context, SongModel data) {
               color: const Color.fromARGB(64, 33, 149, 243),
               child: Icon(
                 Icons.add_circle,
-                color: background1,
+                color: primary0,
               ),
             ),
             title: const Text(

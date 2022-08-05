@@ -1,19 +1,15 @@
 // ignore_for_file: deprecated_member_use
 import 'package:flutter/material.dart';
+import 'package:music_player_app/drawer/view_model/drawer_provider.dart';
+import 'package:music_player_app/home/view/home_screen.dart';
 import 'package:music_player_app/utilities/view/body_container.dart';
-import 'package:share_plus/share_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
-import '../../home/view/home_screen.dart';
-import '../../utilities/view/colors.dart';
+import 'package:music_player_app/utilities/view/core.dart';
+import 'package:music_player_app/utilities/view/main_text_widget.dart';
+import 'package:provider/provider.dart';
 
-class NavDrawer extends StatefulWidget {
+class NavDrawer extends StatelessWidget {
   const NavDrawer({Key? key}) : super(key: key);
 
-  @override
-  State<NavDrawer> createState() => _NavDrawerState();
-}
-
-class _NavDrawerState extends State<NavDrawer> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -26,11 +22,11 @@ class _NavDrawerState extends State<NavDrawer> {
               children: <Widget>[
                 DrawerHeader(
                   decoration: BoxDecoration(
-                    color: background1,
-                    image: const DecorationImage(
+                    color: primary0,
+                    image: DecorationImage(
                       fit: BoxFit.contain,
                       image: AssetImage(
-                        'assets/malhaarNew3Logo.png',
+                        newLogo,
                       ),
                     ),
                   ),
@@ -49,15 +45,11 @@ class _NavDrawerState extends State<NavDrawer> {
                   ),
                 ),
                 ListTile(
-                  leading: const Icon(
-                    Icons.library_music,
-                    color: Colors.white,
+                  leading: const DrawerIcons(
+                    icon: Icons.library_music,
                   ),
-                  title: Text(
-                    'Library',
-                    style: TextStyle(
-                      color: kWhite,
-                    ),
+                  title: MainTextWidget(
+                    title: 'Library',
                   ),
                   onTap: () => {
                     Navigator.of(context).push(
@@ -67,88 +59,48 @@ class _NavDrawerState extends State<NavDrawer> {
                     )
                   },
                 ),
-                // ListTile(
-                //   leading: Icon(
-                //     Icons.recycling,
-                //     color: kWhite,
-                //   ),
-                //   title: Text(
-                //     'Scan Music',
-                //     style: TextStyle(
-                //       color: kWhite,
-                //     ),
-                //   ),
-                //   onTap: () {
-                //     Navigator.of(context).push(
-                //       MaterialPageRoute(
-                //         builder: (ctx) => const ScanScreen(),
-                //       ),
-                //     );
-                //   },
-                //   // trailing: ,
-                // ),
                 ListTile(
-                  leading: Icon(
-                    Icons.feedback_sharp,
-                    color: kWhite,
+                  leading: const DrawerIcons(
+                    icon: Icons.feedback_sharp,
                   ),
-                  title: Text(
-                    'Feedback',
-                    style: TextStyle(
-                      color: kWhite,
-                    ),
+                  title: MainTextWidget(
+                    title: 'Feedback',
                   ),
                   onTap: () => {
-                    _email(),
+                    context.read<DrawerProvider>().email(),
                   },
                 ),
                 ListTile(
-                  leading: Icon(
-                    Icons.laptop,
-                    color: kWhite,
+                  leading: const DrawerIcons(
+                    icon: Icons.laptop,
                   ),
-                  title: const Text(
-                    'About Developer',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
+                  title: MainTextWidget(
+                    title: 'About Developer',
                   ),
                   onTap: () => {
-                    _about(),
+                    context.read<DrawerProvider>().about(),
                   },
                 ),
                 ListTile(
-                  leading: const Icon(
-                    Icons.share_rounded,
-                    color: Colors.white,
+                  leading: const DrawerIcons(
+                    icon: Icons.share_rounded,
                   ),
-                  title: const Text(
-                    'share App',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
+                  title: MainTextWidget(
+                    title: 'share App',
                   ),
                   onTap: () async {
-                    Share.share(
-                        "Hey! check out this new app https://play.google.com/store/apps/details?id=in.brototype.malhaar");
+                    context.read<DrawerProvider>().share();
                   },
                 ),
                 ListTile(
-                  leading: const Icon(
-                    Icons.music_video,
-                    color: Colors.white,
+                  leading: const DrawerIcons(
+                    icon: Icons.music_video,
                   ),
-                  title: const Text(
-                    'Version',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
+                  title: MainTextWidget(
+                    title: 'Version',
                   ),
-                  subtitle: const Text(
-                    "   2.0",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
+                  subtitle: MainTextWidget(
+                    title: "   2.0",
                   ),
                   onTap: () => {},
                 ),
@@ -159,16 +111,17 @@ class _NavDrawerState extends State<NavDrawer> {
       ),
     );
   }
+}
 
-  Future<void> _email() async {
-    if (await launch('mailto:pranavpv257@gmail.com')) {
-      throw "Try Again";
-    }
-  }
+class DrawerIcons extends StatelessWidget {
+  const DrawerIcons({Key? key, required this.icon}) : super(key: key);
+  final IconData icon;
 
-  Future<void> _about() async {
-    if (await launch('https://pranavpv773.github.io/pranav-s/')) {
-      throw "Try Again";
-    }
+  @override
+  Widget build(BuildContext context) {
+    return Icon(
+      icon,
+      color: kWhite,
+    );
   }
 }
