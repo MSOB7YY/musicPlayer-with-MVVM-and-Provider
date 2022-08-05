@@ -1,5 +1,7 @@
 // ignore_for_file: deprecated_member_use
 import 'package:flutter/material.dart';
+import 'package:music_player_app/drawer/view/widgets/drawer_icons.dart';
+import 'package:music_player_app/drawer/view/widgets/scan_screen.dart';
 import 'package:music_player_app/drawer/view_model/drawer_provider.dart';
 import 'package:music_player_app/home/view/home_screen.dart';
 import 'package:music_player_app/utilities/view/body_container.dart';
@@ -60,6 +62,26 @@ class NavDrawer extends StatelessWidget {
                   },
                 ),
                 ListTile(
+                  leading: const Icon(
+                    Icons.recycling,
+                    color: Colors.white,
+                  ),
+                  title: const Text(
+                    'Scan Music',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (ctx) => const ScanScreen(),
+                      ),
+                    );
+                  },
+                  // trailing: ,
+                ),
+                ListTile(
                   leading: const DrawerIcons(
                     icon: Icons.feedback_sharp,
                   ),
@@ -109,19 +131,6 @@ class NavDrawer extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class DrawerIcons extends StatelessWidget {
-  const DrawerIcons({Key? key, required this.icon}) : super(key: key);
-  final IconData icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return Icon(
-      icon,
-      color: kWhite,
     );
   }
 }
