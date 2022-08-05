@@ -4,7 +4,8 @@ import 'colors.dart';
 
 class MainTextWidget extends StatelessWidget {
   final String title;
-  const MainTextWidget({Key? key, required this.title}) : super(key: key);
+  Color? color;
+  MainTextWidget({Key? key, required this.title, this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class MainTextWidget extends StatelessWidget {
       title,
       style: TextStyle(
         overflow: TextOverflow.ellipsis,
-        color: kWhite,
+        color: color ?? kWhite,
       ),
     );
   }
