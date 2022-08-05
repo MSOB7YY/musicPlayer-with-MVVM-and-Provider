@@ -15,8 +15,6 @@ import '../widgets/add_playlist.dart';
 class PlayListHomeScreen extends StatelessWidget {
   final int folderIndex;
   PlayListHomeScreen({Key? key, required this.folderIndex}) : super(key: key);
-
-  final OnAudioQuery audioQuery = OnAudioQuery();
   final List<SongModel> playlistSongs = [];
   final int tempIndex = 0;
 
