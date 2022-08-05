@@ -40,8 +40,11 @@ class ScanScreenState extends State<ScanScreen>
 
   @override
   Widget build(BuildContext context) {
+    MediaQuery.of(context).size.height;
+    MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: primary0,
         title: const Text(
           "Scan Music",
@@ -70,7 +73,7 @@ class ScanScreenState extends State<ScanScreen>
                   totalRepeatCount: 30,
                   animatedTexts: [
                     WavyAnimatedText(
-                      'Scanning.....',
+                      'Tab on Scan',
                       textStyle: TextStyle(
                         color: kWhite,
                         fontSize: 30,
@@ -81,41 +84,28 @@ class ScanScreenState extends State<ScanScreen>
                 ),
               ),
               ElevatedButton(
-                  onPressed: () {
-                    context
-                        .read<ScanFunctionProvider>()
-                        .isPlayinFunction(context);
-                    context.read<ScanProvider>().isplaying = true;
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        18.0,
-                      ),
-                    ),
-                    primary: Colors.amber,
-                    textStyle: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                onPressed: () {
+                  context
+                      .read<ScanFunctionProvider>()
+                      .isPlayinFunction(context);
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                      18.0,
                     ),
                   ),
-                  child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 28.0),
-                      child: context.read<ScanProvider>().isplaying == true
-                          ? AnimatedTextKit(
-                              totalRepeatCount: 30,
-                              animatedTexts: [
-                                WavyAnimatedText(
-                                  'Scanning.....',
-                                  textStyle: TextStyle(
-                                    color: kWhite,
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            )
-                          : Text('scan'))),
+                  primary: Colors.amber,
+                  textStyle: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 100),
+                  child: Text('SCAN'),
+                ),
+              ),
             ],
           ),
         ),
