@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:music_player_app/playlist/view/widgets/add_playlist.dart';
+import 'package:music_player_app/utilities/view/core.dart';
 import 'package:provider/provider.dart';
 import '../../../all_songs/view_model/allsongs_provider.dart';
 import '../../model/playlist_model.dart';
@@ -56,17 +57,17 @@ class PlaylistButtonFunctions with ChangeNotifier {
               SnackBar(
                 content: Text(
                   'added song to the playlist ${context.read<PlaylistProviderFuctions>().playlistNotifier[folderindex].name},',
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: TextStyle(
+                    color: kWhite,
                   ),
                 ),
-                backgroundColor: Colors.amber,
+                backgroundColor: kAmber,
                 behavior: SnackBarBehavior.floating,
               ),
             );
           },
           icon: const Icon(
-            Icons.add,
+            Icons.add_box,
             color: Colors.lightGreen,
           ));
     }
@@ -103,15 +104,15 @@ class PlaylistButtonFunctions with ChangeNotifier {
           SnackBar(
             content: Text(
               'song deleted from the playlist  ${context.read<PlaylistProviderFuctions>().playlistNotifier[folderindex].name},',
-              style: const TextStyle(color: Colors.white),
+              style: TextStyle(color: kWhite),
             ),
-            backgroundColor: Colors.amber,
+            backgroundColor: kAmber,
             behavior: SnackBarBehavior.floating,
           ),
         );
       },
       icon: const Icon(
-        Icons.minimize_rounded,
+        Icons.check_box_outline_blank,
         color: Colors.red,
       ),
     );
