@@ -5,7 +5,7 @@ import 'package:music_player_app/utilities/view/core.dart';
 import 'package:provider/provider.dart';
 
 class PlayMusicProvider with ChangeNotifier {
-  StreamBuilder<PlayerState> playButton() {
+  StreamBuilder<PlayerState> playButton(double size) {
     return StreamBuilder<PlayerState>(
       builder: (context, snapshot) {
         return IconButton(

@@ -56,6 +56,9 @@ class PlaylistButtonFunctions with ChangeNotifier {
     songlist.add(
       context.read<AllsongsProvider>().songs[index].id,
     );
+    print(songlist.length);
+
+    updatelist.clear();
     updatelist = [
       songlist,
       context
@@ -70,6 +73,10 @@ class PlaylistButtonFunctions with ChangeNotifier {
           .name,
       songList: updatelist,
     );
+    print(context
+        .read<PlaylistProviderFuctions>()
+        .playlistNotifier[folderindex]
+        .name);
     context.read<PlaylistProviderFuctions>().updatePlaylist(folderindex, model);
     context.read<PlaylistProviderFuctions>().getallPlaylists();
     context.read<Playlistsongcheck>().showSelectSong(context, folderindex);

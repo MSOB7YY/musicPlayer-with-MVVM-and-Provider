@@ -1,225 +1,139 @@
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:music_player_app/home/model/duration.dart';
+import 'package:music_player_app/playing_music/view/widgets/duration_state_widget.dart';
+import 'package:music_player_app/playing_music/view/widgets/duration_text.dart';
 import 'package:music_player_app/playing_music/view_model/music_functions.dart';
 import 'package:music_player_app/playing_music/view_model/music_utilities.dart';
 import 'package:music_player_app/utilities/view/body_container.dart';
-import 'package:music_player_app/utilities/view/core.dart';
+import 'package:music_player_app/utilities/view/main_text_widget.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
-
 import 'sub_widets/null_miniplayer.dart';
 
-class MiniPlayerExpand extends StatefulWidget {
+class MiniPlayerExpand extends StatelessWidget {
   const MiniPlayerExpand({Key? key}) : super(key: key);
-
-  @override
-  State<MiniPlayerExpand> createState() => _MiniPlayerExpandState();
-}
-
-class _MiniPlayerExpandState extends State<MiniPlayerExpand> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<MusicUtils>().audioPlayer.currentIndexStream.listen((event) {
-      if (event != null) {
-        setState(() {});
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return context.read<MusicUtils>().audioPlayer.playing ||
-            context.read<MusicUtils>().audioPlayer.currentIndex != null &&
-                context.read<MusicUtils>().currentIndex != -1
-        ? BodyContainer(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Stack(
-                    children: [
-                      Center(
-                        // ignore: sized_box_for_whitespace
-                        child: Container(
-                          width: double.infinity,
-                          height: double.infinity,
-                          child: QueryArtworkWidget(
-                            id: context
-                                .read<MusicUtils>()
-                                .myMusic[context
-                                    .read<MusicUtils>()
-                                    .audioPlayer
-                                    .currentIndex!]
-                                .id,
-                            type: ArtworkType.AUDIO,
-                            artworkBorder: BorderRadius.circular(
-                              1.0,
-                            ),
-                            nullArtworkWidget: Image.asset(
-                              "assets/nullMIni.png",
-                              fit: BoxFit.fill,
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<MusicUtils>(context, listen: false)
+          .audioPlayer
+          .currentIndexStream
+          .listen((index) {
+        if (index != null) {
+          Provider.of<MusicUtils>(context, listen: false)
+              .updateCurrentPlayingSongDetails(index);
+        }
+      });
+      context.read<MusicUtils>().duration;
+    });
+    return Consumer<MusicUtils>(builder: (context, value, child) {
+      return value.audioPlayer.playing ||
+              value.audioPlayer.currentIndex != null && value.currentIndex != -1
+          ? BodyContainer(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Stack(
+                      children: [
+                        Center(
+                          // ignore: sized_box_for_whitespace
+                          child: Container(
+                            width: double.infinity,
+                            height: double.infinity,
+                            child: QueryArtworkWidget(
+                              id: value
+                                  .myMusic[context
+                                      .read<MusicUtils>()
+                                      .audioPlayer
+                                      .currentIndex!]
+                                  .id,
+                              type: ArtworkType.AUDIO,
+                              artworkBorder: BorderRadius.circular(
+                                1.0,
+                              ),
+                              nullArtworkWidget: Image.asset(
+                                "assets/nullMIni.png",
+                                fit: BoxFit.fill,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      ListView(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 28.0),
-                            child: Center(
-                              child: Text(
-                                context
-                                    .read<MusicUtils>()
-                                    .myMusic[context
-                                        .read<MusicUtils>()
-                                        .audioPlayer
-                                        .currentIndex!]
-                                    .title,
-                                style: TextStyle(
-                                  color: kWhite,
-                                  overflow: TextOverflow.ellipsis,
-                                  fontSize: 25,
+                        ListView(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 28.0),
+                              child: Center(
+                                child: MainTextWidget(
+                                  title: value
+                                      .myMusic[context
+                                          .read<MusicUtils>()
+                                          .audioPlayer
+                                          .currentIndex!]
+                                      .title,
                                 ),
                               ),
                             ),
-                          ),
-                          Center(
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                top: 5.0,
-                              ),
-                              child: Text(
-                                context
-                                    .read<MusicUtils>()
-                                    .myMusic[context
-                                        .read<MusicUtils>()
-                                        .audioPlayer
-                                        .currentIndex!]
-                                    .artist
-                                    .toString(),
-                                style: TextStyle(
-                                  overflow: TextOverflow.ellipsis,
-                                  color: kWhite,
+                            Center(
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                  top: 5.0,
+                                ),
+                                child: MainTextWidget(
+                                  title: value
+                                      .myMusic[context
+                                          .read<MusicUtils>()
+                                          .audioPlayer
+                                          .currentIndex!]
+                                      .artist
+                                      .toString(),
                                 ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(18, 58, 18, 0),
-                            child: Column(
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.zero,
-                                  margin: const EdgeInsets.only(bottom: 4.0),
-                                  child: StreamBuilder<DurationState>(
-                                    stream: context
-                                        .read<MusicUtils>()
-                                        .durationStateStream,
-                                    builder: (context, snapshot) {
-                                      final durationState = snapshot.data;
-                                      final progress =
-                                          durationState?.position ??
-                                              Duration.zero;
-                                      final total =
-                                          durationState?.total ?? Duration.zero;
-
-                                      return ProgressBar(
-                                        timeLabelLocation:
-                                            TimeLabelLocation.sides,
-                                        progress: progress,
-                                        total: total,
-                                        barHeight: 6.0,
-                                        baseBarColor: kWhite,
-                                        progressBarColor: kAmber,
-                                        thumbColor: Colors.blue[900],
-                                        timeLabelTextStyle: const TextStyle(
-                                          fontSize: 0,
-                                        ),
-                                        onSeek: (duration) {
-                                          context
-                                              .read<MusicUtils>()
-                                              .audioPlayer
-                                              .seek(duration);
-                                        },
-                                      );
-                                    },
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(18, 58, 18, 0),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.zero,
+                                    margin: const EdgeInsets.only(bottom: 4.0),
+                                    child: const DurationStateWidget(
+                                      barHeight: 06,
+                                    ),
                                   ),
-                                ),
-                                StreamBuilder<DurationState>(
-                                  stream: context
-                                      .read<MusicUtils>()
-                                      .durationStateStream,
-                                  builder: (context, snapshot) {
-                                    final durationState = snapshot.data;
-                                    final progress = durationState?.position ??
-                                        Duration.zero;
-                                    final total =
-                                        durationState?.total ?? Duration.zero;
-
-                                    return Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Flexible(
-                                          child: Text(
-                                            progress.toString().split(".")[0],
-                                            style: TextStyle(
-                                              color: kWhite,
-                                              fontSize: 15,
-                                            ),
-                                          ),
-                                        ),
-                                        Flexible(
-                                          child: Text(
-                                            total.toString().split(".")[0],
-                                            style: TextStyle(
-                                              color: kWhite,
-                                              fontSize: 15,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                ),
-                              ],
+                                  const MusicDurationTextWidget(),
+                                ],
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(
-                              16.0,
+                            Padding(
+                              padding: const EdgeInsets.all(
+                                16.0,
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Provider.of<PlayMusicProvider>(context,
+                                          listen: false)
+                                      .previousButton(),
+                                  Provider.of<PlayMusicProvider>(context,
+                                          listen: false)
+                                      .playButton(40),
+                                  Provider.of<PlayMusicProvider>(context,
+                                          listen: false)
+                                      .nextButton(),
+                                ],
+                              ),
                             ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Provider.of<PlayMusicProvider>(context,
-                                        listen: false)
-                                    .previousButton(),
-                                Provider.of<PlayMusicProvider>(context,
-                                        listen: false)
-                                    .playButton(),
-                                Provider.of<PlayMusicProvider>(context,
-                                        listen: false)
-                                    .nextButton(),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          )
-        : const NullMiniPlayer();
+                ],
+              ),
+            )
+          : const NullMiniPlayer();
+    });
   }
 }
