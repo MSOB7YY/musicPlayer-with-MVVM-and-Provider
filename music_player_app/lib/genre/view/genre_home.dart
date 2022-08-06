@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:music_player_app/album/view/listview_seprate.dart';
 import 'package:music_player_app/all_songs/view_model/allsongs_provider.dart';
 import 'package:music_player_app/genre/view/genre_silver_appbar.dart';
 import 'package:music_player_app/genre/view_model/genre_provider.dart';
-import 'package:music_player_app/playing_music/view/music_play.dart';
-import 'package:music_player_app/utilities/bottom_sheet.dart';
 import 'package:music_player_app/utilities/view/body_container.dart';
-import 'package:music_player_app/utilities/view/core.dart';
-import 'package:music_player_app/utilities/view/main_text_widget.dart';
-import 'package:music_player_app/utilities/view/query_art.dart';
-import 'package:music_player_app/utilities/view_model/utility_provider.dart';
+import 'package:music_player_app/utilities/view_model/null_safety.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
 
@@ -21,9 +17,14 @@ class GenreHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+        headerSliverBuilder: (
+          BuildContext context,
+          bool innerBoxIsScrolled,
+        ) {
           return <Widget>[
-            GenreSilverAppBar(genreModel: genreModel),
+            GenreSilverAppBar(
+              genreModel: genreModel,
+            ),
           ];
         },
         body: FutureBuilder<List<SongModel>>(
@@ -32,68 +33,20 @@ class GenreHomeScreen extends StatelessWidget {
                 genreModel.id,
               ),
           builder: (context, item) {
-            return item.data!.isEmpty
-                ? BodyContainer(
+            return item.data == null
+                ? const BodyContainer(
                     child: Center(
-                      child: Text(
-                        "Nothing found!",
-                        style: TextStyle(
-                          color: kWhite,
-                        ),
-                      ),
+                      child: CircularProgressIndicator(),
                     ),
                   )
-                :
-
-                // context.read<GenreProvider>().genreSong.clear;
-                // context.read<GenreProvider>().genreSong = item.data!;
-                BodyContainer(
-                    child: ListView.separated(
-                      itemBuilder: (BuildContext context, index) {
-                        return ListTile(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const MusicScreen(),
-                              ),
-                            );
-                            context
-                                .read<UtilityProvider>()
-                                .playTheMusic(context, item.data!, index);
-                          },
-                          leading: QueryArtImage(
-                            songModel: item.data![index],
-                            artworkType: ArtworkType.GENRE,
-                          ),
-                          title: MainTextWidget(
-                            title: item.data![index].title,
-                          ),
-                          subtitle: MainTextWidget(
-                            title: item.data![index].artist ?? "No Artist",
-                          ),
-                          trailing: IconButton(
-                            icon: Icon(
-                              Icons.more_vert_outlined,
-                              color: kWhite,
-                            ),
-                            onPressed: () {
-                              settingModalBottomSheet(
-                                context,
-                                item.data![index],
-                              );
-                            },
-                          ),
-                        );
-                      },
-                      separatorBuilder: (ctx, index) {
-                        return Divider(
-                          color: kWhite,
-                        );
-                      },
-                      itemCount: item.data!.length,
-                    ),
-                  );
+                : context.read<NullSafetyProvider>().nullChecking(
+                      context,
+                      item.data!,
+                      context.read<GenreProvider>().genreSong,
+                      ListViewSeprated(
+                        songModel: item.data!,
+                      ),
+                    );
           },
         ),
       ),

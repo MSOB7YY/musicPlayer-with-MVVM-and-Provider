@@ -17,7 +17,7 @@ class UtilityProvider with ChangeNotifier {
     );
     context.read<MusicUtils>().myMusic = songModel;
     context.read<MusicUtils>().audioPlayer.setAudioSource(
-          createPlaylist(songModel),
+          createPlaylist(context.read<MusicUtils>().myMusic),
           initialIndex: index,
         );
     context.read<MusicUtils>().audioPlayer.play();
