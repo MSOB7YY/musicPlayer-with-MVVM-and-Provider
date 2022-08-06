@@ -40,13 +40,14 @@ class PlaylistButton extends StatelessWidget {
 
         if (checkIndex != true) {
           return IconButton(
-              onPressed: () {
-                value.addPlaylistButton(context, index!, folderindex!);
-              },
-              icon: const Icon(
-                Icons.add,
-                color: Colors.lightGreen,
-              ));
+            onPressed: () {
+              value.addPlaylistButton(context, index!, folderindex!);
+            },
+            icon: const Icon(
+              Icons.add_box_rounded,
+              color: Colors.lightGreen,
+            ),
+          );
         }
         return IconButton(
           onPressed: () {
@@ -54,7 +55,7 @@ class PlaylistButton extends StatelessWidget {
                 folderindex!, context, id!, index!, indexCheck);
           },
           icon: const Icon(
-            Icons.minimize_rounded,
+            Icons.check_box_outline_blank_sharp,
             color: Colors.red,
           ),
         );
