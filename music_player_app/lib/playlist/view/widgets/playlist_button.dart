@@ -1,94 +1,135 @@
-// ignore_for_file: use_build_context_synchronously
+// // ignore_for_file: must_be_immutable
+// import 'package:flutter/material.dart';
+// import 'package:music_player_app/all_songs/view_model/allsongs_provider.dart';
+// import 'package:music_player_app/playlist/model/playlist_model.dart';
+// import 'package:music_player_app/playlist/view_model/fuctions/playlist_functions.dart';
+// import 'package:provider/provider.dart';
 
-import 'package:flutter/material.dart';
-import 'package:music_player_app/all_songs/view_model/allsongs_provider.dart';
-import 'package:music_player_app/playlist/view_model/fuctions/playlist_button_fn.dart';
-import 'package:provider/provider.dart';
+// class PlaylistButton extends StatefulWidget {
+//   PlaylistButton(
+//       {Key? key,
+//       required this.index,
+//       required this.folderindex,
+//       required this.id})
+//       : super(key: key);
 
-import '../../view_model/fuctions/playlist_functions.dart';
+//   int? index;
+//   int? folderindex;
+//   int? id;
+//   List<dynamic> songlist = [];
+//   static List<dynamic> updatelist = [];
+//   static List<dynamic> dltlist = [];
+//   @override
+//   State<PlaylistButton> createState() => _PlaylistButtonState();
+// }
 
-class PlaylistButton extends StatelessWidget {
-  const PlaylistButton(
-      {Key? key,
-      required this.index,
-      required this.folderindex,
-      required this.id})
-      : super(key: key);
+// class _PlaylistButtonState extends State<PlaylistButton> {
+//   @override
+//   Widget build(BuildContext context) {
+//     final checkIndex = context
+//         .read<PlaylistProviderFuctions>()
+//         .playlistNotifier[widget.folderindex!]
+//         .songList
+//         .contains(widget.id);
+//     final indexCheck = context
+//         .read<PlaylistProviderFuctions>()
+//         .playlistNotifier[widget.folderindex!]
+//         .songList
+//         .indexWhere(
+//           (element) =>
+//               element ==
+//               context.read<AllsongsProvider>().songs[widget.index!].id,
+//         );
+//     if (checkIndex != true) {
+//       return IconButton(
+//           onPressed: () {
+//             widget.songlist.add(
+//               context.read<AllsongsProvider>().songs[widget.index!].id,
+//             );
+//             PlaylistButton.updatelist = [
+//               widget.songlist,
+//               context
+//                   .read<PlaylistProviderFuctions>()
+//                   .playlistNotifier[widget.folderindex!]
+//                   .songList
+//             ].expand((element) => element).toList();
+//             final model = PlaylistDbModel(
+//               name: context
+//                   .read<PlaylistProviderFuctions>()
+//                   .playlistNotifier[widget.folderindex!]
+//                   .name,
+//               songList: PlaylistButton.updatelist,
+//             );
+//             context
+//                 .read<PlaylistProviderFuctions>()
+//                 .updatePlaylist(widget.folderindex!, model);
+//             context.read<PlaylistProviderFuctions>().getallPlaylists();
+//             context
+//                 .read<PlaylistProviderFuctions>()
+//                 .showSelectSong(context, widget.folderindex!);
+//             setState(() {});
+//             ScaffoldMessenger.of(context).showSnackBar(
+//               SnackBar(
+//                 content: Text(
+//                   'added song to the playlist ${context.read<PlaylistProviderFuctions>().playlistNotifier[widget.folderindex!].name},',
+//                   style: const TextStyle(
+//                     color: Colors.white,
+//                   ),
+//                 ),
+//                 backgroundColor: Colors.amber,
+//                 behavior: SnackBarBehavior.floating,
+//               ),
+//             );
+//           },
+//           icon: const Icon(
+//             Icons.add,
+//             color: Colors.lightGreen,
+//           ));
+//     }
+//     return IconButton(
+//       onPressed: () {
+//         context
+//             .read<PlaylistProviderFuctions>()
+//             .playlistNotifier[widget.folderindex!]
+//             .songList
+//             .removeAt(indexCheck);
+//         PlaylistButton.dltlist = [
+//           widget.songlist,
+//           context
+//               .read<PlaylistProviderFuctions>()
+//               .playlistNotifier[widget.folderindex!]
+//               .songList
+//         ].expand((element) => element).toList();
+//         final model = PlaylistDbModel(
+//           name: context
+//               .read<PlaylistProviderFuctions>()
+//               .playlistNotifier[widget.folderindex!]
+//               .name,
+//           songList: PlaylistButton.dltlist,
+//         );
+//         context
+//             .read<PlaylistProviderFuctions>()
+//             .updatePlaylist(widget.folderindex!, model);
+//         context
+//             .read<PlaylistProviderFuctions>()
+//             .showSelectSong(context, widget.folderindex!);
 
-  final int? index;
-  final int? folderindex;
-  final int? id;
-
-  @override
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<PlaylistButtonFunctions>(
-      builder: (context, value, child) {
-        final checkIndex = context
-            .read<PlaylistProviderFuctions>()
-            .playlistNotifier[folderindex!]
-            .songList
-            .contains(id);
-        final indexCheck = context
-            .read<PlaylistProviderFuctions>()
-            .playlistNotifier[folderindex!]
-            .songList
-            .indexWhere(
-              (element) =>
-                  element == context.read<AllsongsProvider>().songs[index!].id,
-            );
-
-        if (checkIndex != true) {
-          return IconButton(
-            onPressed: () {
-              value.addPlaylistButton(context, index!, folderindex!);
-            },
-            icon: const Icon(
-              Icons.add_box_rounded,
-              color: Colors.lightGreen,
-            ),
-          );
-        }
-        return IconButton(
-          onPressed: () {
-            value.deleteFromPlaylist(
-                folderindex!, context, id!, index!, indexCheck);
-          },
-          icon: const Icon(
-            Icons.check_box_outline_blank_sharp,
-            color: Colors.red,
-          ),
-        );
-      },
-    );
-  }
-}
-  //   return context
-  //               .read<PlaylistProviderFuctions>()
-  //               .playlistNotifier[folderindex]
-  //               .songList
-  //               .contains(id) =
-  //           true
-  //       ? IconButton(
-  //           onPressed: () {
-  //             context
-  //                 .read<PlaylistButtonFunctions>()
-  //                 .addPlaylistButton(context, index, folderindex);
-  //           },
-  //           icon: const Icon(
-  //             Icons.add,
-  //             color: Colors.lightGreen,
-  //           ),
-  //         )
-  //       : IconButton(
-  //           onPressed: () async {
-  //             await context
-  //                 .read<PlaylistButtonFunctions>()
-  //                 .deleteFromPlaylist(folderindex, context, id, index);
-  //           },
-  //           icon: const Icon(
-  //             Icons.minimize_rounded,
-  //             color: Colors.red,
-  //           ),
-  //         );
-  // }
+//         setState(() {});
+//         ScaffoldMessenger.of(context).showSnackBar(
+//           SnackBar(
+//             content: Text(
+//               'song deleted from the playlist  ${context.read<PlaylistProviderFuctions>().playlistNotifier[widget.folderindex!].name},',
+//               style: const TextStyle(color: Colors.white),
+//             ),
+//             backgroundColor: Colors.amber,
+//             behavior: SnackBarBehavior.floating,
+//           ),
+//         );
+//       },
+//       icon: const Icon(
+//         Icons.minimize_rounded,
+//         color: Colors.red,
+//       ),
+//     );
+//   }
+// }

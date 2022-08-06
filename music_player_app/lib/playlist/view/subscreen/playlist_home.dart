@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:music_player_app/playlist/view_model/Playlist_provider.dart/playlist_provider.dart';
 import 'package:music_player_app/utilities/view/body_container.dart';
 import 'package:music_player_app/utilities/view/core.dart';
 import 'package:music_player_app/utilities/view/main_text_widget.dart';
@@ -23,7 +22,7 @@ class PlayListHomeScreen extends StatelessWidget {
       (timeStamp) {
         Provider.of<PlaylistProviderFuctions>(context, listen: false)
             .getallPlaylists();
-        Provider.of<Playlistsongcheck>(context, listen: false)
+        Provider.of<PlaylistProviderFuctions>(context, listen: false)
             .showSelectSong(context, folderIndex);
       },
     );
@@ -56,7 +55,7 @@ class PlayListHomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Consumer<Playlistsongcheck>(
+      body: Consumer<PlaylistProviderFuctions>(
         builder: (context, value, child) {
           return BodyContainer(
             child: Padding(
@@ -75,7 +74,7 @@ class PlayListHomeScreen extends StatelessWidget {
                     },
                     leading: QueryArtImage(
                       songModel: context.read<AllsongsProvider>().songs[context
-                          .read<Playlistsongcheck>()
+                          .read<PlaylistProviderFuctions>()
                           .selectPlaySong[index]],
                       artworkType: ArtworkType.AUDIO,
                     ),
@@ -83,7 +82,7 @@ class PlayListHomeScreen extends StatelessWidget {
                       title: context
                           .read<AllsongsProvider>()
                           .songs[context
-                              .read<Playlistsongcheck>()
+                              .read<PlaylistProviderFuctions>()
                               .selectPlaySong[index]]
                           .title,
                     ),
@@ -91,7 +90,7 @@ class PlayListHomeScreen extends StatelessWidget {
                       title: context
                           .read<AllsongsProvider>()
                           .songs[context
-                              .read<Playlistsongcheck>()
+                              .read<PlaylistProviderFuctions>()
                               .selectPlaySong[index]]
                           .artist
                           .toString(),
@@ -103,8 +102,10 @@ class PlayListHomeScreen extends StatelessWidget {
                     color: kWhite,
                   );
                 },
-                itemCount:
-                    context.read<Playlistsongcheck>().selectPlaySong.length,
+                itemCount: context
+                    .read<PlaylistProviderFuctions>()
+                    .selectPlaySong
+                    .length,
               ),
             ),
           );

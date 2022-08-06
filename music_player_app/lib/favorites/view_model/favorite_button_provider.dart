@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:music_player_app/playing_music/view_model/music_utilities.dart';
 import 'package:music_player_app/utilities/view/core.dart';
 import 'package:provider/provider.dart';
 
