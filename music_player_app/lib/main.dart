@@ -109,9 +109,6 @@ class Music extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => ScanFunctionProvider(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => ScanFunctionProvider(),
-        ),
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
