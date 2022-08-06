@@ -23,8 +23,6 @@ class PlayListHomeScreen extends StatelessWidget {
       (timeStamp) {
         Provider.of<PlaylistProviderFuctions>(context, listen: false)
             .getallPlaylists();
-        Provider.of<Playlistsongcheck>(context, listen: false)
-            .showSelectSong(context, folderIndex);
       },
     );
 
