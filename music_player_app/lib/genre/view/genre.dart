@@ -32,68 +32,67 @@ class GenreScreen extends StatelessWidget {
               );
             }
 
-            if (item.data!.isEmpty) {
-              return BodyContainer(
-                child: Center(
-                  child: Text(
-                    "Nothing found!",
-                    style: TextStyle(
-                      color: kWhite,
+            return item.data!.isEmpty
+                ? BodyContainer(
+                    child: Center(
+                      child: Text(
+                        "Nothing found!",
+                        style: TextStyle(
+                          color: kWhite,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              );
-            }
-            return BodyContainer(
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 70.0),
-                child: ListView.separated(
-                  itemBuilder: (BuildContext context, index) {
-                    return ListTile(
-                      leading: QueryArtworkWidget(
-                        artworkBorder: const BorderRadius.all(
-                          Radius.zero,
-                        ),
-                        artworkHeight: 60,
-                        artworkWidth: 60,
-                        artworkFit: BoxFit.fill,
-                        nullArtworkWidget: Image.asset(
-                          "assets/artwrk.jpg",
-                          height: 60,
-                          width: 60,
-                          fit: BoxFit.fitWidth,
-                        ),
-                        id: item.data![index].id,
-                        type: ArtworkType.GENRE,
-                      ),
-                      title: MainTextWidget(
-                        title: item.data![index].genre,
-                      ),
-                      subtitle: MainTextWidget(
-                        title:
-                            "Songs: ${item.data![index].numOfSongs}".toString(),
-                        color: const Color.fromARGB(151, 255, 255, 255),
-                      ),
-                      onTap: () => {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (ctx) => GenreHomeScreen(
-                              genreModel: item.data![index],
+                  )
+                : BodyContainer(
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 70.0),
+                      child: ListView.separated(
+                        itemBuilder: (BuildContext context, index) {
+                          return ListTile(
+                            leading: QueryArtworkWidget(
+                              artworkBorder: const BorderRadius.all(
+                                Radius.zero,
+                              ),
+                              artworkHeight: 60,
+                              artworkWidth: 60,
+                              artworkFit: BoxFit.fill,
+                              nullArtworkWidget: Image.asset(
+                                "assets/artwrk.jpg",
+                                height: 60,
+                                width: 60,
+                                fit: BoxFit.fitWidth,
+                              ),
+                              id: item.data![index].id,
+                              type: ArtworkType.GENRE,
                             ),
-                          ),
-                        ),
-                      },
-                    );
-                  },
-                  separatorBuilder: (ctx, index) {
-                    return Divider(
-                      color: kWhite,
-                    );
-                  },
-                  itemCount: item.data!.length,
-                ),
-              ),
-            );
+                            title: MainTextWidget(
+                              title: item.data![index].genre,
+                            ),
+                            subtitle: MainTextWidget(
+                              title: "Songs: ${item.data![index].numOfSongs}"
+                                  .toString(),
+                              color: const Color.fromARGB(151, 255, 255, 255),
+                            ),
+                            onTap: () => {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (ctx) => GenreHomeScreen(
+                                    genreModel: item.data![index],
+                                  ),
+                                ),
+                              ),
+                            },
+                          );
+                        },
+                        separatorBuilder: (ctx, index) {
+                          return Divider(
+                            color: kWhite,
+                          );
+                        },
+                        itemCount: item.data!.length,
+                      ),
+                    ),
+                  );
           },
         ),
       ),
