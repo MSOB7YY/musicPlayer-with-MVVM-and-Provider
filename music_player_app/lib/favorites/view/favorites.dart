@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:music_player_app/all_songs/view_model/allsongs_provider.dart';
+import 'package:music_player_app/favorites/view/widgets/unable_delete.dart';
 import 'package:music_player_app/favorites/view_model/favorites_function.dart';
 import 'package:music_player_app/favorites/view_model/widgets_favourites.dart';
 import 'package:music_player_app/playing_music/view/music_play.dart';
@@ -9,6 +12,7 @@ import 'package:music_player_app/utilities/view/body_container.dart';
 import 'package:music_player_app/utilities/view/core.dart';
 import 'package:music_player_app/utilities/view/main_text_widget.dart';
 import 'package:music_player_app/utilities/view/query_art.dart';
+import 'package:music_player_app/utilities/view_model/utility_provider.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
 
@@ -60,8 +64,23 @@ class FavouriteListScreen extends StatelessWidget {
                           trailing: IconButton(
                             onPressed: () {
                               context
-                                  .read<FavoritesWidget>()
-                                  .showFavoriteDeletionBox(context, index);
+                                          .read<MusicUtils>()
+                                          .myMusic[context
+                                              .read<MusicUtils>()
+                                              .currentIndex]
+                                          .id ==
+                                      context
+                                          .read<AllsongsProvider>()
+                                          .songs[value.favourites[index]]
+                                          .id
+                                  ? showDialog(
+                                      context: context,
+                                      builder: (BuildContext ctx) {
+                                        return const UnableToDelete();
+                                      })
+                                  : context
+                                      .read<FavoritesWidget>()
+                                      .showFavoriteDeletionBox(context, index);
                             },
                             icon: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -74,25 +93,10 @@ class FavouriteListScreen extends StatelessWidget {
                             ),
                           ),
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const MusicScreen(),
-                              ),
-                            );
-
-                            context.read<MusicUtils>().myMusic =
-                                context.read<FavoriteFunctions>().favloop;
-                            context
-                                .read<MusicUtils>()
-                                .audioPlayer
-                                .setAudioSource(
-                                  createPlaylist(context
-                                      .read<FavoriteFunctions>()
-                                      .favloop),
-                                  initialIndex: index,
-                                );
-                            context.read<MusicUtils>().audioPlayer.play();
+                            context.read<UtilityProvider>().playTheMusic(
+                                context,
+                                context.read<FavoriteFunctions>().favloop,
+                                index);
                           },
                         );
                       },

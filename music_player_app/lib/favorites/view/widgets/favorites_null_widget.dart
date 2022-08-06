@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:music_player_app/utilities/view/core.dart';
 
 class FavoritesNullWidget extends StatelessWidget {
   const FavoritesNullWidget({
     Key? key,
   }) : super(key: key);
-
-  get kWhite => null;
 
   @override
   Widget build(BuildContext context) {
