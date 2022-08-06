@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:miniplayer/miniplayer.dart';
 import 'package:music_player_app/home/view_model/home_functions.dart';
+import 'package:music_player_app/search/view/search_screen.dart';
 import 'package:music_player_app/utilities/view/core.dart';
 import 'package:provider/provider.dart';
 import '../../album/view/album.dart';
@@ -50,11 +51,11 @@ class MusicHome extends StatelessWidget {
               ),
               child: IconButton(
                 onPressed: () {
-                  // Navigator.of(context).push(
-                  //   MaterialPageRoute(
-                  //     builder: (ctx) => Search(),
-                  //   ),
-                  // );
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (ctx) => Search(),
+                    ),
+                  );
                 },
                 icon: const Icon(
                   Icons.search,
