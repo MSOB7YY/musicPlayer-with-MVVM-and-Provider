@@ -11,7 +11,7 @@ class WidgetProvider with ChangeNotifier {
             color: kWhite,
           ),
         ),
-        backgroundColor: Colors.amber,
+        backgroundColor: kAmber,
         behavior: SnackBarBehavior.floating,
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:music_player_app/utilities/view/core.dart';
 import 'package:provider/provider.dart';
 import '../../../all_songs/view_model/allsongs_provider.dart';
 import '../../model/playlist_model.dart';
@@ -85,11 +86,11 @@ class PlaylistButtonFunctions with ChangeNotifier {
       SnackBar(
         content: Text(
           'added song to the playlist ${context.read<PlaylistProviderFuctions>().playlistNotifier[folderindex].name},',
-          style: const TextStyle(
-            color: Colors.white,
+          style: TextStyle(
+            color: kWhite,
           ),
         ),
-        backgroundColor: Colors.amber,
+        backgroundColor: kAmber,
         behavior: SnackBarBehavior.floating,
       ),
     );
