@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:music_player_app/playing_music/view_model/music_utilities.dart';
+import 'package:music_player_app/utilities/view/core.dart';
 import 'package:provider/provider.dart';
 
 import 'favorites_function.dart';
@@ -6,7 +8,12 @@ import 'favorites_function.dart';
 class FavouriteButtonProvider with ChangeNotifier {
   addFavoriteSongButton(BuildContext context, dynamic id) async {
     await context.read<FavoriteFunctions>().addSongs(id, context);
-    const snackBar = SnackBar(content: Text('add to favorites '));
+    final snackBar = SnackBar(
+      backgroundColor: kAmber,
+      content: const Text(
+        'add to favorites ',
+      ),
+    );
     // ignore: use_build_context_synchronously
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
     notifyListeners();
