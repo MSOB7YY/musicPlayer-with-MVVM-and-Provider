@@ -32,79 +32,78 @@ class AllSongs extends StatelessWidget {
                       ignoreCase: true,
                     ),
             builder: (context, item) {
+              if (item.data == null) {
+                return const BodyContainer(
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              }
+              if (item.data!.isEmpty) {
+                return BodyContainer(
+                  child: Center(
+                    child: Text(
+                      "Nothing found!",
+                      style: TextStyle(
+                        color: kWhite,
+                      ),
+                    ),
+                  ),
+                );
+              }
               value.songs.clear();
               value.songs = item.data!;
-              return item.data == null
-                  ? const BodyContainer(
-                      child: Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    )
-                  : item.data!.isEmpty
-                      ? BodyContainer(
-                          child: Center(
-                            child: Text(
-                              "Nothing found!",
-                              style: TextStyle(
-                                color: kWhite,
-                              ),
-                            ),
-                          ),
-                        )
-                      : RefreshIndicator(
-                          onRefresh: () async {
-                            value.scanToast(context);
+              return RefreshIndicator(
+                onRefresh: () async {
+                  value.scanToast(context);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 80.0),
+                  child: BodyContainer(
+                    child: ListView.separated(
+                      itemBuilder: (BuildContext context, index) {
+                        return ListTile(
+                          onTap: () {
+                            context
+                                .read<UtilityProvider>()
+                                .playTheMusic(context, item.data!, index);
                           },
-                          child: Padding(
-                            padding: const EdgeInsets.only(bottom: 80.0),
-                            child: BodyContainer(
-                              child: ListView.separated(
-                                itemBuilder: (BuildContext context, index) {
-                                  return ListTile(
-                                    onTap: () {
-                                      context
-                                          .read<UtilityProvider>()
-                                          .playTheMusic(
-                                              context, item.data!, index);
-                                    },
-                                    leading: QueryArtImage(
-                                      songModel: item.data![index],
-                                      artworkType: ArtworkType.AUDIO,
-                                    ),
-                                    title: MainTextWidget(
-                                      title: item.data![index].title,
-                                    ),
-                                    subtitle: MainTextWidget(
-                                      title: item.data![index].artist ==
-                                              '<unknown>'
-                                          ? "unknown Artist"
-                                          : item.data![index].artist ??
-                                              "No Artist",
-                                    ),
-                                    trailing: IconButton(
-                                      icon: Icon(
-                                        Icons.more_vert_outlined,
-                                        color: kWhite,
-                                      ),
-                                      onPressed: () {
-                                        settingModalBottomSheet(
-                                          context,
-                                          item.data![index],
-                                        );
-                                      },
-                                    ),
-                                  );
-                                },
-                                separatorBuilder: (ctx, index) {
-                                  return Divider(
-                                    color: kWhite,
-                                  );
-                                },
-                                itemCount: item.data!.length,
-                              ),
+                          leading: QueryArtImage(
+                            songModel: item.data![index],
+                            artworkType: ArtworkType.AUDIO,
+                          ),
+                          title: MainTextWidget(
+                            title: item.data![index].title,
+                          ),
+                          subtitle: MainTextWidget(
+                            title: item.data![index].artist == '<unknown>'
+                                ? "unknown Artist"
+                                : item.data![index].artist ?? "No Artist",
+                          ),
+                          trailing: IconButton(
+                            icon: Icon(
+                              Icons.more_vert_outlined,
+                              color: kWhite,
                             ),
+                            onPressed: () {
+                              settingModalBottomSheet(
+                                context,
+                                item.data![index],
+                              );
+                            },
                           ),
                         );
+                      },
+                      separatorBuilder: (ctx, index) {
+                        return Divider(
+                          color: kWhite,
+                        );
+                      },
+                      itemCount: item.data!.length,
+                    ),
+                  ),
+                ),
+              );
             },
           );
         },
