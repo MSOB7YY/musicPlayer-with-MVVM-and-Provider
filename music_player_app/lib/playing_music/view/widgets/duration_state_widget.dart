@@ -6,10 +6,11 @@ import 'package:provider/provider.dart';
 import '../../view_model/music_utilities.dart';
 
 class DurationStateWidget extends StatelessWidget {
-  const DurationStateWidget({
-    Key? key,
-  }) : super(key: key);
-
+  const DurationStateWidget(
+      {Key? key, required this.barHeight, this.thumbRadius})
+      : super(key: key);
+  final double barHeight;
+  final double? thumbRadius;
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<DurationState>(
@@ -24,7 +25,8 @@ class DurationStateWidget extends StatelessWidget {
           timeLabelLocation: TimeLabelLocation.sides,
           progress: progress,
           total: total,
-          barHeight: 6.0,
+          thumbRadius: thumbRadius ?? 10,
+          barHeight: barHeight,
           baseBarColor: Colors.white,
           progressBarColor: Colors.amber,
           thumbColor: Colors.blue[900],

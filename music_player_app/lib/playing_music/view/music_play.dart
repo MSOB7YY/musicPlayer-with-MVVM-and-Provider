@@ -10,10 +10,8 @@ import 'widgets/duration_text.dart';
 import 'widgets/music_artwork.dart';
 
 class MusicScreen extends StatelessWidget {
-  const MusicScreen({
-    Key? key,
-  }) : super(key: key);
-
+  const MusicScreen({Key? key}) : super(key: key);
+  // final List<SongModel> musicList;
   @override
   Widget build(BuildContext context) {
     MediaQuery.of(context).size.height;
@@ -115,7 +113,9 @@ class MusicScreen extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.zero,
                       margin: const EdgeInsets.only(bottom: 4.0),
-                      child: const DurationStateWidget(),
+                      child: const DurationStateWidget(
+                        barHeight: 06,
+                      ),
                     ),
                     const MusicDurationTextWidget(),
                   ],
@@ -129,7 +129,7 @@ class MusicScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     context.read<PlayMusicProvider>().previousButton(),
-                    context.read<PlayMusicProvider>().playButton(),
+                    context.read<PlayMusicProvider>().playButton(40),
                     context.read<PlayMusicProvider>().nextButton(),
                   ],
                 ),
