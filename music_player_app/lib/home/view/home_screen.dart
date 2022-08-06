@@ -53,7 +53,7 @@ class MusicHome extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (ctx) => Search(),
+                      builder: (ctx) => const Search(),
                     ),
                   );
                 },

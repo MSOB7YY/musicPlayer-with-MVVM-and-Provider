@@ -52,12 +52,6 @@ class GenreHomeScreen extends StatelessWidget {
                       itemBuilder: (BuildContext context, index) {
                         return ListTile(
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const MusicScreen(),
-                              ),
-                            );
                             context
                                 .read<UtilityProvider>()
                                 .playTheMusic(context, item.data!, index);
