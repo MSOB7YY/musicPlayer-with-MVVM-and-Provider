@@ -1,6 +1,5 @@
 // ignore_for_file: invalid_use_of_protected_member, must_be_immutable, invalid_use_of_visible_for_testing_member
 import 'package:flutter/material.dart';
-import 'package:music_player_app/all_songs/view_model/allsongs_provider.dart';
 import 'package:music_player_app/search/view/text_field_widget.dart';
 import 'package:music_player_app/search/view_model/search_provider.dart';
 import 'package:music_player_app/utilities/view/body_container.dart';

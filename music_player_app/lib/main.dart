@@ -15,7 +15,6 @@ import 'package:music_player_app/home/view_model/home_functions.dart';
 import 'package:music_player_app/playing_music/view_model/music_functions.dart';
 import 'package:music_player_app/playing_music/view_model/music_utilities.dart';
 import 'package:music_player_app/playlist/model/playlist_model.dart';
-import 'package:music_player_app/playlist/view_model/Playlist_provider.dart/playlist_provider.dart';
 import 'package:music_player_app/playlist/view_model/Playlist_provider.dart/widget_provider.dart';
 import 'package:music_player_app/playlist/view_model/fuctions/playlist_button_fn.dart';
 import 'package:music_player_app/playlist/view_model/fuctions/playlist_functions.dart';
@@ -75,9 +74,9 @@ class Music extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => PlaylistProviderFuctions(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => Playlistsongcheck(),
-        ),
+        // ChangeNotifierProvider(
+        //   create: (_) => Playlistsongcheck(),
+        // ),
         ChangeNotifierProvider(
           create: (_) => PlaylistButtonFunctions(),
         ),

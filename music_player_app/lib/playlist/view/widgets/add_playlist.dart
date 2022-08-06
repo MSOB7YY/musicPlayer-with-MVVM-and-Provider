@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:music_player_app/all_songs/view_model/allsongs_provider.dart';
-import 'package:music_player_app/playlist/view/widgets/playlist_button.dart';
+import 'package:music_player_app/playlist/view_model/fuctions/playlist_button_fn.dart';
 import 'package:music_player_app/playlist/view_model/fuctions/playlist_functions.dart';
 import 'package:music_player_app/utilities/view/body_container.dart';
 import 'package:music_player_app/utilities/view/core.dart';
@@ -14,9 +14,11 @@ class AddSongsToPlayList extends StatelessWidget {
   final int folderIndex;
   const AddSongsToPlayList({Key? key, required this.folderIndex})
       : super(key: key);
-
+  static List<dynamic> updatelist = [];
+  static List<dynamic> dltlist = [];
   @override
   Widget build(BuildContext context) {
+    print("im a developer");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kAmber,
@@ -48,36 +50,45 @@ class AddSongsToPlayList extends StatelessWidget {
           context.read<AllsongsProvider>().songs = item.data!;
 
           return BodyContainer(
-            child: ListView.separated(
-              itemBuilder: (BuildContext context, index) {
-                return ListTile(
-                  onTap: () async {},
-                  leading: QueryArtImage(
-                    songModel: context.read<AllsongsProvider>().songs[index],
-                    artworkType: ArtworkType.AUDIO,
-                  ),
-                  title: MainTextWidget(
-                    title: context.read<AllsongsProvider>().songs[index].title,
-                  ),
-                  subtitle: MainTextWidget(
-                    title:
-                        context.read<AllsongsProvider>().songs[index].artist ??
-                            "No Artist",
-                  ),
-                  trailing: PlaylistButton(
-                    index: index,
-                    folderindex: folderIndex,
-                    id: context.read<AllsongsProvider>().songs[index].id,
-                  ),
-                );
-              },
-              separatorBuilder: (ctx, index) {
-                return Divider(
-                  color: kWhite,
-                );
-              },
-              itemCount: context.read<AllsongsProvider>().songs.length,
-            ),
+            child:
+                Consumer<PlaylistButtonFunctions>(builder: (context, value, _) {
+              print("pranav");
+              return ListView.separated(
+                itemBuilder: (BuildContext context, index) {
+                  return ListTile(
+                    onTap: () async {},
+                    leading: QueryArtImage(
+                      songModel: context.read<AllsongsProvider>().songs[index],
+                      artworkType: ArtworkType.AUDIO,
+                    ),
+                    title: MainTextWidget(
+                      title:
+                          context.read<AllsongsProvider>().songs[index].title,
+                    ),
+                    subtitle: MainTextWidget(
+                      title: context
+                              .read<AllsongsProvider>()
+                              .songs[index]
+                              .artist ??
+                          "No Artist",
+                    ),
+                    trailing:
+                        context.watch<PlaylistButtonFunctions>().playlistButton(
+                              context,
+                              index,
+                              folderIndex,
+                              context.read<AllsongsProvider>().songs[index].id,
+                            ),
+                  );
+                },
+                separatorBuilder: (ctx, index) {
+                  return Divider(
+                    color: kWhite,
+                  );
+                },
+                itemCount: context.read<AllsongsProvider>().songs.length,
+              );
+            }),
           );
         },
       ),

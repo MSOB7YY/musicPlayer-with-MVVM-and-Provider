@@ -1,13 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:music_player_app/all_songs/view_model/allsongs_provider.dart';
 import 'package:music_player_app/favorites/view/widgets/unable_delete.dart';
 import 'package:music_player_app/favorites/view_model/favorites_function.dart';
 import 'package:music_player_app/favorites/view_model/widgets_favourites.dart';
-import 'package:music_player_app/playing_music/view/music_play.dart';
 import 'package:music_player_app/playing_music/view_model/music_utilities.dart';
-import 'package:music_player_app/utilities/create_playlist.dart';
 import 'package:music_player_app/utilities/view/body_container.dart';
 import 'package:music_player_app/utilities/view/core.dart';
 import 'package:music_player_app/utilities/view/main_text_widget.dart';
@@ -15,7 +11,6 @@ import 'package:music_player_app/utilities/view/query_art.dart';
 import 'package:music_player_app/utilities/view_model/utility_provider.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
-
 import 'widgets/favorites_null_widget.dart';
 
 class FavouriteListScreen extends StatelessWidget {
