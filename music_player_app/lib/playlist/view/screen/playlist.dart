@@ -26,7 +26,9 @@ class PlayList extends StatelessWidget {
         backgroundColor: primary0,
         elevation: 0,
         automaticallyImplyLeading: false,
-        title: const Text("PlayList"),
+        title: const Text(
+          "PlayList",
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(

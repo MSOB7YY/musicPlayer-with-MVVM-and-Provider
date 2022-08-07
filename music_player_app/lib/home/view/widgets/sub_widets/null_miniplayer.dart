@@ -1,11 +1,10 @@
-import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:music_player_app/home/view/widgets/icon_buttons.dart';
+import 'package:music_player_app/playing_music/view/widgets/duration_state_widget.dart';
+import 'package:music_player_app/playing_music/view/widgets/duration_text.dart';
+import 'package:music_player_app/utilities/view/body_container.dart';
 import 'package:music_player_app/utilities/view/core.dart';
-import 'package:provider/provider.dart';
-import '../../../../playing_music/view_model/music_utilities.dart';
-import '../../../../utilities/view/body_container.dart';
-import '../../../model/duration.dart';
-import '../icon_buttons.dart';
+import 'package:music_player_app/utilities/view/main_text_widget.dart';
 
 class NullMiniPlayer extends StatelessWidget {
   const NullMiniPlayer({
@@ -27,7 +26,7 @@ class NullMiniPlayer extends StatelessWidget {
                     width: double.infinity,
                     height: double.infinity,
                     child: Image.asset(
-                      "assets/nullMIni.png",
+                      nullMiniExpandImage,
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -52,12 +51,8 @@ class NullMiniPlayer extends StatelessWidget {
                         padding: const EdgeInsets.only(
                           top: 5.0,
                         ),
-                        child: Text(
-                          "Artist",
-                          style: TextStyle(
-                            overflow: TextOverflow.ellipsis,
-                            color: kWhite,
-                          ),
+                        child: MainTextWidget(
+                          title: "Artist",
                         ),
                       ),
                     ),
@@ -68,75 +63,11 @@ class NullMiniPlayer extends StatelessWidget {
                           Container(
                             padding: EdgeInsets.zero,
                             margin: const EdgeInsets.only(bottom: 4.0),
-                            child: StreamBuilder<DurationState>(
-                              stream: context
-                                  .read<MusicUtils>()
-                                  .durationStateStream,
-                              builder: (context, snapshot) {
-                                final durationState = snapshot.data;
-                                final progress =
-                                    durationState?.position ?? Duration.zero;
-                                final total =
-                                    durationState?.total ?? Duration.zero;
-
-                                return ProgressBar(
-                                  timeLabelLocation: TimeLabelLocation.sides,
-                                  progress: progress,
-                                  total: total,
-                                  barHeight: 6.0,
-                                  baseBarColor: kWhite,
-                                  progressBarColor: kAmber,
-                                  thumbColor: Colors.blue[900],
-                                  timeLabelTextStyle: const TextStyle(
-                                    fontSize: 0,
-                                  ),
-                                  onSeek: (duration) {
-                                    context
-                                        .read<MusicUtils>()
-                                        .audioPlayer
-                                        .seek(duration);
-                                  },
-                                );
-                              },
+                            child: const DurationStateWidget(
+                              barHeight: 06,
                             ),
                           ),
-                          StreamBuilder<DurationState>(
-                            stream:
-                                context.read<MusicUtils>().durationStateStream,
-                            builder: (context, snapshot) {
-                              final durationState = snapshot.data;
-                              final progress =
-                                  durationState?.position ?? Duration.zero;
-                              final total =
-                                  durationState?.total ?? Duration.zero;
-
-                              return Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Flexible(
-                                    child: Text(
-                                      progress.toString().split(".")[0],
-                                      style: TextStyle(
-                                        color: kWhite,
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                  ),
-                                  Flexible(
-                                    child: Text(
-                                      total.toString().split(".")[0],
-                                      style: TextStyle(
-                                        color: kWhite,
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
+                          const MusicDurationTextWidget(),
                         ],
                       ),
                     ),
