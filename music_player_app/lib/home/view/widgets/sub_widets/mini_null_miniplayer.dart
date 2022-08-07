@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:music_player_app/home/view/widgets/icon_buttons.dart';
 import 'package:music_player_app/playing_music/view/widgets/duration_state_widget.dart';
 import 'package:music_player_app/utilities/view/body_container.dart';
-import 'package:music_player_app/utilities/view/core.dart';
+import 'package:music_player_app/utilities/view/main_text_widget.dart';
 
 class MiniNullWidget extends StatelessWidget {
   const MiniNullWidget({
@@ -25,19 +25,11 @@ class MiniNullWidget extends StatelessWidget {
             leading: Image.asset(
               "assets/malhaarNew3Logo.png",
             ),
-            title: Text(
-              "Music Player",
-              style: TextStyle(
-                color: kWhite,
-                overflow: TextOverflow.ellipsis,
-              ),
+            title: MainTextWidget(
+              title: "Music Player",
             ),
-            subtitle: Text(
-              "Artist",
-              style: TextStyle(
-                color: kWhite,
-                overflow: TextOverflow.ellipsis,
-              ),
+            subtitle: MainTextWidget(
+              title: "Artist",
             ),
             trailing: const IconButtons(
               icon: Icons.play_arrow,
