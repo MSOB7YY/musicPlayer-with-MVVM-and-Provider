@@ -26,7 +26,7 @@ class NullMiniPlayer extends StatelessWidget {
                     width: double.infinity,
                     height: double.infinity,
                     child: Image.asset(
-                      "assets/nullMIni.png",
+                      nullMiniExpandImage,
                       fit: BoxFit.fill,
                     ),
                   ),
