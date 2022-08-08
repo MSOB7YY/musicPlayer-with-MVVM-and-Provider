@@ -77,8 +77,7 @@ class SettingModalBottom extends StatelessWidget {
             'Add to playlist',
           ),
           onTap: () => {
-            Navigator.of(context).pop(),
-            Provider.of<MusicUtils>(context).playlistDialog(
+            Provider.of<MusicUtils>(context, listen: false).playlistDialog(
               context,
               data.id,
               data,
