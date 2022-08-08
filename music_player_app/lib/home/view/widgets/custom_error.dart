@@ -18,7 +18,7 @@ class CustomSnackBarError extends StatelessWidget {
         color: primary1,
       ),
       backgroundColor: primary1,
-      message: "no Songs found",
+      message: "no Songs found ",
     );
   }
 }
