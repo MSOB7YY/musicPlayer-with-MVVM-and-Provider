@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:music_player_app/playing_music/view/widgets/music_icons.dart';
 import 'package:music_player_app/playing_music/view_model/music_functions.dart';
 import 'package:music_player_app/playing_music/view_model/music_utilities.dart';
+import 'package:music_player_app/search/view/search_screen.dart';
 import 'package:music_player_app/utilities/view/core.dart';
 import 'package:music_player_app/utilities/view/main_text_widget.dart';
 import 'package:provider/provider.dart';
@@ -39,11 +40,11 @@ class MusicScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (ctx) => Search(),
-              //   ),
-              // );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (ctx) => const Search(),
+                ),
+              );
             },
             icon: const Icon(
               Icons.search_rounded,
