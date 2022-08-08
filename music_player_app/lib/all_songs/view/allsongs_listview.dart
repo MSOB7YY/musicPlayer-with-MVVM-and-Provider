@@ -47,10 +47,12 @@ class AllSongsListView extends StatelessWidget {
                     color: kWhite,
                   ),
                   onPressed: () {
-                    settingModalBottomSheet(
-                      context,
-                      songModel[index],
-                    );
+                    context
+                        .read<SettingModalProvider>()
+                        .settingModalBottomSheet(
+                          context,
+                          songModel[index],
+                        );
                   },
                 ),
               );
