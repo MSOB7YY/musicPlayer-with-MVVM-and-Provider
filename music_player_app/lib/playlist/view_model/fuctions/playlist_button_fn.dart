@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:music_player_app/all_songs/view_model/allsongs_provider.dart';
+import 'package:music_player_app/playlist/model/playlist_model.dart';
 import 'package:music_player_app/playlist/view/widgets/add_playlist.dart';
 import 'package:provider/provider.dart';
-import '../../../all_songs/view_model/allsongs_provider.dart';
-import '../../model/playlist_model.dart';
 import 'playlist_functions.dart';
 
 class PlaylistButtonFunctions with ChangeNotifier {
