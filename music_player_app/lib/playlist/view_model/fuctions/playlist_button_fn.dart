@@ -66,7 +66,7 @@ class PlaylistButtonFunctions with ChangeNotifier {
           );
         },
         icon: const Icon(
-          Icons.add,
+          Icons.add_box,
           color: Colors.lightGreen,
         ),
       );
@@ -112,7 +112,7 @@ class PlaylistButtonFunctions with ChangeNotifier {
         );
       },
       icon: const Icon(
-        Icons.minimize_rounded,
+        Icons.check_box_outline_blank_outlined,
         color: Colors.red,
       ),
     );

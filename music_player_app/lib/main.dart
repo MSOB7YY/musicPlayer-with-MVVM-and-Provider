@@ -75,9 +75,6 @@ class Music extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => PlaylistProviderFuctions(),
         ),
-        // ChangeNotifierProvider(
-        //   create: (_) => Playlistsongcheck(),
-        // ),
         ChangeNotifierProvider(
           create: (_) => PlaylistButtonFunctions(),
         ),
