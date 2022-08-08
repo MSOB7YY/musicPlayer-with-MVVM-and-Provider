@@ -39,7 +39,7 @@ class PlaylistProviderFuctions with ChangeNotifier {
     getallPlaylists();
   }
 
-  playlistBottomSheet(context, index) {
+  playlistBottomSheet(context, index, name) {
     showModalBottomSheet(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
@@ -48,6 +48,7 @@ class PlaylistProviderFuctions with ChangeNotifier {
       builder: (BuildContext ctx) {
         return PlaylistBottomSheet(
           index: index,
+          name: name,
         );
       },
     );

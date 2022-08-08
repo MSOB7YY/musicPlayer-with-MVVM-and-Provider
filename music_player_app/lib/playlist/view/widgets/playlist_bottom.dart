@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:music_player_app/playlist/view_model/fuctions/playlist_functions.dart';
+import 'package:music_player_app/playlist/view/delete_alert.dart';
 import 'package:music_player_app/utilities/view/core.dart';
-import 'package:provider/provider.dart';
 
 class PlaylistBottomSheet extends StatelessWidget {
   final dynamic index;
-  const PlaylistBottomSheet({Key? key, required this.index}) : super(key: key);
+  final String name;
+  const PlaylistBottomSheet({Key? key, required this.index, required this.name})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +30,13 @@ class PlaylistBottomSheet extends StatelessWidget {
             'Delete',
           ),
           onTap: () {
-            Provider.of<PlaylistProviderFuctions>(context, listen: false)
-                .deletePlaylist(index);
             Navigator.of(context).pop();
+            showDialog(
+              context: context,
+              builder: (BuildContext ctx) {
+                return DeletionPlaylistAlertBox(index: index, name: name);
+              },
+            );
           },
         ),
       ],

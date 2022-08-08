@@ -86,7 +86,8 @@ class PlayList extends StatelessWidget {
                               onPressed: () {
                                 context
                                     .read<PlaylistProviderFuctions>()
-                                    .playlistBottomSheet(context, index);
+                                    .playlistBottomSheet(
+                                        context, index, data.name);
                               },
                               icon: const Icon(
                                 Icons.more_vert_outlined,

@@ -18,7 +18,6 @@ class AddSongsToPlayList extends StatelessWidget {
   static List<dynamic> dltlist = [];
   @override
   Widget build(BuildContext context) {
-    print("im a developer");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kAmber,
@@ -52,7 +51,6 @@ class AddSongsToPlayList extends StatelessWidget {
           return BodyContainer(
             child:
                 Consumer<PlaylistButtonFunctions>(builder: (context, value, _) {
-              print("pranav");
               return ListView.separated(
                 itemBuilder: (BuildContext context, index) {
                   return ListTile(
