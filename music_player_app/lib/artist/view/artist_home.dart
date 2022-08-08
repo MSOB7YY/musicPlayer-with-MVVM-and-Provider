@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:music_player_app/album/view/listview_seprate.dart';
-import 'package:music_player_app/album/view/siver_artist_appbar.dart';
 import 'package:music_player_app/all_songs/view_model/allsongs_provider.dart';
+import 'package:music_player_app/artist/view/siver_artist_appbar.dart';
 import 'package:music_player_app/artist/view_model/artist_provider.dart';
 import 'package:music_player_app/utilities/view/body_container.dart';
 import 'package:music_player_app/utilities/view_model/null_safety.dart';
