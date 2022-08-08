@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:music_player_app/favorites/view_model/favorites_function.dart';
 import 'package:music_player_app/playlist/view_model/fuctions/playlist_functions.dart';
 import 'package:music_player_app/utilities/view/core.dart';
 import 'package:provider/provider.dart';
