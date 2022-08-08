@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:music_player_app/all_songs/view_model/allsongs_provider.dart';
+import 'package:music_player_app/playlist/model/playlist_model.dart';
 import 'package:music_player_app/playlist/view/widgets/add_playlist.dart';
-import 'package:music_player_app/utilities/view/core.dart';
 import 'package:provider/provider.dart';
-import '../../../all_songs/view_model/allsongs_provider.dart';
-import '../../model/playlist_model.dart';
 import 'playlist_functions.dart';
 
 class PlaylistButtonFunctions with ChangeNotifier {
@@ -27,49 +26,50 @@ class PlaylistButtonFunctions with ChangeNotifier {
         );
     if (checkIndex != true) {
       return IconButton(
-          onPressed: () {
-            songlist.add(
-              context.read<AllsongsProvider>().songs[index!].id,
-            );
-            AddSongsToPlayList.updatelist = [
-              songlist,
-              context
-                  .read<PlaylistProviderFuctions>()
-                  .playlistNotifier[folderindex]
-                  .songList
-            ].expand((element) => element).toList();
-            final model = PlaylistDbModel(
-              name: context
-                  .read<PlaylistProviderFuctions>()
-                  .playlistNotifier[folderindex]
-                  .name,
-              songList: AddSongsToPlayList.updatelist,
-            );
+        onPressed: () {
+          songlist.add(
+            context.read<AllsongsProvider>().songs[index!].id,
+          );
+          AddSongsToPlayList.updatelist = [
+            songlist,
             context
                 .read<PlaylistProviderFuctions>()
-                .updatePlaylist(folderindex, model);
-            context.read<PlaylistProviderFuctions>().getallPlaylists();
-            context
+                .playlistNotifier[folderindex]
+                .songList
+          ].expand((element) => element).toList();
+          final model = PlaylistDbModel(
+            name: context
                 .read<PlaylistProviderFuctions>()
-                .showSelectSong(context, folderindex);
-            notifyListeners();
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  'added song to the playlist ${context.read<PlaylistProviderFuctions>().playlistNotifier[folderindex].name},',
-                  style: TextStyle(
-                    color: kWhite,
-                  ),
+                .playlistNotifier[folderindex]
+                .name,
+            songList: AddSongsToPlayList.updatelist,
+          );
+          context
+              .read<PlaylistProviderFuctions>()
+              .updatePlaylist(folderindex, model);
+          context.read<PlaylistProviderFuctions>().getallPlaylists();
+          context
+              .read<PlaylistProviderFuctions>()
+              .showSelectSong(context, folderindex);
+          notifyListeners();
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'added song to the playlist ${context.read<PlaylistProviderFuctions>().playlistNotifier[folderindex].name},',
+                style: const TextStyle(
+                  color: Colors.white,
                 ),
-                backgroundColor: kAmber,
-                behavior: SnackBarBehavior.floating,
               ),
-            );
-          },
-          icon: const Icon(
-            Icons.add_box,
-            color: Colors.lightGreen,
-          ));
+              backgroundColor: Colors.amber,
+              behavior: SnackBarBehavior.floating,
+            ),
+          );
+        },
+        icon: const Icon(
+          Icons.add,
+          color: Colors.lightGreen,
+        ),
+      );
     }
     return IconButton(
       onPressed: () {
@@ -104,15 +104,15 @@ class PlaylistButtonFunctions with ChangeNotifier {
           SnackBar(
             content: Text(
               'song deleted from the playlist  ${context.read<PlaylistProviderFuctions>().playlistNotifier[folderindex].name},',
-              style: TextStyle(color: kWhite),
+              style: const TextStyle(color: Colors.white),
             ),
-            backgroundColor: kAmber,
+            backgroundColor: Colors.amber,
             behavior: SnackBarBehavior.floating,
           ),
         );
       },
       icon: const Icon(
-        Icons.check_box_outline_blank,
+        Icons.minimize_rounded,
         color: Colors.red,
       ),
     );
