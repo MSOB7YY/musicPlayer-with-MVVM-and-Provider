@@ -4,8 +4,6 @@ import 'package:music_player_app/utilities/view/core.dart';
 import 'package:music_player_app/utilities/view/query_art.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-bool? result;
-
 class Details extends StatelessWidget {
   final SongModel songModel;
   const Details({Key? key, required this.songModel}) : super(key: key);
