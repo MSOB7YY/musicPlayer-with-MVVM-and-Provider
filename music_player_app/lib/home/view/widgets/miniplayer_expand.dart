@@ -14,18 +14,18 @@ class MiniPlayerExpand extends StatelessWidget {
   const MiniPlayerExpand({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    //   Provider.of<MusicUtils>(context, listen: false)
-    //       .audioPlayer
-    //       .currentIndexStream
-    //       .listen((index) {
-    //     if (index != null) {
-    //       Provider.of<MusicUtils>(context, listen: false)
-    //           .updateCurrentPlayingSongDetails(index);
-    //     }
-    //   });
-    //   context.read<MusicUtils>().duration;
-    // });
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<MusicUtils>(context, listen: false)
+          .audioPlayer
+          .currentIndexStream
+          .listen((index) {
+        if (index != null) {
+          Provider.of<MusicUtils>(context, listen: false)
+              .updateCurrentPlayingSongDetails(index);
+        }
+      });
+      context.read<MusicUtils>().duration;
+    });
     return Consumer<MusicUtils>(builder: (context, value, child) {
       return value.audioPlayer.playing ||
               value.audioPlayer.currentIndex != null && value.currentIndex != -1
