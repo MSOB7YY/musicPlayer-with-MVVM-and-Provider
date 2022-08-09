@@ -5,6 +5,7 @@ import 'package:just_audio_background/just_audio_background.dart';
 import 'package:music_player_app/album/view_model/album_provider.dart';
 import 'package:music_player_app/all_songs/view_model/allsongs_provider.dart';
 import 'package:music_player_app/artist/view_model/artist_provider.dart';
+import 'package:music_player_app/drawer/view_model/drawer_provider.dart';
 import 'package:music_player_app/drawer/view_model/scan_function.dart';
 import 'package:music_player_app/drawer/view_model/scan_provider.dart';
 import 'package:music_player_app/favorites/view_model/favorite_button_provider.dart';
@@ -116,6 +117,9 @@ class Music extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => SettingModalProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => DrawerProvider(),
         )
       ],
       child: const MaterialApp(

@@ -88,8 +88,8 @@ class NavDrawer extends StatelessWidget {
                   title: MainTextWidget(
                     title: 'Feedback',
                   ),
-                  onTap: () => {
-                    context.read<DrawerProvider>().email(),
+                  onTap: () {
+                    context.read<DrawerProvider>().email();
                   },
                 ),
                 ListTile(
@@ -99,8 +99,8 @@ class NavDrawer extends StatelessWidget {
                   title: MainTextWidget(
                     title: 'About Developer',
                   ),
-                  onTap: () => {
-                    context.read<DrawerProvider>().about(),
+                  onTap: () {
+                    context.read<DrawerProvider>().about();
                   },
                 ),
                 ListTile(
@@ -110,7 +110,7 @@ class NavDrawer extends StatelessWidget {
                   title: MainTextWidget(
                     title: 'share App',
                   ),
-                  onTap: () async {
+                  onTap: () {
                     context.read<DrawerProvider>().share();
                   },
                 ),

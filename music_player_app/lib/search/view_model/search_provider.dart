@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:music_player_app/album/view/album.dart';
 import 'package:music_player_app/all_songs/view_model/allsongs_provider.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:provider/provider.dart';
