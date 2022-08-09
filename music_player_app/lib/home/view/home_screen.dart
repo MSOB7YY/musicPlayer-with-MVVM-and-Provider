@@ -8,6 +8,7 @@ import 'package:music_player_app/drawer/view/drawer.dart';
 import 'package:music_player_app/favorites/view/favorites.dart';
 import 'package:music_player_app/genre/view/genre.dart';
 import 'package:music_player_app/home/view_model/home_functions.dart';
+import 'package:music_player_app/playing_music/view_model/music_utilities.dart';
 import 'package:music_player_app/playlist/view/screen/playlist.dart';
 import 'package:music_player_app/search/view/search_screen.dart';
 import 'package:music_player_app/utilities/view/body_container.dart';
@@ -130,15 +131,17 @@ class MusicHome extends StatelessWidget {
                 ],
               ),
             ),
-            Miniplayer(
-              minHeight: 80,
-              maxHeight: 350,
-              builder: (height, percentage) {
-                return percentage < 0.2
-                    ? const MiniPlayerMini()
-                    : const MiniPlayerExpand();
-              },
-            ),
+            Consumer<MusicUtils>(builder: (context, value, child) {
+              return Miniplayer(
+                minHeight: 80,
+                maxHeight: 350,
+                builder: (height, percentage) {
+                  return percentage < 0.2
+                      ? const MiniPlayerMini()
+                      : const MiniPlayerExpand();
+                },
+              );
+            }),
           ],
         ),
       ),
