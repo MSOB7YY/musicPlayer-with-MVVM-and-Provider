@@ -43,11 +43,7 @@ class MiniPlayerExpand extends StatelessWidget {
                             height: double.infinity,
                             child: QueryArtworkWidget(
                               id: value
-                                  .myMusic[context
-                                      .read<MusicUtils>()
-                                      .audioPlayer
-                                      .currentIndex!]
-                                  .id,
+                                  .myMusic[value.audioPlayer.currentIndex!].id,
                               type: ArtworkType.AUDIO,
                               artworkBorder: BorderRadius.circular(
                                 1.0,
@@ -66,10 +62,7 @@ class MiniPlayerExpand extends StatelessWidget {
                               child: Center(
                                 child: MainTextWidget(
                                   title: value
-                                      .myMusic[context
-                                          .read<MusicUtils>()
-                                          .audioPlayer
-                                          .currentIndex!]
+                                      .myMusic[value.audioPlayer.currentIndex!]
                                       .title,
                                 ),
                               ),
@@ -81,10 +74,7 @@ class MiniPlayerExpand extends StatelessWidget {
                                 ),
                                 child: MainTextWidget(
                                   title: value
-                                      .myMusic[context
-                                          .read<MusicUtils>()
-                                          .audioPlayer
-                                          .currentIndex!]
+                                      .myMusic[value.audioPlayer.currentIndex!]
                                       .artist
                                       .toString(),
                                 ),
