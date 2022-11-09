@@ -25,10 +25,10 @@ class NavDrawer extends StatelessWidget {
                 DrawerHeader(
                   decoration: BoxDecoration(
                     color: primary0,
-                    image: DecorationImage(
+                    image: const DecorationImage(
                       fit: BoxFit.contain,
                       image: AssetImage(
-                        newLogo,
+                        "assets/white_music.png",
                       ),
                     ),
                   ),
@@ -37,7 +37,7 @@ class NavDrawer extends StatelessWidget {
                     // ignore: avoid_unnecessary_containers
                     child: Container(
                       child: const Text(
-                        'MalhaaR Music',
+                        '',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,

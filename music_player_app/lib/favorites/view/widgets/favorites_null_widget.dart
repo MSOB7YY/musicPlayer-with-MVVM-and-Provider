@@ -10,13 +10,14 @@ class FavoritesNullWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Image.asset(
-                'assets/emptyFav1.png',
+                'assets/couples.png',
               ),
             ),
           ),

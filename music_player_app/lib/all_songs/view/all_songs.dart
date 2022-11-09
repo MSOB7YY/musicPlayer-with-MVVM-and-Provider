@@ -38,13 +38,19 @@ class AllSongs extends StatelessWidget {
               }
               if (item.data!.isEmpty) {
                 return BodyContainer(
-                  child: Center(
-                    child: Text(
-                      "Nothing found!",
-                      style: TextStyle(
-                        color: kWhite,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset("assets/white_music.png"),
+                      Center(
+                        child: Text(
+                          "No music found!",
+                          style: TextStyle(
+                            color: kWhite,
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 );
               }
