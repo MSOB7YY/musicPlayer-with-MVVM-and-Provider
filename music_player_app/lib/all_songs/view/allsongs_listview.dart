@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:music_player_app/all_songs/view_model/allsongs_provider.dart';
 import 'package:music_player_app/utilities/bottom_sheet.dart';
@@ -23,37 +24,39 @@ class AllSongsListView extends StatelessWidget {
         child: BodyContainer(
           child: ListView.separated(
             itemBuilder: (BuildContext context, index) {
-              return ListTile(
-                onTap: () {
-                  context
-                      .read<UtilityProvider>()
-                      .playTheMusic(context, songModel, index);
-                },
-                leading: QueryArtImage(
-                  songModel: songModel[index],
-                  artworkType: ArtworkType.AUDIO,
-                ),
-                title: MainTextWidget(
-                  title: songModel[index].title,
-                ),
-                subtitle: MainTextWidget(
-                  title: songModel[index].artist == '<unknown>'
-                      ? "unknown Artist"
-                      : songModel[index].artist ?? "No Artist",
-                ),
-                trailing: IconButton(
-                  icon: Icon(
-                    Icons.more_vert_outlined,
-                    color: kWhite,
-                  ),
-                  onPressed: () {
+              return FadeInUpBig(
+                child: ListTile(
+                  onTap: () {
                     context
-                        .read<SettingModalProvider>()
-                        .settingModalBottomSheet(
-                          context,
-                          songModel[index],
-                        );
+                        .read<UtilityProvider>()
+                        .playTheMusic(context, songModel, index);
                   },
+                  leading: QueryArtImage(
+                    songModel: songModel[index],
+                    artworkType: ArtworkType.AUDIO,
+                  ),
+                  title: MainTextWidget(
+                    title: songModel[index].title,
+                  ),
+                  subtitle: MainTextWidget(
+                    title: songModel[index].artist == '<unknown>'
+                        ? "unknown Artist"
+                        : songModel[index].artist ?? "No Artist",
+                  ),
+                  trailing: IconButton(
+                    icon: Icon(
+                      Icons.more_vert_outlined,
+                      color: kWhite,
+                    ),
+                    onPressed: () {
+                      context
+                          .read<SettingModalProvider>()
+                          .settingModalBottomSheet(
+                            context,
+                            songModel[index],
+                          );
+                    },
+                  ),
                 ),
               );
             },
