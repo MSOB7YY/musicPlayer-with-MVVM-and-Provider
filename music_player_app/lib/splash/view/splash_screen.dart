@@ -36,30 +36,30 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        FadeInUpBig(
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.centerRight,
-                end: Alignment.bottomRight,
-                colors: [
-                  primary0,
-                  primary1,
-                ],
-              ),
+        Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.centerRight,
+              end: Alignment.bottomRight,
+              colors: [
+                primary0,
+                primary1,
+              ],
             ),
           ),
         ),
         Center(
           child: Align(
             alignment: Alignment.center,
-            child: Container(
-              height: 250,
-              width: 170,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(
-                    "assets/cloud.png",
+            child: FadeInDownBig(
+              child: Container(
+                height: 250,
+                width: 170,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+                      "assets/cloud.png",
+                    ),
                   ),
                 ),
               ),
@@ -74,12 +74,14 @@ class _SplashScreenState extends State<SplashScreen>
             0.1,
             0.3,
           ),
-          child: Text(
-            "MalhaaR Music",
-            style: TextStyle(
-              fontSize: 25,
-              color: kWhite,
-              decoration: TextDecoration.none,
+          child: FadeInUpBig(
+            child: Text(
+              "MalhaaR Music",
+              style: TextStyle(
+                fontSize: 25,
+                color: kWhite,
+                decoration: TextDecoration.none,
+              ),
             ),
           ),
         ),
