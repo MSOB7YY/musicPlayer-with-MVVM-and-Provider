@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:music_player_app/splash/view_model/splash_provider.dart';
 import 'package:music_player_app/utilities/view/core.dart';
@@ -35,40 +36,33 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.centerRight,
-              end: Alignment.bottomRight,
-              colors: [
-                primary0,
-                primary1,
-              ],
+        FadeInUpBig(
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.centerRight,
+                end: Alignment.bottomRight,
+                colors: [
+                  primary0,
+                  primary1,
+                ],
+              ),
             ),
           ),
         ),
         Center(
           child: Align(
             alignment: Alignment.center,
-            child: AnimatedBuilder(
-              animation: _animatonController,
-              child: Container(
-                height: 250,
-                width: 170,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(
-                      "assets/cloud.png",
-                    ),
+            child: Container(
+              height: 250,
+              width: 170,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    "assets/cloud.png",
                   ),
                 ),
               ),
-              builder: (context, child) {
-                return Transform.rotate(
-                  angle: 0.5 * 50 * _animatonController.value,
-                  child: child,
-                );
-              },
             ),
           ),
         ),
