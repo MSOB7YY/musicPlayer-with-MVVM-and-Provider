@@ -1,6 +1,7 @@
 // ignore_for_file: sized_box_for_whitespace, must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:music_player_app/utilities/view/core.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
@@ -11,7 +12,7 @@ class MusicPlayArtwork extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height / 2,
+      height: MediaQuery.of(context).size.height / 2.h,
       child: QueryArtworkWidget(
         id: id,
         type: ArtworkType.AUDIO,
@@ -21,7 +22,7 @@ class MusicPlayArtwork extends StatelessWidget {
         nullArtworkWidget: Image.asset(
           newLogo,
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height / 2,
+          height: MediaQuery.of(context).size.height / 2.h,
         ),
       ),
     );

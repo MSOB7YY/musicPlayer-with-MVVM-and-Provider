@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:music_player_app/playing_music/view/widgets/music_icons.dart';
 import 'package:music_player_app/playing_music/view_model/music_functions.dart';
 import 'package:music_player_app/playing_music/view_model/music_utilities.dart';
@@ -15,8 +16,8 @@ class MusicScreen extends StatelessWidget {
   // final List<SongModel> musicList;
   @override
   Widget build(BuildContext context) {
-    MediaQuery.of(context).size.height;
-    MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Provider.of<MusicUtils>(context, listen: false)
           .audioPlayer
@@ -54,6 +55,8 @@ class MusicScreen extends StatelessWidget {
       ),
       body: Consumer<MusicUtils>(builder: (context, value, child) {
         return Container(
+          height: height,
+          width: width,
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage(
@@ -113,7 +116,7 @@ class MusicScreen extends StatelessWidget {
                   children: [
                     Container(
                       padding: EdgeInsets.zero,
-                      margin: const EdgeInsets.only(bottom: 4.0),
+                      margin: EdgeInsets.only(bottom: 4.0.h),
                       child: const DurationStateWidget(
                         barHeight: 06,
                       ),

@@ -1,3 +1,3 @@
 //--------------------STRINGS-------------------------//
 
-String appName = 'MalhaaR Music';
+String appName = 'MusicPods';
