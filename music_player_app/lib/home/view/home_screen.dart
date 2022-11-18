@@ -6,7 +6,6 @@ import 'package:music_player_app/album/view/album.dart';
 import 'package:music_player_app/all_songs/view/all_songs.dart';
 import 'package:music_player_app/artist/view/artist.dart';
 import 'package:music_player_app/drawer/view/drawer.dart';
-import 'package:music_player_app/favorites/view/favorites.dart';
 import 'package:music_player_app/genre/view/genre.dart';
 import 'package:music_player_app/home/view_model/home_functions.dart';
 import 'package:music_player_app/playing_music/view_model/music_utilities.dart';
@@ -32,7 +31,7 @@ class MusicHome extends StatelessWidget {
       animationDuration: const Duration(
         seconds: 0,
       ),
-      length: 6,
+      length: 5,
       child: Scaffold(
         drawer: const NavDrawer(),
         appBar: AppBar(
@@ -83,11 +82,11 @@ class MusicHome extends StatelessWidget {
                   title: "PLAYLIST",
                 ),
               ),
-              const Tab(
-                child: TextWidget(
-                  title: "FAVORITES",
-                ),
-              ),
+              // const Tab(
+              //   child: TextWidget(
+              //     title: "FAVORITES",
+              //   ),
+              // ),
               const Tab(
                 child: TextWidget(
                   title: "ALBUMS",
@@ -117,9 +116,9 @@ class MusicHome extends StatelessWidget {
                   Center(
                     child: PlayList(),
                   ),
-                  const Center(
-                    child: FavouriteListScreen(),
-                  ),
+                  // const Center(
+                  //   child: FavouriteListScreen(),
+                  // ),
                   const Center(
                     child: AlbumScreen(),
                   ),
