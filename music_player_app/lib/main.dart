@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:music_player_app/album/view_model/album_provider.dart';
@@ -122,10 +123,16 @@ class Music extends StatelessWidget {
           create: (_) => DrawerProvider(),
         )
       ],
-      child: const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
-      ),
+      child: ScreenUtilInit(
+          designSize: const Size(360, 690),
+          minTextAdapt: true,
+          splitScreenMode: true,
+          builder: (context, _) {
+            return const MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: SplashScreen(),
+            );
+          }),
     );
   }
 }

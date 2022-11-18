@@ -76,7 +76,7 @@ class _SplashScreenState extends State<SplashScreen>
           ),
           child: FadeInUpBig(
             child: Text(
-              "MalhaaR Music",
+              "Music Pods",
               style: TextStyle(
                 fontSize: 25,
                 color: kWhite,

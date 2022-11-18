@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, use_build_context_synchronously
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:miniplayer/miniplayer.dart';
 import 'package:music_player_app/album/view/album.dart';
 import 'package:music_player_app/all_songs/view/all_songs.dart';
@@ -59,9 +60,9 @@ class MusicHome extends StatelessWidget {
                     ),
                   );
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.search,
-                  size: 28,
+                  size: 28.w,
                 ),
               ),
             ),
