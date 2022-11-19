@@ -10,19 +10,24 @@ class MusicPlayArtwork extends StatelessWidget {
   dynamic id;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height / 2.h,
-      child: QueryArtworkWidget(
-        id: id,
-        type: ArtworkType.AUDIO,
-        artworkBorder: BorderRadius.circular(
-          14.0,
-        ),
-        nullArtworkWidget: Image.asset(
-          newLogo,
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height / 2.h,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        width: MediaQuery.of(context).size.width / 1.w,
+        height: MediaQuery.of(context).size.height / 2.h,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(80.w))),
+        child: QueryArtworkWidget(
+          id: id,
+          type: ArtworkType.AUDIO,
+          artworkBorder: BorderRadius.circular(
+            14.0,
+          ),
+          nullArtworkWidget: Image.asset(
+            newLogo,
+            // width: MediaQuery.of(context).size.width,
+            //  height: MediaQuery.of(context).size.height / 2.h,
+          ),
         ),
       ),
     );

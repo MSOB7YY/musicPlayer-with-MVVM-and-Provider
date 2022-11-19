@@ -41,7 +41,7 @@ class AllSongs extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset("assets/white_music.png"),
+                      Image.asset("assets/boy_music.png"),
                       Center(
                         child: Text(
                           "No music found!",

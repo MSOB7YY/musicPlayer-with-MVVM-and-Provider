@@ -24,6 +24,11 @@ class FavouriteListScreen extends StatelessWidget {
       },
     );
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: primary0,
+        elevation: 0,
+        title: const Text("Favourites"),
+      ),
       body: Consumer<FavoriteFunctions>(
         builder: (context, value, child) {
           return value.favourites.isEmpty
