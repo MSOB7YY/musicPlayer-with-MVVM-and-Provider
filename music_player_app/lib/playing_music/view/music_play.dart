@@ -31,6 +31,7 @@ class MusicScreen extends StatelessWidget {
       context.read<MusicUtils>().duration;
     });
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: primary0,
       appBar: AppBar(
         centerTitle: true,
@@ -58,12 +59,13 @@ class MusicScreen extends StatelessWidget {
           height: height,
           width: width,
           decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                musicPlayBackground,
-              ),
-              fit: BoxFit.cover,
-            ),
+            color: primary1,
+            // image: DecorationImage(
+            //   image: AssetImage(
+            //     musicPlayBackground,
+            //   ),
+            //   fit: BoxFit.cover,
+            // ),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -13,23 +13,10 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
-  late final _animatonController = AnimationController(
-    vsync: this,
-    duration: const Duration(
-      seconds: 8,
-    ),
-  );
   @override
   void initState() {
     context.read<SplashProvider>().goHome(context);
     super.initState();
-    _animatonController.forward();
-  }
-
-  @override
-  void dispose() {
-    _animatonController.dispose();
-    super.dispose();
   }
 
   @override
@@ -76,7 +63,7 @@ class _SplashScreenState extends State<SplashScreen>
           ),
           child: FadeInUpBig(
             child: Text(
-              "Music Pods",
+              "MusicPods",
               style: TextStyle(
                 fontSize: 25,
                 color: kWhite,
