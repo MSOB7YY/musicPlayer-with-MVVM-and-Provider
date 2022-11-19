@@ -19,24 +19,32 @@ class SearchTextField extends StatelessWidget {
       ),
       controller: context.read<SearchProvider>().searchController,
       decoration: InputDecoration(
-        suffixIcon: IconButton(
-          icon: Icon(
-            Icons.close,
-            color: kWhite,
-          ),
-          onPressed: () {
-            context.read<SearchProvider>().searchController.clear();
-          },
-        ),
+        suffixIcon:
+            context.watch<SearchProvider>().searchController.text.isNotEmpty
+                ? IconButton(
+                    icon: Icon(
+                      Icons.close,
+                      color: kWhite,
+                    ),
+                    onPressed: () {
+                      context.read<SearchProvider>().searchController.clear();
+                    },
+                  )
+                : Icon(
+                    Icons.search,
+                    color: kWhite,
+                  ),
         filled: true,
         fillColor: const Color.fromARGB(55, 255, 255, 255),
-        enabledBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: kWhite),
+          borderRadius: const BorderRadius.all(
             Radius.circular(10),
           ),
         ),
-        focusedBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: kWhite),
+          borderRadius: const BorderRadius.all(
             Radius.circular(10),
           ),
         ),
