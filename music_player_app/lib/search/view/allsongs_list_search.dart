@@ -23,49 +23,79 @@ class AllSongsSearchListView extends StatelessWidget {
       child: BodyContainer(
         child: ListView.separated(
           itemBuilder: (BuildContext context, index) {
-            return FadeInLeftBig(
-              child: ListTile(
-                onTap: () {
-                  context
-                      .read<UtilityProvider>()
-                      .playTheMusic(context, songModel, index);
-                },
-                leading: QueryArtImage(
-                  songModel: songModel[index],
-                  artworkType: ArtworkType.AUDIO,
-                ),
-                title: MainTextWidget(
-                  title: songModel[index].title,
-                ),
-                subtitle: MainTextWidget(
-                  title: songModel[index].artist == '<unknown>'
-                      ? "unknown Artist"
-                      : songModel[index].artist ?? "No Artist",
-                ),
-                trailing: IconButton(
-                  icon: Icon(
-                    Icons.more_vert_outlined,
-                    color: kWhite,
-                  ),
-                  onPressed: () {
-                    context
-                        .read<SettingModalProvider>()
-                        .settingModalBottomSheet(
-                          context,
-                          songModel[index],
-                        );
-                  },
-                ),
-              ),
-            );
+            return index % 2 == 0
+                ? FadeInUpBig(
+                    child: AllSongsListWidget(
+                      songModel: songModel,
+                      index: index,
+                    ),
+                  )
+                : FadeInDownBig(
+                    child: AllSongsListWidget(
+                      songModel: songModel,
+                      index: index,
+                    ),
+                  );
           },
           separatorBuilder: (ctx, index) {
-            return Divider(
-              color: kWhite,
-            );
+            return index % 2 == 0
+                ? FadeInRightBig(
+                    child: Divider(
+                      color: kWhite,
+                    ),
+                  )
+                : FadeInLeftBig(
+                    child: Divider(
+                      color: kWhite,
+                    ),
+                  );
           },
           itemCount: songModel.length,
         ),
+      ),
+    );
+  }
+}
+
+class AllSongsListWidget extends StatelessWidget {
+  const AllSongsListWidget({
+    Key? key,
+    required this.songModel,
+    required this.index,
+  }) : super(key: key);
+
+  final List<SongModel> songModel;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      onTap: () {
+        context.read<UtilityProvider>().playTheMusic(context, songModel, index);
+      },
+      leading: QueryArtImage(
+        songModel: songModel[index],
+        artworkType: ArtworkType.AUDIO,
+      ),
+      title: MainTextWidget(
+        title: songModel[index].title,
+      ),
+      subtitle: MainTextWidget(
+        title: songModel[index].artist == '<unknown>'
+            ? "unknown Artist"
+            : songModel[index].artist ?? "No Artist",
+      ),
+      trailing: IconButton(
+        icon: Icon(
+          Icons.more_vert_outlined,
+          color: kWhite,
+        ),
+        onPressed: () {
+          context.read<SettingModalProvider>().settingModalBottomSheet(
+                context,
+                songModel[index],
+              );
+        },
       ),
     );
   }
