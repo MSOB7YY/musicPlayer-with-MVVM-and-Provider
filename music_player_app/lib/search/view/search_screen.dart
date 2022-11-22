@@ -1,4 +1,5 @@
 // ignore_for_file: invalid_use_of_protected_member, must_be_immutable, invalid_use_of_visible_for_testing_member
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:music_player_app/search/view/future_allsongs.dart';
 import 'package:music_player_app/search/view/text_field_widget.dart';
@@ -32,41 +33,43 @@ class Search extends StatelessWidget {
             if (value.temp.isEmpty) {
               return const FutureAllSongs();
             }
-            return ListView.separated(
-              itemBuilder: (ctx, index) {
-                final data = value.temp[index];
-                return ListTile(
-                  leading: QueryArtImage(
-                    songModel: data,
-                    artworkType: ArtworkType.AUDIO,
-                  ),
-                  title: Text(
-                    data.title,
-                    style: TextStyle(
-                      color: kWhite,
+            return FadeInLeftBig(
+              child: ListView.separated(
+                itemBuilder: (ctx, index) {
+                  final data = value.temp[index];
+                  return ListTile(
+                    leading: QueryArtImage(
+                      songModel: data,
+                      artworkType: ArtworkType.AUDIO,
                     ),
-                  ),
-                  subtitle: Text(
-                    data.artist.toString(),
-                    style: TextStyle(
-                      color: kWhite,
-                      overflow: TextOverflow.ellipsis,
+                    title: Text(
+                      data.title,
+                      style: TextStyle(
+                        color: kWhite,
+                      ),
                     ),
-                  ),
-                  onTap: () async {
-                    context
-                        .read<UtilityProvider>()
-                        .playTheMusic(context, value.temp, index);
-                  },
-                );
-              },
-              separatorBuilder: (ctx, index) {
-                return Divider(
-                  thickness: 3,
-                  color: kWhite,
-                );
-              },
-              itemCount: value.temp.length,
+                    subtitle: Text(
+                      data.artist.toString(),
+                      style: TextStyle(
+                        color: kWhite,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    onTap: () async {
+                      context
+                          .read<UtilityProvider>()
+                          .playTheMusic(context, value.temp, index);
+                    },
+                  );
+                },
+                separatorBuilder: (ctx, index) {
+                  return Divider(
+                    thickness: 3,
+                    color: kWhite,
+                  );
+                },
+                itemCount: value.temp.length,
+              ),
             );
           },
         ),
