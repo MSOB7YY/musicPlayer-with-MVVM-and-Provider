@@ -7,6 +7,7 @@ import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class AllsongsProvider with ChangeNotifier {
   List<SongModel> songs = [];
+  final SongSortType songSortType = SongSortType.DISPLAY_NAME;
   final OnAudioQuery audioQuery = OnAudioQuery();
   final AudioPlayer audioPlayer = AudioPlayer();
   requestPermission() async {
@@ -40,5 +41,9 @@ class AllsongsProvider with ChangeNotifier {
         message: "Songs Scanned Total songs:${songs.length} ",
       ),
     );
+  }
+
+  SongSortType sortFn() {
+    return songSortType;
   }
 }

@@ -23,7 +23,7 @@ class AllSongs extends StatelessWidget {
           return FutureBuilder<List<SongModel>>(
             future:
                 Provider.of<AllsongsProvider>(context).audioQuery.querySongs(
-                      sortType: SongSortType.DISPLAY_NAME,
+                      sortType: context.watch<AllsongsProvider>().songSortType,
                       orderType: OrderType.ASC_OR_SMALLER,
                       uriType: UriType.EXTERNAL,
                       ignoreCase: true,
@@ -41,7 +41,9 @@ class AllSongs extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset("assets/boy_music.png"),
+                      Image.asset(
+                        "assets/boy_music.png",
+                      ),
                       Center(
                         child: Text(
                           "No music found!",
